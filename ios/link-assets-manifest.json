@@ -1,0 +1,81 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "android/app/src/main/assest/fonts/OFL.txt",
+      "sha1": "d04a310e89918d3abbb33912378de20ab9283c4e"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Black.otf",
+      "sha1": "addb0765fef3296240352bb4ebaf9cae90cc268b"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-BlackItalic.otf",
+      "sha1": "f32b4c9c7bbf8a1fff3ee26eb90574d005b60218"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Bold.otf",
+      "sha1": "4c96ecd899dc1cfc9416fe1c28813d37b5841e76"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-BoldItalic.otf",
+      "sha1": "5cc6a21e8858b4cffdc40651cbd6e9cd938fc462"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-ExtraBold.otf",
+      "sha1": "c1108470dd16b09ed916970f508301a259fd2885"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-ExtraBoldItalic.otf",
+      "sha1": "79987a1732e91439f5c44490ceb625e365747743"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-ExtraLight.otf",
+      "sha1": "672c909c504ed20203e8d79ffaf4faac9e2445db"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-ExtraLightItalic.otf",
+      "sha1": "c66520b420d1d329637fff19e0a7ee4c91d40ab9"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Italic.otf",
+      "sha1": "756f394e21ccfbfaa15f5c4429dc84a89ba1f819"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Light.otf",
+      "sha1": "74810221501e10895c612a9c88175dc4219aca96"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-LightItalic.otf",
+      "sha1": "a2078e9d28f7e447e1763f7fc8058c3f1c59e601"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Medium.otf",
+      "sha1": "cbc991dad215c6c7484488ff33030c497be56ef1"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-MediumItalic.otf",
+      "sha1": "3d0b9cd728b02e922b2c7d6127c795799ab9f72e"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Regular.otf",
+      "sha1": "1b83a17e4cafb4a361cc4bb09ce9f9c390136277"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-SemiBold.otf",
+      "sha1": "b7919c9a3ad79791b6bc309dfd9f1c6958ae64b0"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-SemiBoldItalic.otf",
+      "sha1": "da41df11a5d25bf763dfe9dc7a831a55de12972e"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-Thin.otf",
+      "sha1": "b228d312e0b32ed3960a86554cb2573db9cbb629"
+    },
+    {
+      "path": "android/app/src/main/assest/fonts/WorkSans-ThinItalic.otf",
+      "sha1": "b06efd64308af79e8db0e1a26864c98d870b2495"
+    }
+  ]
+}
