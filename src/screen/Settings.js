@@ -13,8 +13,10 @@ import EditProfile from '../Component/EditProfile';
 import Account from './Account';
 import FansFollowing from './FansFollowing';
 import Display from './Display';
+import {WebView} from 'react-native-webview';
+import HelpSupport from './HelpSupport';
 
-export default function Settings() {
+export default function Settings({navigation}) {
   const [active, setActive] = useState(1);
   const onPress = v => {
     setActive(v);
@@ -82,7 +84,7 @@ export default function Settings() {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => onPress(3)}
+                onPress={() => navigation.navigate('HelpSupport')}
                 style={{
                   backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor,
                   paddingVertical: 8,
@@ -183,9 +185,16 @@ export default function Settings() {
         </View>
         {active == 1 && <EditProfile />}
         {active == 2 && <Account />}
+        {/* {active == 3 && (
+          <WebView
+            source={{
+              uri: 'https://reactnative.dev/' ,
+            }}
+          />
+        )} */}
+
         {active == 4 && <FansFollowing />}
         {active == 6 && <Display />}
-
       </ScrollView>
     </View>
   );

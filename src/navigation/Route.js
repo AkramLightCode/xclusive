@@ -22,6 +22,7 @@ import Bookmark from '../screen/Bookmark';
 import Payment from '../screen/Payment';
 import NewPost from '../screen/NewPost';
 import Chat from '../screen/Chat';
+import HelpSupport from '../screen/HelpSupport';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -39,7 +40,6 @@ export default function Route() {
           headerShown: false,
           swipeEnabled: false,
           drawerPosition: 'right',
-        
         }}>
         <Drawer.Screen
           name="TabStack"
@@ -161,6 +161,11 @@ export default function Route() {
         <Stack.Screen
           name="Chat"
           component={Chat}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="HelpSupport"
+          component={HelpSupport}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
