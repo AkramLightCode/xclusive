@@ -20,7 +20,7 @@ export default function Payment() {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
       <ScrollView>
-        <View style={{backgroundColor: COLORS.white, padding: 10}}>
+        <View style={{backgroundColor: COLORS.white, padding: 10,marginTop:.7}}>
           <Text
             style={{
               fontSize: 22,

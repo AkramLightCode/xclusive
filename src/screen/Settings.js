@@ -13,6 +13,7 @@ import EditProfile from '../Component/EditProfile';
 import Account from './Account';
 import FansFollowing from './FansFollowing';
 import Display from './Display';
+import WebView from 'react-native-webview';
 
 export default function Settings() {
   const [active, setActive] = useState(1);
@@ -21,8 +22,9 @@ export default function Settings() {
   };
   return (
     <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{backgroundColor: COLORS.white, padding: 10}}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        <View
+          style={{backgroundColor: COLORS.white, padding: 10, marginTop: 0.7}}>
           <Text
             style={{
               fontSize: 22,
@@ -183,10 +185,10 @@ export default function Settings() {
         </View>
         {active == 1 && <EditProfile />}
         {active == 2 && <Account />}
+        {active == 3 && <WebView source={{uri: 'https://reactnative.dev/'}} />}
         {active == 4 && <FansFollowing />}
         {active == 6 && <Display />}
-
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   );
 }

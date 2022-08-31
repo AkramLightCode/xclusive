@@ -93,7 +93,7 @@ export default function Lists() {
       Text1: '0 people',
     },
     {
-      Text: 'close friends',
+      Text: 'Close friends',
       Text1: '0 people',
     },
   ];
