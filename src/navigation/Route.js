@@ -21,6 +21,7 @@ import Settings from '../screen/Settings';
 import Sign_in from '../screen/Sign up/index';
 import Splesh from '../screen/Splesh';
 import TopTab from './TopTab';
+import HelpSupport from '../screen/HelpSupport';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -159,6 +160,11 @@ export default function Route() {
         <Stack.Screen
           name="Chat"
           component={Chat}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="HelpSupport"
+          component={HelpSupport}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

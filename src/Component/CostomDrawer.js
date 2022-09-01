@@ -85,6 +85,8 @@ const CostomDrawer = ({navigation}) => {
             toggleSwitch();
           } else if (index === 9) {
             navigation.navigate('Sign_in');
+          } else if (index === 6) {
+            navigation.navigate('HelpSupport')
           }
         }}>
         <Image style={styles.profileimg} source={item.logo} />
