@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
-import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -9,14 +8,17 @@ import InputCommon from '../../Component/InputCommon';
 import CoustomButton from '../../Component/CoustomButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, FONTS} from '../../assest/Themes';
+import {useThemeAwareObject} from '../../theme';
+import signUpStyles from './styles';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test@gmail.com');
+  const [password, setPassword] = useState('12345678');
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const styles = useThemeAwareObject(signUpStyles);
 
   const onClick = () => {
     setShow(show => !show);
@@ -41,7 +43,9 @@ const Sign_in = props => {
 
   return (
     <SafeAreaView style={styles.continue}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{marginHorizontal: 20}}>
         <Image source={Images.hederLogo} style={styles.Image} />
         <Text
           style={{
@@ -152,7 +156,7 @@ const Sign_in = props => {
               paddingVertical: 10,
               flex: 0.5,
               justifyContent: 'center',
-              marginRight:10
+              marginRight: 10,
             }}>
             <Image source={Images.google} style={{width: 20, height: 20}} />
             <Text
@@ -176,7 +180,7 @@ const Sign_in = props => {
               paddingVertical: 10,
               flex: 0.5,
               justifyContent: 'center',
-              marginLeft:10
+              marginLeft: 10,
             }}>
             <Image source={Images.twitter} style={{width: 20, height: 20}} />
             <Text

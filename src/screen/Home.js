@@ -11,8 +11,10 @@ import {
 import React, {useState} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
+import {useThemeAwareObject} from '../theme';
 
 export default function Home() {
+  const styles = useThemeAwareObject(dashboardStyles);
   const [active, setActive] = useState(1);
   const onPress = v => {
     setActive(v);
@@ -115,7 +117,12 @@ export default function Home() {
                 <Image style={styles.favorit} source={Images.favorit} />
               </TouchableOpacity>
             </View>
-            <View style={{flexDirection: 'row', alignItems: 'center',marginTop:5}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 5,
+              }}>
               <Text style={[styles.detail, {color: COLORS.toneblack}]}>
                 13 likes
               </Text>
@@ -199,7 +206,7 @@ export default function Home() {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
+    <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* <View style={styles.buttonContainor}> */}
         <ScrollView horizontal style={styles.buttonContainor}>
@@ -273,164 +280,168 @@ export default function Home() {
   );
 }
 
-const styles = StyleSheet.create({
-  listContainor: {
-    backgroundColor: COLORS.white,
-    marginTop: 15,
-    flexDirection: 'row',
-    padding: 10,
-  },
-  userProfile: {
-    width: 40,
-    height: 40,
-    resizeMode: 'contain',
-    borderRadius: 20,
-  },
-  userName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: COLORS.lightblack,
-    lineHeight: 25,
-    fontFamily: FONTS.medium,
-  },
-  XclusiveText: {
-    fontSize: 13,
-    lineHeight: 20,
-    fontWeight: '400',
-    color: COLORS.baba,
-    fontFamily: FONTS.semiBold,
-  },
-  DayText: {
-    fontSize: 13,
-    lineHeight: 20,
-    fontWeight: '400',
-    color: COLORS.light,
-    fontFamily: FONTS.light,
-  },
-  dotIcon: {
-    width: 22,
-    height: 22,
-    resizeMode: 'contain',
-    marginLeft: 3,
-    tintColor: COLORS.csilver,
-    resizeMode: 'contain',
-  },
-  detail: {
-    color: COLORS.fontColor,
-    fontWeight: '400',
-    fontSize: 14,
-    fontFamily: FONTS.Regular,
-  },
-  vidio: {
-    width: '100%',
-    height: 200,
-    borderRadius: 10,
-  },
-  mapItem: {
-    width: 100,
-    height: 50,
-    borderRadius: 10,
-    resizeMode: 'contain',
-  },
-  iconContainor: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 15,
-  },
-  icon: {
-    resizeMode: 'contain',
-    width: 20,
-    height: 20,
-    tintColor: COLORS.Tgray,
-  },
-  favorit: {
-    resizeMode: 'contain',
-    width: 20,
-    height: 20,
-    tintColor: COLORS.pink,
-  },
+const dashboardStyles = theme => {
+  const styles = StyleSheet.create({
+    container: {flex: 1, backgroundColor: theme.color.backgroundColor},
+    listContainor: {
+      backgroundColor: theme.color.backgroundColor,
+      marginTop: 15,
+      flexDirection: 'row',
+      padding: 10,
+    },
+    userProfile: {
+      width: 40,
+      height: 40,
+      resizeMode: 'contain',
+      borderRadius: 20,
+    },
+    userName: {
+      fontSize: 18,
+      fontWeight: '700',
+      color: theme.color.lightblack,
+      lineHeight: 25,
+      fontFamily: FONTS.medium,
+    },
+    XclusiveText: {
+      fontSize: 13,
+      lineHeight: 20,
+      fontWeight: '400',
+      color: COLORS.baba,
+      fontFamily: FONTS.semiBold,
+    },
+    DayText: {
+      fontSize: 13,
+      lineHeight: 20,
+      fontWeight: '400',
+      color: COLORS.light,
+      fontFamily: FONTS.light,
+    },
+    dotIcon: {
+      width: 22,
+      height: 22,
+      resizeMode: 'contain',
+      marginLeft: 3,
+      tintColor: COLORS.csilver,
+      resizeMode: 'contain',
+    },
+    detail: {
+      color: COLORS.fontColor,
+      fontWeight: '400',
+      fontSize: 14,
+      fontFamily: FONTS.Regular,
+    },
+    vidio: {
+      width: '100%',
+      height: 200,
+      borderRadius: 10,
+    },
+    mapItem: {
+      width: 100,
+      height: 50,
+      borderRadius: 10,
+      resizeMode: 'contain',
+    },
+    iconContainor: {
+      flex: 1,
+      flexDirection: 'row',
+      marginTop: 15,
+    },
+    icon: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 20,
+      tintColor: COLORS.Tgray,
+    },
+    favorit: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 20,
+      tintColor: COLORS.pink,
+    },
 
-  singalDot: {
-    resizeMode: 'contain',
-    width: 4,
-    height: 4,
-    marginHorizontal: 15,
-  },
-  buttonContainor: {
-    flexDirection: 'row',
-    paddingVertical: 10,
-    backgroundColor: COLORS.white,
-    marginTop: 1,
-  },
-  button: {
-    paddingVertical: 7,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-    marginLeft: 10,
-  },
-  buttonText: {
-    fontWeight: '400',
-    fontSize: 15,
-    lineHeight: 20,
-    fontFamily: FONTS.semiBold,
-  },
-  filterView: {
-    flexDirection: 'row',
-    paddingBottom: 10,
-    justifyContent: 'space-around',
-    backgroundColor: COLORS.white,
-    marginTop: 1,
-    paddingVertical: 10,
-  },
-  filterIcon: {
-    resizeMode: 'contain',
-    width: 20,
-    height: 20,
-  },
-  bgImg: {
-    height: 210,
-    width: 175,
-    marginTop: 15,
-    borderRadius: 10,
-    overflow: 'hidden',
-    marginLeft: 10,
-  },
-  elivetionView: {
-    padding: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  userCard: {
-    fontSize: 14,
-    color: COLORS.white,
-    fontFamily: FONTS.semiBold,
-  },
-  cardXclusive: {
-    fontSize: 12,
-    color: COLORS.white,
-    fontFamily: FONTS.light,
-  },
-  cardButton: {
-    backgroundColor: COLORS.white,
-    paddingVertical: 4,
-    paddingHorizontal: 15,
-    marginTop: 5,
-    borderRadius: 5,
-  },
-  cardButtonText: {
-    color: COLORS.black,
-    fontSize: 12,
-    fontFamily: FONTS.light,
-  },
-  cardUserImg: {
-    height: 40,
-    width: 40,
-    borderRadius: 50,
-    resizeMode: 'cover',
-    borderWidth: 2,
-    borderColor: COLORS.white,
-  },
-});
+    singalDot: {
+      resizeMode: 'contain',
+      width: 4,
+      height: 4,
+      marginHorizontal: 15,
+    },
+    buttonContainor: {
+      flexDirection: 'row',
+      paddingVertical: 10,
+      backgroundColor: COLORS.white,
+      marginTop: 1,
+    },
+    button: {
+      paddingVertical: 7,
+      paddingHorizontal: 15,
+      borderRadius: 20,
+      marginLeft: 10,
+    },
+    buttonText: {
+      fontWeight: '400',
+      fontSize: 15,
+      lineHeight: 20,
+      fontFamily: FONTS.semiBold,
+    },
+    filterView: {
+      flexDirection: 'row',
+      paddingBottom: 10,
+      justifyContent: 'space-around',
+      backgroundColor: COLORS.white,
+      marginTop: 1,
+      paddingVertical: 10,
+    },
+    filterIcon: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 20,
+    },
+    bgImg: {
+      height: 210,
+      width: 175,
+      marginTop: 15,
+      borderRadius: 10,
+      overflow: 'hidden',
+      marginLeft: 10,
+    },
+    elivetionView: {
+      padding: 10,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+    },
+    userCard: {
+      fontSize: 14,
+      color: COLORS.white,
+      fontFamily: FONTS.semiBold,
+    },
+    cardXclusive: {
+      fontSize: 12,
+      color: COLORS.white,
+      fontFamily: FONTS.light,
+    },
+    cardButton: {
+      backgroundColor: COLORS.white,
+      paddingVertical: 4,
+      paddingHorizontal: 15,
+      marginTop: 5,
+      borderRadius: 5,
+    },
+    cardButtonText: {
+      color: COLORS.black,
+      fontSize: 12,
+      fontFamily: FONTS.light,
+    },
+    cardUserImg: {
+      height: 40,
+      width: 40,
+      borderRadius: 50,
+      resizeMode: 'cover',
+      borderWidth: 2,
+      borderColor: COLORS.white,
+    },
+  });
+  return styles;
+};

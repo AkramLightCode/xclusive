@@ -1,27 +1,26 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import React from 'react';
 
-import TopTab from './TopTab';
-import Home from '../screen/Home';
-import Messages from '../screen/Messages';
-import Splesh from '../screen/Splesh';
-import Sign_in from '../screen/Sign up/index';
-import Registration from '../screen/Registration/Registration';
-import ForgotPassword from '../screen/ForgotPassword/ForgotPassword';
-import ResetPassword from '../screen/ResetPassword/ResetPassword';
-import Notifications from '../screen/Notifications';
 import CostomDrawer from '../Component/CostomDrawer';
-import Lists from '../screen/Lists';
-import MyProfile from '../screen/MyProfile';
-import Settings from '../screen/Settings';
 import Bookmark from '../screen/Bookmark';
-import Payment from '../screen/Payment';
-import NewPost from '../screen/NewPost';
 import Chat from '../screen/Chat';
+import ForgotPassword from '../screen/ForgotPassword/ForgotPassword';
+import Home from '../screen/Home';
+import Lists from '../screen/Lists';
+import Messages from '../screen/Messages';
+import MyProfile from '../screen/MyProfile';
+import NewPost from '../screen/NewPost';
+import Notifications from '../screen/Notifications';
+import Payment from '../screen/Payment';
+import Registration from '../screen/Registration/Registration';
+import ResetPassword from '../screen/ResetPassword/ResetPassword';
+import Settings from '../screen/Settings';
+import Sign_in from '../screen/Sign up/index';
+import Splesh from '../screen/Splesh';
+import TopTab from './TopTab';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -39,7 +38,6 @@ export default function Route() {
           headerShown: false,
           swipeEnabled: false,
           drawerPosition: 'right',
-        
         }}>
         <Drawer.Screen
           name="TabStack"

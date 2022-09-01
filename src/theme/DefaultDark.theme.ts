@@ -1,11 +1,11 @@
-export {COLORS, FONTS};
+import {ColorTheme, SpacingTheme, Theme} from './Theme.interface';
 
-const COLORS = {
-  black: '#000000',
+const DEFAULT_DARK_COLOR_THEME: ColorTheme = {
+  black: '#ffffff',
   lightblack: '#3D373A',
   sblack: '#303030',
   darkblack: '#310436',
-  white: '#fff',
+  white: '#000000',
   pink: '#FC0270',
   bgColor: '#F4F4F4',
   lightgray: '#8E878A',
@@ -41,17 +41,18 @@ const COLORS = {
   razzmatazz: '#EC1E79',
   Strawberry: '#FE2283',
   borderColor: '#EDEDED',
-  backgroundColor: '#ffffff',
+  backgroundColor: '#000000',
 };
 
-const FONTS = {
-  boldBlack: 'WorkSans-Black',
-  bold: 'WorkSans-Bold',
-  extraBold: 'WorkSans-ExtraBold',
-  extraLight: 'WorkSans-ExtraLight',
-  light: 'WorkSans-Light',
-  medium: 'WorkSans-Medium',
-  semiBold: 'PWorkSans-SemiBold',
-  thin: 'WorkSans-Thin',
-  Regular: 'WorkSans-Regular',
+const DEFAULT_DARK_SPACING_THEME: SpacingTheme = {
+  base: 8,
+  double: 16,
+};
+
+export const DEFAULT_DARK_THEME_ID = 'default-dark';
+
+export const DEFAULT_DARK_THEME: Theme = {
+  id: DEFAULT_DARK_THEME_ID,
+  color: DEFAULT_DARK_COLOR_THEME,
+  spacing: DEFAULT_DARK_SPACING_THEME,
 };

@@ -1,6 +1,6 @@
-export {COLORS, FONTS};
+import {ColorTheme, SpacingTheme, Theme} from './Theme.interface';
 
-const COLORS = {
+const DEFAULT_LIGHT_COLOR_THEME: ColorTheme = {
   black: '#000000',
   lightblack: '#3D373A',
   sblack: '#303030',
@@ -44,14 +44,15 @@ const COLORS = {
   backgroundColor: '#ffffff',
 };
 
-const FONTS = {
-  boldBlack: 'WorkSans-Black',
-  bold: 'WorkSans-Bold',
-  extraBold: 'WorkSans-ExtraBold',
-  extraLight: 'WorkSans-ExtraLight',
-  light: 'WorkSans-Light',
-  medium: 'WorkSans-Medium',
-  semiBold: 'PWorkSans-SemiBold',
-  thin: 'WorkSans-Thin',
-  Regular: 'WorkSans-Regular',
+const DEFAULT_LIGHT_SPACING_THEME: SpacingTheme = {
+  base: 8,
+  double: 16,
+};
+
+export const DEFAULT_LIGHT_THEME_ID = 'default-light';
+
+export const DEFAULT_LIGHT_THEME: Theme = {
+  id: DEFAULT_LIGHT_THEME_ID,
+  color: DEFAULT_LIGHT_COLOR_THEME,
+  spacing: DEFAULT_LIGHT_SPACING_THEME,
 };

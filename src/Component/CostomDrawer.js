@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -11,10 +11,51 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import Images from '../assest/Images';
 import {COLORS, FONTS} from '../assest/Themes';
+import {
+  DEFAULT_DARK_THEME,
+  DEFAULT_DARK_THEME_ID,
+  DEFAULT_LIGHT_THEME,
+  DEFAULT_LIGHT_THEME_ID,
+  useTheme,
+  useThemeAwareObject,
+} from '../theme';
+import {getApplicationTheme, setApplicationTheme} from '../utils/Preference';
 
 const CostomDrawer = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const {theme, setTheme, toggleTheme} = useTheme();
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const styles = useThemeAwareObject(drawerStyles);
+
+  useEffect(() => {
+    getThemeInLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    console.log(isEnabled);
+    setTheme(isEnabled ? DEFAULT_DARK_THEME : DEFAULT_LIGHT_THEME);
+    saveThemeInLocalStorage();
+  }, [isEnabled]);
+
+  const saveThemeInLocalStorage = async () => {
+    setApplicationTheme(
+      isEnabled ? DEFAULT_DARK_THEME_ID : DEFAULT_LIGHT_THEME_ID,
+    );
+  };
+
+  const getThemeInLocalStorage = async () => {
+    try {
+      const savedTheme = await getApplicationTheme();
+      setIsEnabled(savedTheme === DEFAULT_LIGHT_THEME_ID ? false : true);
+      setTheme(
+        savedTheme === DEFAULT_LIGHT_THEME_ID
+          ? DEFAULT_LIGHT_THEME
+          : DEFAULT_DARK_THEME,
+      );
+    } catch (e) {
+      setIsEnabled(true);
+    }
+  };
 
   const data = [
     {logo: Images.profileIcon, title: 'My profile'},
@@ -55,7 +96,7 @@ const CostomDrawer = ({navigation}) => {
               trackColor={{false: '#ccc', true: COLORS.razzmatazz}}
               thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
               ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
+              onValueChange={setIsEnabled}
               value={isEnabled}
             />
           </View>
@@ -64,7 +105,7 @@ const CostomDrawer = ({navigation}) => {
     );
   };
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.white}}>
+    <View style={{flex: 1, backgroundColor: theme.color.backgroundColor}}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.mainview}>
           <Image
@@ -172,30 +213,34 @@ const CostomDrawer = ({navigation}) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  mainview: {
-    backgroundColor: COLORS.razzmatazz,
-    paddingTop: 20,
-  },
-  Myprofile: {
-    height: 40,
-    marginTop: 5,
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    marginTop: 10,
-  },
-  profileimg: {
-    width: 18,
-    height: 18,
-    resizeMode: 'contain',
-  },
-  Text: {
-    marginLeft: 20,
-    fontSize: 14,
-    color: COLORS.black,
-    fontWeight: '400',
-    fontFamily: FONTS.semiBold,
-  },
-});
+const drawerStyles = theme => {
+  const styles = StyleSheet.create({
+    mainview: {
+      backgroundColor: COLORS.razzmatazz,
+      paddingTop: 20,
+    },
+    Myprofile: {
+      height: 40,
+      marginTop: 5,
+      alignItems: 'center',
+      flexDirection: 'row',
+      paddingHorizontal: 20,
+      marginTop: 10,
+    },
+    profileimg: {
+      width: 18,
+      height: 18,
+      resizeMode: 'contain',
+      tintColor: theme.color.black,
+    },
+    Text: {
+      marginLeft: 20,
+      fontSize: 14,
+      color: theme.color.black,
+      fontWeight: '400',
+      fontFamily: FONTS.semiBold,
+    },
+  });
+  return styles;
+};
 export default CostomDrawer;
