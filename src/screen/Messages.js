@@ -228,6 +228,15 @@ export default function Messages({navigation}) {
             // extraData={refreshItem}
           />
         )}
+         {active == 'All' && (
+          <FlatList
+            // style={{paddingBottom: 20}}
+            data={filteredDataSource}
+            renderItem={ListData}
+            keyExtractor={(item, index) => index.toString()}
+            // extraData={refreshItem}
+          />
+        )}
       </ScrollView>
     </View>
   );

@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     paddinVertical: 20,
   },
   FlatListView: {
-    width: 170,
+    width: 150,
     height: 150,
     borderRadius: 5,
     marginTop: 15,

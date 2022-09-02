@@ -22,6 +22,9 @@ import Sign_in from '../screen/Sign up/index';
 import Splesh from '../screen/Splesh';
 import TopTab from './TopTab';
 import HelpSupport from '../screen/HelpSupport';
+import Drawersetting from '../screen/Drawersetting';
+import ChangePassword from '../screen/ChangePassword';
+import Search from '../screen/Search';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -165,6 +168,21 @@ export default function Route() {
         <Stack.Screen
           name="HelpSupport"
           component={HelpSupport}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Drawersetting"
+          component={Drawersetting}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Search"
+          component={Search}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

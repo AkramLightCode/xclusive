@@ -18,6 +18,7 @@ export default function Headers({
   StatusBarBg,
   barStyle,
   mainStyles,
+  onClickSearch
 }) {
   return (
     <View style={[mainStyles, {backgroundColor: 'rgba(0,0,0,0.0)'}]}>
@@ -38,7 +39,7 @@ export default function Headers({
           {search && (
             <TouchableOpacity
               style={{marginRight: 20}}
-              onPress={() => onClick}
+              onPress={() => {onClickSearch()}}
               activeOpacity={0.5}>
               <Image
                 source={Images.search}

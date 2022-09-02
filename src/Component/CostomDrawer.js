@@ -79,6 +79,8 @@ const CostomDrawer = ({navigation}) => {
             navigation.navigate('MyProfile');
           } else if (index === 1) {
             navigation.navigate('Bookmark');
+          } else if (index === 3) {
+            navigation.navigate('Drawersetting');
           } else if (index === 4) {
             navigation.navigate('MyHomeStackScreens', {screen: 'Payment'});
           } else if (index === 7) {
@@ -86,7 +88,7 @@ const CostomDrawer = ({navigation}) => {
           } else if (index === 9) {
             navigation.navigate('Sign_in');
           } else if (index === 6) {
-            navigation.navigate('HelpSupport')
+            navigation.navigate('HelpSupport');
           }
         }}>
         <Image style={styles.profileimg} source={item.logo} />
