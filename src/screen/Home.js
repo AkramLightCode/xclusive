@@ -11,10 +11,11 @@ import {
 import React, {useState} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
-import {useThemeAwareObject} from '../theme';
+import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function Home() {
   const styles = useThemeAwareObject(dashboardStyles);
+  const {theme} = useTheme();
   const [active, setActive] = useState(1);
   const onPress = v => {
     setActive(v);
@@ -43,7 +44,7 @@ export default function Home() {
                     fontSize: 13,
                     lineHeight: 20,
                     fontWeight: '400',
-                    color: COLORS.light,
+                    color: theme.color.light,
                     fontFamily: FONTS.semiBold,
                     marginRight: 7,
                   }}>
@@ -123,13 +124,13 @@ export default function Home() {
                 alignItems: 'center',
                 marginTop: 5,
               }}>
-              <Text style={[styles.detail, {color: COLORS.toneblack}]}>
+              <Text style={[styles.detail, {color: theme.color.toneblack}]}>
                 13 likes
               </Text>
 
               <Image style={styles.singalDot} source={Images.onedot} />
 
-              <Text style={[styles.detail, {color: COLORS.toneblack}]}>
+              <Text style={[styles.detail, {color: theme.color.toneblack}]}>
                 53 comments
               </Text>
             </View>
@@ -214,7 +215,9 @@ export default function Home() {
             onPress={() => onPress(1)}
             style={[
               styles.button,
-              {backgroundColor: active == 1 ? COLORS.pink : COLORS.bgColor},
+              {
+                backgroundColor: active == 1 ? COLORS.pink : COLORS.bgColor,
+              },
             ]}>
             <Text
               style={[
@@ -254,6 +257,7 @@ export default function Home() {
           </TouchableOpacity>
         </ScrollView>
         {/* </View> */}
+        <View style={styles.seperator} />
         <View style={styles.filterView}>
           <TouchableOpacity>
             <Image style={styles.filterIcon} source={Images.gallery} />
@@ -268,6 +272,7 @@ export default function Home() {
             <Image style={styles.filterIcon} source={Images.Menu} />
           </TouchableOpacity>
         </View>
+        <View style={styles.seperator} />
         {active == 1 && (
           <FlatList
             showsVerticalScrollIndicator={false}
@@ -322,7 +327,6 @@ const dashboardStyles = theme => {
       resizeMode: 'contain',
       marginLeft: 3,
       tintColor: COLORS.csilver,
-      resizeMode: 'contain',
     },
     detail: {
       color: COLORS.fontColor,
@@ -368,7 +372,7 @@ const dashboardStyles = theme => {
     buttonContainor: {
       flexDirection: 'row',
       paddingVertical: 10,
-      backgroundColor: COLORS.white,
+      backgroundColor: theme.color.white,
       marginTop: 1,
     },
     button: {
@@ -387,7 +391,7 @@ const dashboardStyles = theme => {
       flexDirection: 'row',
       paddingBottom: 10,
       justifyContent: 'space-around',
-      backgroundColor: COLORS.white,
+      backgroundColor: theme.color.backgroundColor,
       marginTop: 1,
       paddingVertical: 10,
     },
@@ -395,6 +399,7 @@ const dashboardStyles = theme => {
       resizeMode: 'contain',
       width: 20,
       height: 20,
+      tintColor: theme.color.black,
     },
     bgImg: {
       height: 210,
@@ -441,6 +446,11 @@ const dashboardStyles = theme => {
       resizeMode: 'cover',
       borderWidth: 2,
       borderColor: COLORS.white,
+    },
+    seperator: {
+      backgroundColor: theme.color.gray,
+      height: 0.3,
+      marginVertical: 5,
     },
   });
   return styles;

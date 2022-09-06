@@ -86,7 +86,7 @@ const CostomDrawer = ({navigation}) => {
           } else if (index === 9) {
             navigation.navigate('Sign_in');
           } else if (index === 6) {
-            navigation.navigate('HelpSupport')
+            navigation.navigate('HelpSupport');
           }
         }}>
         <Image style={styles.profileimg} source={item.logo} />
@@ -223,7 +223,6 @@ const drawerStyles = theme => {
     },
     Myprofile: {
       height: 40,
-      marginTop: 5,
       alignItems: 'center',
       flexDirection: 'row',
       paddingHorizontal: 20,

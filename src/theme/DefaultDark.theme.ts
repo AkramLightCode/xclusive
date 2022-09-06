@@ -2,7 +2,7 @@ import {ColorTheme, SpacingTheme, Theme} from './Theme.interface';
 
 const DEFAULT_DARK_COLOR_THEME: ColorTheme = {
   black: '#ffffff',
-  lightblack: '#3D373A',
+  lightblack: '#B9B0B4',
   sblack: '#303030',
   darkblack: '#310436',
   white: '#000000',
@@ -12,7 +12,7 @@ const DEFAULT_DARK_COLOR_THEME: ColorTheme = {
   gray: '#656565',
   light: '#B9B0B4',
   PlatinumGray: '#797979',
-  toneblack: '#1D1D1D',
+  toneblack: '#CCCCCC',
   toneblack2: '#232323',
   fontColor: '#847D80',
   baba: '#BABABA',
