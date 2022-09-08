@@ -4,7 +4,6 @@ import {FONTS} from '../../assest/Themes';
 export default StyleSheet.create({
   continue: {
     flex: 1,
-    marginHorizontal: 20,
   },
   Image: {
     width: 80,

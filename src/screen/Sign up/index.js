@@ -1,14 +1,24 @@
 import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, ScrollView, StatusBar} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import LinearGradient from 'react-native-linear-gradient';
+import LoaderIndicator from '../../comman/LoaderIndicator';
 
 import Images from '../../assest/Images';
 import InputCommon from '../../Component/InputCommon';
 import CoustomButton from '../../Component/CoustomButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, FONTS} from '../../assest/Themes';
+import API from '../../services/API';
+import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
@@ -17,6 +27,7 @@ const Sign_in = props => {
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onClick = () => {
     setShow(show => !show);
@@ -35,14 +46,31 @@ const Sign_in = props => {
     } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
     } else {
-      props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+      setLoading(true);
+      const payload = {
+        email: email,
+        password: password,
+      };
+      console.log('payload', JSON.stringify(payload));
+      API.post(LOGIN_ENDPOINT, payload)
+        .then(res => {
+          console.log('\n\n\n\n\n Response =>' + JSON.stringify(res));
+          props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+          setLoading(false);
+        })
+        .catch(e => {
+          setLoading(false);
+          Toast.show('User not registered');
+        });
     }
   };
 
   return (
     <SafeAreaView style={styles.continue}>
-      <StatusBar backgroundColor={COLORS.bgColor} barStyle='dark-content' />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{marginHorizontal: 20}}>
         <Image source={Images.hederLogo} style={styles.Image} />
         <Text
           style={{
@@ -153,7 +181,7 @@ const Sign_in = props => {
               paddingVertical: 10,
               flex: 0.5,
               justifyContent: 'center',
-              marginRight:10
+              marginRight: 10,
             }}>
             <Image source={Images.google} style={{width: 20, height: 20}} />
             <Text
@@ -177,7 +205,7 @@ const Sign_in = props => {
               paddingVertical: 10,
               flex: 0.5,
               justifyContent: 'center',
-              marginLeft:10
+              marginLeft: 10,
             }}>
             <Image source={Images.twitter} style={{width: 20, height: 20}} />
             <Text
@@ -228,6 +256,7 @@ const Sign_in = props => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <LoaderIndicator loading={loading} />
     </SafeAreaView>
   );
 };
