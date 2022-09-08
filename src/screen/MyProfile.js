@@ -389,17 +389,7 @@ export default function MyProfile({props, navigation}) {
                     source={Images.share}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft: 'auto'}}>
-                  <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: 20,
-                      height: 20,
-                      tintColor: COLORS.pink,
-                    }}
-                    source={Images.favorit}
-                  />
-                </TouchableOpacity>
+             
               </View>
               <View
                 style={{

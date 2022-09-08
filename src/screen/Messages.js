@@ -8,21 +8,62 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
 
 export default function Messages({navigation}) {
   const [active, setActive] = useState('Recents', 'All');
+  const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState([
+    {name: 'Peter Benedict'},
+    {name: 'Emilli Salt'},
+    {name: 'Jemmy Rayen'},
+    {name: 'Peter Benedick'},
+    {name: 'Emilli Salt'},
+  ]);
+  const [masterDataSource, setMasterDataSource] = useState([
+    {name: 'Peter Benedict'},
+    {name: 'Emilli Salt'},
+    {name: 'Jemmy Rayen'},
+    {name: 'Peter Benedick'},
+    {name: 'Emilli Salt'},
+  ]);
 
   const onPress = v => {
     setActive(v);
   };
 
+  useEffect(() => {
+    // setFilteredDataSource();
+    // setMasterDataSource();
+    apiCall();
+  }, [navigation]);
+
+  const apiCall = () => {
+    setFilteredDataSource(filteredDataSource);
+  };
+
+  const searchFilterFunction = text => {
+    if (text) {
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      console.log();
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
+
   const ListData = ({item}) => {
     return (
       <TouchableOpacity
-      activeOpacity={0.7}
+        activeOpacity={0.7}
         onPress={() => navigation.navigate('Chat')}
         style={{
           padding: 15,
@@ -53,7 +94,7 @@ export default function Messages({navigation}) {
               lineHeight: 25,
               fontFamily: FONTS.medium,
             }}>
-            Peter Benedict
+           {item.name}
           </Text>
           <Text
             style={{
@@ -119,7 +160,12 @@ export default function Messages({navigation}) {
           <Text style={styles.MessagesText}>Messages</Text>
           <View style={styles.SearchbarContainer}>
             <View style={styles.SearchbarinnerView}>
-              <TextInput placeholder="" style={styles.Input} />
+              <TextInput
+                value={search}
+                onChangeText={text => searchFilterFunction(text)}
+                // placeholder=""
+                style={styles.Input}
+              />
               <TouchableOpacity>
                 <Image style={styles.SerchImage} source={Images.search} />
               </TouchableOpacity>
@@ -172,9 +218,11 @@ export default function Messages({navigation}) {
         </View>
         {active == 'Recents' && (
           <FlatList
-            style={{paddingBottom: 20}}
-            data={[1, 2, 3, 4, 5, 6]}
+            // style={{paddingBottom: 20}}
+            data={filteredDataSource}
             renderItem={ListData}
+            keyExtractor={(item, index) => index.toString()}
+            // extraData={refreshItem}
           />
         )}
       </ScrollView>
@@ -190,6 +238,7 @@ const styles = StyleSheet.create({
   mainview: {
     backgroundColor: COLORS.white,
     padding: 15,
+    marginTop: 0.7,
   },
   MessagesText: {
     fontSize: 22,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {Text, View, Image, TouchableOpacity, ScrollView, StatusBar} from 'react-native';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import LinearGradient from 'react-native-linear-gradient';
@@ -41,6 +41,7 @@ const Sign_in = props => {
 
   return (
     <SafeAreaView style={styles.continue}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle='dark-content' />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image source={Images.hederLogo} style={styles.Image} />
         <Text
