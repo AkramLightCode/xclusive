@@ -14,6 +14,7 @@ import CoustomButton from './CoustomButton';
 import ImagePicker from 'react-native-image-crop-picker';
 import LinearGradient from 'react-native-linear-gradient';
 import { COLORS } from '../assest/Themes';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 export default function EditProfile() {
@@ -59,7 +60,7 @@ export default function EditProfile() {
   };
 
   return (
-    <View>
+    <ScrollView>
       <View style={{marginBottom: 50}}>
         <ImageBackground
           resizeMode="stretch"
@@ -165,7 +166,7 @@ export default function EditProfile() {
         </LinearGradient>
 
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

@@ -1,7 +1,16 @@
 import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  StatusBar,
+} from 'react-native';
+import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import LinearGradient from 'react-native-linear-gradient';
+import LoaderIndicator from '../../comman/LoaderIndicator';
 
 import Images from '../../assest/Images';
 import InputCommon from '../../Component/InputCommon';
@@ -10,15 +19,19 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, FONTS} from '../../assest/Themes';
 import {useThemeAwareObject} from '../../theme';
 import signUpStyles from './styles';
+import API from '../../services/API';
+import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
+import { setLoggedIn } from '../../utils/Preference';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState('test@gmail.com');
+  const [email, setEmail] = useState('test1@gmail.com');
   const [password, setPassword] = useState('12345678');
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const styles = useThemeAwareObject(signUpStyles);
+  const [loading, setLoading] = useState(false);
 
   const onClick = () => {
     setShow(show => !show);
@@ -37,12 +50,30 @@ const Sign_in = props => {
     } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
     } else {
-      props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+      setLoading(true);
+      const payload = {
+        email: email,
+        password: password,
+      };
+      console.log('payload', JSON.stringify(payload));
+      API.post(LOGIN_ENDPOINT, payload)
+        .then(res => {
+          setLoggedIn(res.data.user);
+          console.log('res.data.user===========: ', res.data.user);
+          console.log('\n\n\n\n\n Response =>' + JSON.stringify(res));
+          props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+          setLoading(false);
+        })
+        .catch(e => {
+          setLoading(false);
+          Toast.show('User not registered');
+        });
     }
   };
 
   return (
     <SafeAreaView style={styles.continue}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{marginHorizontal: 20}}>
@@ -72,6 +103,8 @@ const Sign_in = props => {
             placeholderTextColor={COLORS.gray2}
             secureTextEntry={false}
             getfocus={() => {}}
+            autoCapitalize="none"
+            keyboardType={'email-addresss'}
           />
           {emailError && <Text style={styles.errorText}>{emailError}</Text>}
 
@@ -231,6 +264,7 @@ const Sign_in = props => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <LoaderIndicator loading={loading} />
     </SafeAreaView>
   );
 };

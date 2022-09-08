@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Keyboard,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -15,11 +16,13 @@ import Images from '../../assest/Images';
 import {COLORS, FONTS} from '../../assest/Themes';
 import CoustomButton from '../../Component/CoustomButton';
 import InputCommon from '../../Component/InputCommon';
+import LoaderIndicator from '../../comman/LoaderIndicator';
 
 import NetInfo from '@react-native-community/netinfo';
-import Helper from '../../Lib/Helper';
-import ApiUrl from '../../Lib/ApiUrl';
 import Toast from 'react-native-simple-toast';
+import API from '../../services/API';
+import {REGISTER_ENDPOINT} from '../../services/ApiEndpoints';
+import {setRegToken} from '../../utils/Preference';
 
 const Registration = props => {
   const [show, setShow] = useState(false);
@@ -31,6 +34,7 @@ const Registration = props => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onClick = () => {
     setShow(show => !show);
@@ -39,65 +43,48 @@ const Registration = props => {
   const onlogin = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (email == '') {
-      setEmailError('Enter Email.');
-      return;
+      setEmailError('Enter email');
     }
     if (password == '') {
-      setPasswordError('Enter Password.');
-      return;
+      setPasswordError('Enter Password');
     }
     if (name == '') {
       setNameError('Enter name.');
-      return;
-    }
-     if (reg.test(email) == false) {
-      setEmailError('Check Email.');
-      return;
-    } 
-     if (password.length < 8) {
+    } else if (reg.test(email) == false) {
+      setEmailError('Enter Valid email');
+    } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
-      return;
-     } 
-    
-    Keyboard.dismiss();
-    NetInfo.fetch().then(state => {
-      if (!state.isConnected) {
-        Toast.show('Please check your Network');
-        return false;
-      } else {
-        
-        var data = {
-          name: name,
-          email: email,
-          password: password,
-        };
-        // Helper.showLoader()
-        Helper.makeRequest({url: ApiUrl.register, method: 'POST', data: data})
-          .then(response => {
-            console.log('----res: ', response.data.access_token);
-            // let newResponse = JSON.parse(response);
-            if (response.status == 'success') {
-             Helper.setData('token', response.data.access_token)
-              props.navigation.reset({
-                index: 0,
-                routes: [{name: 'Sign_in'}],
-              });
-              Toast.show(response.message);
-              // Helper.hideLoader();
-            } else {
-              // Helper.hideLoader();
-              Toast.show(response.message);
-            }
-          })
-          .catch(err => {
-            Toast.show(err);
-          });
-      }
-    });
+    } else {
+      setLoading(true);
+      const payload = {
+        email: email,
+        password: password,
+        name: name,
+      };
+      console.log('payload', JSON.stringify(payload));
+      API.post(REGISTER_ENDPOINT, payload)
+        .then(res => {
+          if (res.status === 'success') {
+            Toast.show(res.message);
+            setRegToken(res.data.access_token);
+            console.log('\n\n\n\n\n Response =>' + JSON.stringify(res));
+            props.navigation.navigate('Sign_in');
+            setLoading(false);
+          } else {
+            setLoading(false);
+          }
+        })
+        .catch(e => {
+          setLoading(false);
+          Toast.show('User not registered');
+        });
+    }
   };
 
   return (
     <SafeAreaView style={Styles.continue}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image source={Images.hederLogo} style={Styles.Image} />
         <Text
@@ -164,7 +151,9 @@ const Registration = props => {
           end={{x: 1.8, y: 0}}
           colors={['#FC0270', '#6B2063']}>
           <CoustomButton
-            onPress={onlogin}
+            onPress={() => {
+              onlogin();
+            }}
             title={'Sign Up'}
             fontSize={16}
             lineHeight={22}
@@ -272,6 +261,7 @@ const Registration = props => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <LoaderIndicator loading={loading} />
     </SafeAreaView>
   );
 };

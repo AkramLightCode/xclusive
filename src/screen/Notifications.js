@@ -110,7 +110,7 @@ export default function Notifications() {
   return (
     <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{backgroundColor: COLORS.white, paddingVertical: 15}}>
+        <View style={{backgroundColor: COLORS.white, paddingVertical: 15,marginTop:.7}}>
           <Text
             style={{
               fontSize: 22,

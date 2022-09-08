@@ -22,7 +22,7 @@ const renderItem = ({item}) => (
       borderRadius: 5,
       marginTop: 20,
     }}>
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View style={{flexDirection: 'row',   }}>
       <View style={{flex: 0.8}}>
         <Text
           style={{

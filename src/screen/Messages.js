@@ -24,11 +24,13 @@ export default function Messages({navigation}) {
     {name: 'Peter Benedick'},
     {name: 'Emilli Salt'},
   ]);
-  const [masterDataSource, setMasterDataSource] = useState([{name: 'Peter Benedict'},
-  {name: 'Emilli Salt'},
-  {name: 'Jemmy Rayen'},
-  {name: 'Peter Benedick'},
-  {name: 'Emilli Salt'},]);
+  const [masterDataSource, setMasterDataSource] = useState([
+    {name: 'Peter Benedict'},
+    {name: 'Emilli Salt'},
+    {name: 'Jemmy Rayen'},
+    {name: 'Peter Benedick'},
+    {name: 'Emilli Salt'},
+  ]);
 
   const onPress = v => {
     setActive(v);
@@ -37,24 +39,21 @@ export default function Messages({navigation}) {
   useEffect(() => {
     // setFilteredDataSource();
     // setMasterDataSource();
-    apiCall()
+    apiCall();
   }, [navigation]);
 
-
-  const apiCall=()=>{
-    setFilteredDataSource(filteredDataSource)
-  }
+  const apiCall = () => {
+    setFilteredDataSource(filteredDataSource);
+  };
 
   const searchFilterFunction = text => {
     if (text) {
       const newData = masterDataSource.filter(function (item) {
-        const itemData = item.name
-          ? item.name.toUpperCase()
-          : ''.toUpperCase();
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
-      console.log()
+      console.log();
       setFilteredDataSource(newData);
       setSearch(text);
     } else {
@@ -250,6 +249,7 @@ const styles = StyleSheet.create({
   mainview: {
     backgroundColor: COLORS.white,
     padding: 15,
+    marginTop: 0.7,
   },
   MessagesText: {
     fontSize: 22,

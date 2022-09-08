@@ -5,7 +5,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
 import CostomDrawer from '../Component/CostomDrawer';
-import Bookmark from '../screen/Bookmark';
 import Chat from '../screen/Chat';
 import ForgotPassword from '../screen/ForgotPassword/ForgotPassword';
 import Home from '../screen/Home';
@@ -25,6 +24,7 @@ import HelpSupport from '../screen/HelpSupport';
 import Drawersetting from '../screen/Drawersetting';
 import ChangePassword from '../screen/ChangePassword';
 import Search from '../screen/Search';
+import Bookmark from '../screen/Bookmark';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();

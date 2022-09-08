@@ -23,8 +23,9 @@ export default function Settings({navigation}) {
   };
   return (
     <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{backgroundColor: COLORS.white, padding: 10}}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+        <View
+          style={{backgroundColor: COLORS.white, padding: 10, marginTop: 0.7}}>
           <Text
             style={{
               fontSize: 22,
@@ -185,17 +186,10 @@ export default function Settings({navigation}) {
         </View>
         {active == 1 && <EditProfile />}
         {active == 2 && <Account />}
-        {/* {active == 3 && (
-          <WebView
-            source={{
-              uri: 'https://reactnative.dev/' ,
-            }}
-          />
-        )} */}
-
+        {active == 3 && <WebView source={{uri: 'https://reactnative.dev/'}} />}
         {active == 4 && <FansFollowing />}
         {active == 6 && <Display />}
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   );
 }

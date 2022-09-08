@@ -8,6 +8,8 @@ import {
 import {ThemeProvider} from './src/theme/Theme.context';
 import {getApplicationTheme} from './src/utils/Preference';
 
+console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
+
 export default class App extends Component {
   constructor() {
     super();

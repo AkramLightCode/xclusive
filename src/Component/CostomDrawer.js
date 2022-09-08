@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Switch,
   FlatList,
+  StatusBar,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Images from '../assest/Images';
@@ -59,9 +60,9 @@ const CostomDrawer = ({navigation}) => {
 
   const data = [
     {logo: Images.profileIcon, title: 'My profile'},
-    {logo: Images.RightIcon, title: 'Bookmark'},
+    {logo: Images.RightIcon, title: 'Bookmarks'},
     {logo: Images.TreehLine, title: 'Lists'},
-    {logo: Images.Setting, title: 'Setting'},
+    {logo: Images.Setting, title: 'Settings'},
     {logo: Images.Cards, title: 'Your Cards'},
     {logo: Images.Addbank, title: 'Add Bank (To Earn)'},
     {logo: Images.HelfIcon, title: 'Help & Support'},
@@ -83,6 +84,8 @@ const CostomDrawer = ({navigation}) => {
             navigation.navigate('Drawersetting');
           } else if (index === 4) {
             navigation.navigate('MyHomeStackScreens', {screen: 'Payment'});
+          } else if (index === 6) {
+            navigation.navigate('HelpSupport');
           } else if (index === 7) {
             toggleSwitch();
           } else if (index === 9) {
