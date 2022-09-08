@@ -59,6 +59,7 @@ export default class InputCommon extends React.Component {
             numberOfLines={this.props.numberOfLines}
             multiline={this.props.multiline}
             autoFocus={this.autoFocus}
+            autoCapitalize={this.props.autoCapitalize}
           />
           {this.props.showIcon && (
             <TouchableOpacity onPress={this.props.onPress}>

@@ -5,16 +5,21 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Keyboard,
   ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Toast from 'react-native-simple-toast';
 
 import Images from '../../assest/Images';
 import {COLORS, FONTS} from '../../assest/Themes';
 import CoustomButton from '../../Component/CoustomButton';
 import InputCommon from '../../Component/InputCommon';
+
+import NetInfo from '@react-native-community/netinfo';
+import Helper from '../../Lib/Helper';
+import ApiUrl from '../../Lib/ApiUrl';
+import Toast from 'react-native-simple-toast';
 
 const Registration = props => {
   const [show, setShow] = useState(false);
@@ -33,22 +38,62 @@ const Registration = props => {
 
   const onlogin = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
     if (email == '') {
       setEmailError('Enter Email.');
+      return;
     }
     if (password == '') {
       setPasswordError('Enter Password.');
+      return;
     }
     if (name == '') {
       setNameError('Enter name.');
-    } else if (reg.test(email) == false) {
-      setEmailError('Check Email.');
-    } else if (name.length < 8) {
-      setPasswordError('Password Must Be 8 Charater');
-    } else {
-      props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+      return;
     }
+     if (reg.test(email) == false) {
+      setEmailError('Check Email.');
+      return;
+    } 
+     if (password.length < 8) {
+      setPasswordError('Password Must Be 8 Charater');
+      return;
+     } 
+    
+    Keyboard.dismiss();
+    NetInfo.fetch().then(state => {
+      if (!state.isConnected) {
+        Toast.show('Please check your Network');
+        return false;
+      } else {
+        
+        var data = {
+          name: name,
+          email: email,
+          password: password,
+        };
+        // Helper.showLoader()
+        Helper.makeRequest({url: ApiUrl.register, method: 'POST', data: data})
+          .then(response => {
+            console.log('----res: ', response.data.access_token);
+            // let newResponse = JSON.parse(response);
+            if (response.status == 'success') {
+             Helper.setData('token', response.data.access_token)
+              props.navigation.reset({
+                index: 0,
+                routes: [{name: 'Sign_in'}],
+              });
+              Toast.show(response.message);
+              // Helper.hideLoader();
+            } else {
+              // Helper.hideLoader();
+              Toast.show(response.message);
+            }
+          })
+          .catch(err => {
+            Toast.show(err);
+          });
+      }
+    });
   };
 
   return (
@@ -68,7 +113,7 @@ const Registration = props => {
           Sign up
         </Text>
         <InputCommon
-          keyboardType="email-addresss"
+          keyboardType={'email-addresss'}
           value={email}
           onChangeText={v => {
             setEmail(v);
@@ -78,6 +123,7 @@ const Registration = props => {
           isLeftimg
           typeIcon={Images.email}
           placeHolder="Email"
+          autoCapitalize="none"
         />
         {emailError && <Text style={Styles.errorText}>{emailError}</Text>}
         <InputCommon
@@ -94,6 +140,7 @@ const Registration = props => {
           inputStyle={{marginTop: 20}}
           typeIcon={Images.password}
           placeHolder="Password"
+          keyboardType={'password'}
         />
         {passwordError && <Text style={Styles.errorText}>{passwordError}</Text>}
         <InputCommon

@@ -16,6 +16,7 @@ import {useThemeAwareObject} from '../theme';
 export default function Home() {
   const styles = useThemeAwareObject(dashboardStyles);
   const [active, setActive] = useState(1);
+
   const onPress = v => {
     setActive(v);
   };
@@ -140,10 +141,7 @@ export default function Home() {
         {/* ????????????????????????????????????????????????????????????????????????/// /*/}
 
         {index === 1 && (
-          <View
-            style={{
-              paddingVertical: 20,
-            }}>
+          <View style={styles.suggestionTextStyle}>
             <View
               style={{
                 flexDirection: 'row',
@@ -282,7 +280,7 @@ export default function Home() {
 
 const dashboardStyles = theme => {
   const styles = StyleSheet.create({
-    container: {flex: 1, backgroundColor: theme.color.backgroundColor},
+    container: {flex: 1, backgroundColor: '#E1DEDD'},
     listContainor: {
       backgroundColor: theme.color.backgroundColor,
       marginTop: 15,
@@ -300,6 +298,7 @@ const dashboardStyles = theme => {
       fontWeight: '700',
       color: theme.color.lightblack,
       lineHeight: 25,
+
       fontFamily: FONTS.medium,
     },
     XclusiveText: {
@@ -358,7 +357,11 @@ const dashboardStyles = theme => {
       height: 20,
       tintColor: COLORS.pink,
     },
-
+    suggestionTextStyle: {
+      marginTop: 10,
+      paddingVertical: 20,
+      backgroundColor: theme.color.backgroundColor,
+    },
     singalDot: {
       resizeMode: 'contain',
       width: 4,
