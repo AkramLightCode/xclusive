@@ -67,66 +67,6 @@ export default class Helper extends React.Component {
         });
     }
 
-    // static alert(alertMessage, cb) {
-    //     Alert.alert(
-    //         Config.app_name,
-    //         alertMessage,
-    //         [
-    //             { text: 'OK', onPress: () => { if (cb) cb(true); console.log('OK Pressed') } },
-    //         ],
-    //         { cancelable: false }
-    //     )
-    // }
-
-    // static confirm(alertMessage, cb) {
-    //     Alert.alert(
-    //         Config.app_name,
-    //         alertMessage,
-    //         [
-    //             { text: 'OK', onPress: () => { if (cb) cb(true); console.log('OK Pressed') } },
-    //             { text: 'Cancel', onPress: () => { if (cb) cb(false); }, style: 'cancel' },
-    //         ],
-    //         { cancelable: false }
-    //     )
-    // }
-
-    // static confirmPopUp(alertMessage, cb) {
-    //     Alert.alert(
-    //         Config.app_name,
-    //         alertMessage,
-    //         [
-    //             { text: 'YES', onPress: () => { if (cb) cb(true); console.log('OK Pressed') } },
-    //             { text: 'NO', onPress: () => { if (cb) cb(false); }, style: 'cancel' },
-    //         ],
-    //         { cancelable: false }
-    //     )
-    // }
-
-    // static permissionConfirm(alertMessage, cb) {
-    //     Alert.alert(
-    //         Config.app_name,
-    //         alertMessage,
-    //         [
-    //             { text: 'NOT NOW', onPress: () => { if (cb) cb(false); }, style: 'cancel' },
-    //             { text: 'SETTINGS', onPress: () => { if (cb) cb(true); console.log('OK Pressed') } },
-    //         ],
-    //         { cancelable: false }
-    //     )
-    // }
-
-    // static cameraAlert(alertMessage, Camera, Gallery, Cancel, cbCamera, cbGallery) {
-    //     Alert.alert(
-    //         Config.app_name,
-    //         alertMessage,
-    //         [
-    //             { text: Camera, onPress: () => { if (cbCamera) cbCamera(true); console.log('OK Pressed') } },
-    //             { text: Gallery, onPress: () => { if (cbGallery) cbGallery(true); console.log('OK Pressed') } },
-    //             { text: Cancel, onPress: () => { if (cbCamera) cbCamera(false); }, style: 'cancel' },
-    //         ],
-    //         { cancelable: false }
-    //     )
-    // }
-
     static async setData(key, val) {
         try {
             let tempval = JSON.stringify(val);
@@ -226,15 +166,6 @@ export default class Helper extends React.Component {
             })
             .then((responseJson) => {
                 return JSON.stringify(responseJson);
-                //     if (responseJson.hasOwnProperty('status')) {
-                //         if (responseJson.error === 401) {
-                //             AsyncStorage.removeItem('userdata');
-                //             AsyncStorage.removeItem('token');
-                //             Toast.show(responseJson.message);
-                //         }
-                //     } else
-                //         return responseJson;
-                // }
             })
             .catch((error, a) => {
                 console.log('errorerror', error);
