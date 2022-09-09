@@ -21,7 +21,7 @@ import {useThemeAwareObject} from '../../theme';
 import signUpStyles from './styles';
 import API from '../../services/API';
 import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
-import { setLoggedIn } from '../../utils/Preference';
+import { setLoggedIn, setRegToken } from '../../utils/Preference';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
@@ -58,10 +58,11 @@ const Sign_in = props => {
       console.log('payload', JSON.stringify(payload));
       API.post(LOGIN_ENDPOINT, payload)
         .then(res => {
-          setLoggedIn(res.data.user);
-          console.log('res.data.user===========: ', res.data.user);
+          setLoggedIn(res.data);
+          setRegToken(res.data.access_token);
+          console.log('res.data.user===========: ', res.data);
           console.log('\n\n\n\n\n Response =>' + JSON.stringify(res));
-          props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+          props.navigation.replace('HomeStacksScreen', {screen: 'Home'});
           setLoading(false);
         })
         .catch(e => {

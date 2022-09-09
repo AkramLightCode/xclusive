@@ -12,6 +12,8 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import Images from '../assest/Images';
 import {COLORS, FONTS} from '../assest/Themes';
+import API from '../services/API';
+import {LOGOUT_ENDPOINT} from '../services/ApiEndpoints';
 import {
   DEFAULT_DARK_THEME,
   DEFAULT_DARK_THEME_ID,
@@ -20,16 +22,26 @@ import {
   useTheme,
   useThemeAwareObject,
 } from '../theme';
-import {getApplicationTheme, setApplicationTheme} from '../utils/Preference';
+import {
+  getApplicationTheme,
+  getRegToken,
+  setApplicationTheme,
+  setRegToken,
+} from '../utils/Preference';
+import LoaderIndicator from '../comman/LoaderIndicator';
+import SimpleToast from 'react-native-simple-toast';
 
 const CostomDrawer = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const {theme, setTheme, toggleTheme} = useTheme();
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const styles = useThemeAwareObject(drawerStyles);
+  const [loading, setLoading] = useState(false);
+  const [is_Token, setIs_Token] = useState('');
 
   useEffect(() => {
     getThemeInLocalStorage();
+    getDataToken();
   }, []);
 
   useEffect(() => {
@@ -56,6 +68,32 @@ const CostomDrawer = ({navigation}) => {
     } catch (e) {
       setIsEnabled(true);
     }
+  };
+
+  const getDataToken = async () => {
+    try {
+      const token = await getRegToken();
+      console.log('=====token: ', token);
+      setIs_Token(token);
+    } catch (e) {
+      console.log('=====e: ', e);
+    }
+  };
+
+  const logoutApi = () => {
+    const payload = {};
+    API.post(LOGOUT_ENDPOINT, payload, is_Token)
+      .then(res => {
+        console.log('res.data.user===========: ', res);
+        setRegToken('');
+        navigation.replace('Sign_in');
+        console.log('\n\n\n\n\n Response =>' + JSON.stringify(res));
+        setLoading(false);
+      })
+      .catch(e => {
+        setLoading(false);
+        SimpleToast.show('User not registered');
+      });
   };
 
   const data = [
@@ -89,7 +127,9 @@ const CostomDrawer = ({navigation}) => {
           } else if (index === 7) {
             toggleSwitch();
           } else if (index === 9) {
-            navigation.navigate('Sign_in');
+            // navigation.navigate('Sign_in');
+            alert('Logout');
+            logoutApi();
           } else if (index === 6) {
             navigation.navigate('HelpSupport');
           }
@@ -217,6 +257,7 @@ const CostomDrawer = ({navigation}) => {
           showsVerticalScrollIndicator={false}
         />
       </ScrollView>
+      <LoaderIndicator loading={loading} />
     </View>
   );
 };
