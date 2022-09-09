@@ -1,6 +1,13 @@
 import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
-import Toast from 'react-native-simple-toast';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  StatusBar,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Images from '../../assest/Images';
@@ -8,8 +15,9 @@ import InputCommon from '../../Component/InputCommon';
 import CoustomButton from '../../Component/CoustomButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, FONTS} from '../../assest/Themes';
-import {useThemeAwareObject} from '../../theme';
-import signUpStyles from './styles';
+// import {useThemeAwareObject} from '../../theme';
+
+// import styles from './styles';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
@@ -18,7 +26,7 @@ const Sign_in = props => {
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const styles = useThemeAwareObject(signUpStyles);
+  // const styles = useThemeAwareObject(signUpStyles);
 
   const onClick = () => {
     setShow(show => !show);
@@ -42,21 +50,13 @@ const Sign_in = props => {
   };
 
   return (
-    <SafeAreaView style={styles.continue}>
+    <SafeAreaView style={{flex: 1,backgroundColor:COLORS.bgColor}}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle='dark-content' />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{marginHorizontal: 20}}>
-        <Image source={Images.hederLogo} style={styles.Image} />
-        <Text
-          style={{
-            fontSize: 16,
-            fontWeight: 'bold',
-            color: COLORS.dark,
-            alignSelf: 'center',
-            marginTop: 10,
-          }}>
-          Sign In
-        </Text>
+        <Image source={Images.hederLogo} style={styles.hederLogo} />
+        <Text style={styles.SignInText}>Sign In</Text>
         <View style={{marginTop: 20}}>
           <InputCommon
             value={email}
@@ -100,18 +100,7 @@ const Sign_in = props => {
           onPress={() => {
             props.navigation.navigate('ResetPassword');
           }}>
-          <Text
-            style={{
-              fontSize: 17,
-              alignSelf: 'center',
-              marginTop: 25,
-              fontWeight: '400',
-              lineHeight: 20,
-              color: COLORS.shade1,
-              fontFamily: FONTS.semiBold,
-            }}>
-            Forgot your password?
-          </Text>
+          <Text style={styles.ForgotText}>Forgot your password?</Text>
         </TouchableOpacity>
         <LinearGradient
           style={{marginVertical: 20, borderRadius: 7}}
@@ -130,109 +119,124 @@ const Sign_in = props => {
           />
         </LinearGradient>
 
-        <Text
-          style={{
-            fontSize: 14,
-            color: COLORS.paynesgray,
-            fontWeight: '600',
-            lineHeight: 20,
-            fontFamily: FONTS.medium,
-            textAlign: 'center',
-          }}>
-          Or
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 20,
-            justifyContent: 'space-between',
-          }}>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              backgroundColor: 'white',
-              alignItems: 'center',
-              borderRadius: 7,
-              paddingVertical: 10,
-              flex: 0.5,
-              justifyContent: 'center',
-              marginRight: 10,
-            }}>
-            <Image source={Images.google} style={{width: 20, height: 20}} />
-            <Text
-              style={{
-                marginHorizontal: 20,
-                fontSize: 15,
-                fontWeight: '400',
-                lineHeight: 20,
-                color: COLORS.Sandstone,
-                fontFamily: FONTS.light,
-              }}>
-              Google
-            </Text>
+        <Text style={styles.OrText}>Or</Text>
+        <View style={styles.GTContainer}>
+          <TouchableOpacity style={styles.GTCommonContainer}>
+            <Image source={Images.google} style={styles.CommonImage} />
+            <Text style={styles.CommonText}>Google</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              backgroundColor: 'white',
-              alignItems: 'center',
-              borderRadius: 7,
-              paddingVertical: 10,
-              flex: 0.5,
-              justifyContent: 'center',
-              marginLeft: 10,
-            }}>
-            <Image source={Images.twitter} style={{width: 20, height: 20}} />
-            <Text
-              style={{
-                marginHorizontal: 20,
-                fontSize: 15,
-                fontWeight: '400',
-                lineHeight: 20,
-                color: COLORS.Sandstone,
-                fontFamily: FONTS.light,
-              }}>
-              Twitter
-            </Text>
+          <TouchableOpacity style={styles.GTCommonContainer}>
+            <Image source={Images.twitter} style={styles.CommonImage} />
+            <Text style={styles.CommonText}>Twitter</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            alignSelf: 'center',
-            marginTop: 40,
-            flexDirection: 'row',
-            marginBottom: 30,
-          }}>
-          <Text
-            style={{
-              fontSize: 15,
-              lineHeight: 20,
-              fontWeight: '400',
-              fontFamily: FONTS.semiBold,
-              color: COLORS.gray3,
-            }}>
-            Don’t Have An Account?
-          </Text>
+        <View style={styles.DontView}>
+          <Text style={styles.DontText}>Don’t Have An Account?</Text>
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Registration');
             }}>
-            <Text
-              style={{
-                fontSize: 15,
-                fontWeight: '400',
-                color: COLORS.black,
-                lineHeight: 20,
-                fontFamily: FONTS.medium,
-                marginLeft: 5,
-              }}>
-              Sign Up
-            </Text>
+            <Text style={styles.SignUpText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  hederLogo: {
+    width: 80,
+    height: 80,
+    alignSelf: 'center',
+    marginTop: 50,
+  },
+  SignInText: {
+    fontSize: 16,
+    color: COLORS.dark,
+    alignSelf: 'center',
+    marginTop: 10,
+    fontFamily:FONTS.bold
+  },
+  errorText: {
+    color: 'red',
+    marginLeft: 'auto',
+    fontSize: 12,
+    fontFamily: FONTS.Regular,
+  },
+  ForgotText: {
+    fontSize: 16,
+    alignSelf: 'center',
+    marginTop: 25,
+    lineHeight: 20,
+    color: COLORS.shade1,
+    fontFamily: FONTS.Regular,
+  },
+  OrText: {
+    fontSize: 14,
+    color: COLORS.paynesgray,
+    lineHeight: 20,
+    fontFamily: FONTS.medium,
+    textAlign: 'center',
+  },
+  GTContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    justifyContent: 'space-between',
+  },
+  GoogleContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    borderRadius: 7,
+    paddingVertical: 10,
+    flex: 0.5,
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  GTCommonContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    alignItems: 'center',
+    borderRadius: 7,
+    paddingVertical: 10,
+    flex: 0.5,
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  CommonImage: {
+    width: 20,
+    height: 20,
+  },
+  CommonText: {
+    marginHorizontal: 20,
+    fontSize: 15,
+    fontWeight: '400',
+    lineHeight: 20,
+    color: COLORS.Sandstone,
+    fontFamily: FONTS.light,
+  },
+  DontView: {
+    alignSelf: 'center',
+    marginTop: 40,
+    flexDirection: 'row',
+    marginBottom: 30,
+  },
+  DontText: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '400',
+    fontFamily: FONTS.Regular,
+    color: COLORS.gray3,
+  },
+  SignUpText: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: COLORS.black,
+    lineHeight: 20,
+    fontFamily: FONTS.medium,
+    marginLeft: 5,
+  },
+});
 
 export default Sign_in;

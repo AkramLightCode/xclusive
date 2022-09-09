@@ -9,10 +9,14 @@ import {
 import React from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
+import { useTheme, useThemeAwareObject } from '../theme';
 
 export default function FansFollowing() {
+  const styles = useThemeAwareObject(dashboardStyles);
+
+  const {theme} = useTheme()
+
   return (
-    <View style={{flex: 1}}>
       <View style={styles.mainview}>
         <View style={styles.secondview}>
           <View>
@@ -20,48 +24,59 @@ export default function FansFollowing() {
               style={{
                 fontFamily: FONTS.medium,
                 color: COLORS.black,
-                fontWeight: '500',
                 fontSize: 15,
                 lineHeight: 20,
+                color:theme.color.black
               }}>
               Following Price
             </Text>
             <TextInput
-              style={{ color: COLORS.shadegray,
+            placeholderTextColor={theme.color.shadegray}
+              style={{
+                color: theme.color.shadegray,
                 fontWeight: '400',
                 fontSize: 15,
-                fontFamily: FONTS.light,}}
+                fontFamily: FONTS.light,
+              }}
               placeholder="Free"
-              
             />
           </View>
           <TouchableOpacity>
             <Image
               source={Images.Rightarrow}
-              style={{width: 15, height: 15, resizeMode: 'contain',tintColor:COLORS.BL}}
+              style={{
+                width: 15,
+                height: 15,
+                resizeMode: 'contain',
+                tintColor: theme.color.black,
+              }}
             />
           </TouchableOpacity>
         </View>
       </View>
-    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  mainview: {
-    backgroundColor: COLORS.white,
-    padding: 10,
-    marginTop: 10,
-    marginHorizontal: 10,
-    borderRadius: 7,
-    paddingVertical: 20,
-  },
-  secondview: {
-    borderWidth: 0.2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
-    borderRadius: 5,
-  },
-});
+const dashboardStyles = theme => {
+  const styles = StyleSheet.create({
+    mainview: {
+      backgroundColor: theme.color.backgroundColor,
+      padding: 20,
+      marginTop: 10,
+      marginHorizontal: 10,
+      borderRadius: 7,
+  
+    },
+    secondview: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: 10,
+      borderRadius: 5,
+      backgroundColor:theme.color.backgroundColor,
+      borderWidth:0.5,
+      borderColor:theme.color.borderColor2
+    },
+  });
+  return styles;
+};

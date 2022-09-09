@@ -204,7 +204,7 @@ const Registration = props => {
             flexDirection: 'row',
             marginBottom: 30,
           }}>
-          <Text style={{fontSize: 15, lineHeight: 20, color: COLORS.gray}}>
+          <Text style={{fontSize: 14, lineHeight: 20, color: COLORS.gray3,fontFamily:FONTS.Regular}}>
             Don’t have an account?
           </Text>
           <TouchableOpacity
@@ -213,7 +213,7 @@ const Registration = props => {
             }}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 14,
                 fontWeight: '400',
                 color: COLORS.black,
                 lineHeight: 20,
@@ -243,7 +243,7 @@ const Styles = StyleSheet.create({
     color: 'red',
     marginLeft: 'auto',
     fontSize: 12,
-    fontFamily: FONTS.medium,
+    fontFamily: FONTS.Regular,
   },
 });
 export default Registration;

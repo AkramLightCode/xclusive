@@ -10,24 +10,25 @@ import {COLORS, FONTS} from '../assest/Themes';
 import NewCard from './paymentScreen/NewCard';
 import YourCard from './paymentScreen/YourCard';
 import PaymentScreen from './paymentScreen/Payment';
+import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function Payment() {
+  const styles = useThemeAwareObject(dashboardStyles);
+  const {theme} = useTheme ();
   const [active, setActive] = useState(1);
   const onPress = v => {
     setActive(v);
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
-      <ScrollView>
-        <View style={{backgroundColor: COLORS.white, padding: 10}}>
+    <View style={styles.Container}>
+        <View style={styles.MainView}>
           <Text
             style={{
               fontSize: 22,
-              color: COLORS.black,
-              fontWeight: '600',
+              color:theme.color.black,
               marginHorizontal: 10,
-              fontFamily: FONTS.bold,
+              fontFamily: FONTS.semiBold,
               lineHeight: 30,
             }}>
             Payment
@@ -51,10 +52,9 @@ export default function Payment() {
                 <Text
                   style={{
                     color: active == 1 ? COLORS.white : COLORS.sblack,
-                    fontWeight: '400',
                     fontSize: 15,
                     lineHeight: 20,
-                    fontFamily: FONTS.semiBold,
+                    fontFamily: FONTS.Regular,
                   }}>
                   Your Cards
                 </Text>
@@ -71,10 +71,9 @@ export default function Payment() {
                 <Text
                   style={{
                     color: active == 2 ? COLORS.white : COLORS.sblack,
-                    fontWeight: '400',
                     fontSize: 15,
                     lineHeight: 20,
-                    fontFamily: FONTS.semiBold,
+                    fontFamily: FONTS.Regular,
                   }}>
                   Payments
                 </Text>
@@ -86,9 +85,20 @@ export default function Payment() {
         {active == 1 && <YourCard onPress={() => onPress(3)} />}
         {active == 3 && <NewCard onClick={() => onPress(1)} />}
         {active == 2 && <PaymentScreen />}
-      </ScrollView>
     </View>
   );
 }
+const dashboardStyles = theme => {
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Container:{
+    flex: 1,
+    backgroundColor: theme.color.bgColor,
+  },
+  MainView:{
+    backgroundColor: theme.color.backgroundColor,
+    padding: 10
+    },
+});
+return styles;
+};

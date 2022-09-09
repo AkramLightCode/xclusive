@@ -12,10 +12,13 @@ import React, {useState, useEffect} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
-// import {useEffect} from 'react/cjs/react.production.min';
+import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function Messages({navigation}) {
-  const [active ,setActive ] =useState('Recents','All')
+  const styles = useThemeAwareObject(dashboardStyles);
+  const {theme} = useTheme();
+
+  const [active, setActive] = useState('Recents', 'All');
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([
     {name: 'Peter Benedict'},
@@ -24,37 +27,34 @@ export default function Messages({navigation}) {
     {name: 'Peter Benedick'},
     {name: 'Emilli Salt'},
   ]);
-  const [masterDataSource, setMasterDataSource] = useState([{name: 'Peter Benedict'},
-  {name: 'Emilli Salt'},
-  {name: 'Jemmy Rayen'},
-  {name: 'Peter Benedick'},
-  {name: 'Emilli Salt'},]);
+  const [masterDataSource, setMasterDataSource] = useState([
+    {name: 'Peter Benedict'},
+    {name: 'Emilli Salt'},
+    {name: 'Jemmy Rayen'},
+    {name: 'Peter Benedick'},
+    {name: 'Emilli Salt'},
+  ]);
 
   const onPress = v => {
     setActive(v);
   };
 
   useEffect(() => {
-    // setFilteredDataSource();
-    // setMasterDataSource();
-    apiCall()
+    apiCall();
   }, [navigation]);
 
-
-  const apiCall=()=>{
-    setFilteredDataSource(filteredDataSource)
-  }
+  const apiCall = () => {
+    setFilteredDataSource(filteredDataSource);
+  };
 
   const searchFilterFunction = text => {
     if (text) {
       const newData = masterDataSource.filter(function (item) {
-        const itemData = item.name
-          ? item.name.toUpperCase()
-          : ''.toUpperCase();
+        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
-      console.log()
+      console.log();
       setFilteredDataSource(newData);
       setSearch(text);
     } else {
@@ -68,88 +68,17 @@ export default function Messages({navigation}) {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => navigation.navigate('Chat')}
-        style={{
-          padding: 15,
-          flexDirection: 'row',
-          backgroundColor: COLORS.white,
-          marginTop: 10,
-        }}>
-        <Image
-          style={{
-            height: 50,
-            width: 50,
-            resizeMode: 'contain',
-            borderRadius: 50,
-          }}
-          source={Images.profile}
-        />
-        <View
-          style={{
-            justifyContent: 'center',
-            marginLeft: 10,
-            marginRight: 'auto',
-          }}>
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: '700',
-              color: COLORS.lightblack,
-              lineHeight: 25,
-              fontFamily: FONTS.medium,
-            }}>
-            {item.name.toUpperCase()}
-          </Text>
-          <Text
-            style={{
-              fontSize: 13,
-              lineHeight: 20,
-              fontWeight: '400',
-              color: COLORS.lightgray,
-              fontFamily: FONTS.semiBold,
-            }}>
-            @Xclusive
-          </Text>
-          <Text
-            style={{
-              fontSize: 15,
-              lineHeight: 20,
-              fontWeight: '500',
-              color: COLORS.gray,
-              marginTop: 5,
-              fontFamily: FONTS.Regular,
-            }}>
-            Message Locked
-          </Text>
+        style={styles.FlatListMainView}>
+        <Image style={styles.ProfileImage} source={Images.profile} />
+        <View style={styles.PETERView}>
+          <Text style={styles.PETERText}>{item.name.toUpperCase()}</Text>
+          <Text style={styles.XclusiveText}>@Xclusive</Text>
+          <Text style={styles.MessageLText}>Message Locked</Text>
         </View>
         <View style={{alignItems: 'flex-end'}}>
-          <Text
-            style={{
-              fontSize: 13,
-              lineHeight: 20,
-              fontWeight: '400',
-              color: COLORS.light,
-              fontFamily: FONTS.semiBold,
-            }}>
-            22 mar
-          </Text>
-          <View
-            style={{
-              justifyContent: 'center',
-              borderRadius: 50,
-              backgroundColor: COLORS.pink,
-              padding: 10,
-              alignItems: 'center',
-              marginTop: 10,
-            }}>
-            <Image
-              style={{
-                height: 20,
-                width: 20,
-                resizeMode: 'contain',
-                tintColor: COLORS.white,
-              }}
-              source={Images.lock}
-            />
+          <Text style={styles.Date}>22 mar</Text>
+          <View style={styles.LockView}>
+            <Image style={styles.LockImage} source={Images.lock} />
           </View>
         </View>
       </TouchableOpacity>
@@ -158,14 +87,14 @@ export default function Messages({navigation}) {
 
   return (
     <View style={styles.Container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
         <View style={styles.mainview}>
           <Text style={styles.MessagesText}>Messages</Text>
           <View style={styles.SearchbarContainer}>
             <View style={styles.SearchbarinnerView}>
               <TextInput
                 placeholder="name"
-                onChangeText={(text) => searchFilterFunction(text)}
+                onChangeText={text => searchFilterFunction(text)}
                 value={search}
                 style={styles.Input}
               />
@@ -178,42 +107,40 @@ export default function Messages({navigation}) {
           <View style={styles.ButtonContainer}>
             <TouchableOpacity
               onPress={() => onPress('Recents')}
-              style={{
-                backgroundColor:
-                  active == 'Recents' ? COLORS.pink : COLORS.bgColor,
-                paddingHorizontal: 30,
-                paddingVertical: 10,
-                borderRadius: 30,
-              }}>
+              style={[
+                styles.topButton,
+                {
+                  backgroundColor:
+                    active == 'Recents' ? COLORS.pink : COLORS.bgColor,
+                },
+              ]}>
               <Text
-                style={{
-                  color: active == 'Recents' ? COLORS.white : COLORS.sblack,
-                  fontWeight: '400',
-                  fontSize: 15,
-                  lineHeight: 20,
-                  fontFamily: FONTS.semiBold,
-                }}>
+                style={[
+                  styles.topText,
+                  {
+                    color: active == 'Recents' ? COLORS.white : COLORS.sblack,
+                  },
+                ]}>
                 Recents
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress('All')}
-              style={{
-                backgroundColor: active == 'All' ? COLORS.pink : COLORS.bgColor,
-                marginLeft: 20,
-                paddingHorizontal: 35,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 30,
-              }}>
+              style={[
+                styles.topButton,
+                {
+                  backgroundColor:
+                    active == 'All' ? COLORS.pink : COLORS.bgColor,
+                  marginLeft: 20,
+                },
+              ]}>
               <Text
-                style={{
-                  color: active == 'All' ? COLORS.white : COLORS.sblack,
-                  fontWeight: '400',
-                  fontSize: 15,
-                  lineHeight: 20,
-                  fontFamily: FONTS.semiBold,
-                }}>
+                style={[
+                  styles.topText,
+                  {
+                    color: active == 'All' ? COLORS.white : COLORS.sblack,
+                  },
+                ]}>
                 All
               </Text>
             </TouchableOpacity>
@@ -221,68 +148,139 @@ export default function Messages({navigation}) {
         </View>
         {active == 'Recents' && (
           <FlatList
-            // style={{paddingBottom: 20}}
             data={filteredDataSource}
             renderItem={ListData}
             keyExtractor={(item, index) => index.toString()}
-            // extraData={refreshItem}
+            showsVerticalScrollIndicator={false}
           />
         )}
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   );
 }
+const dashboardStyles = theme => {
+  const styles = StyleSheet.create({
+    Container: {
+      flex: 1,
+      backgroundColor: theme.color.bgColor,
+    },
+    mainview: {
+      backgroundColor: theme.color.backgroundColor,
+      padding: 15,
+      marginTop: 0.7,
+    },
+    MessagesText: {
+      fontSize: 22,
+      color: theme.color.black,
+      marginHorizontal: 10,
+      fontFamily: FONTS.semiBold,
+      lineHeight: 30,
+      textTransform: 'capitalize',
 
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-    backgroundColor: COLORS.bgColor,
-  },
-  mainview: {
-    backgroundColor: COLORS.white,
-    padding: 15,
-  },
-  MessagesText: {
-    fontSize: 22,
-    color: COLORS.black,
-    fontWeight: '600',
-    marginHorizontal: 10,
-    fontFamily: FONTS.bold,
-    lineHeight: 30,
-  },
-  SearchbarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  SearchbarinnerView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderRadius: 30,
-    paddingHorizontal: 10,
-    flex: 1,
-    borderColor: COLORS.black,
-  },
-  Input: {
-    flex: 1,
-  },
-  SerchImage: {
-    width: 20,
-    height: 25,
-    resizeMode: 'contain',
-    tintColor: COLORS.black,
-  },
-  PlusImage: {
-    width: 20,
-    height: 20,
-    resizeMode: 'contain',
-    marginLeft: 20,
-    tintColor: COLORS.black,
-  },
-  ButtonContainer: {
-    backgroundColor: COLORS.white,
-    marginTop: 20,
-    flexDirection: 'row',
-  },
-});
+    },
+    SearchbarContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    SearchbarinnerView: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderRadius: 30,
+      paddingHorizontal: 10,
+      flex: 1,
+      borderColor: COLORS.black,
+      backgroundColor: COLORS.white,
+    },
+    Input: {
+      flex: 1,
+    },
+    SerchImage: {
+      width: 20,
+      height: 25,
+      resizeMode: 'contain',
+      tintColor: COLORS.black,
+    },
+    PlusImage: {
+      width: 20,
+      height: 20,
+      resizeMode: 'contain',
+      marginLeft: 20,
+      tintColor: theme.color.black,
+    },
+    ButtonContainer: {
+      backgroundColor: theme.color.backgroundColor,
+      marginTop: 20,
+      flexDirection: 'row',
+    },
+    FlatListMainView: {
+      padding: 15,
+      flexDirection: 'row',
+      backgroundColor: theme.color.backgroundColor,
+      marginTop: 10,
+    },
+    ProfileImage: {
+      height: 50,
+      width: 50,
+      resizeMode: 'contain',
+      borderRadius: 50,
+    },
+    PETERView: {
+      justifyContent: 'center',
+      marginLeft: 10,
+      marginRight: 'auto',
+    },
+    PETERText: {
+      fontSize: 18,
+      color: theme.color.lightblack,
+      fontFamily: FONTS.semiBold,
+      textTransform: 'capitalize',
+
+    },
+    XclusiveText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.lightgray,
+      fontFamily: FONTS.Regular,
+    },
+    MessageLText: {
+      fontSize: 14,
+      lineHeight: 20,
+      color: theme.color.gray,
+      marginTop: 5,
+      fontFamily: FONTS.Regular,
+    },
+    Date: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.light,
+      fontFamily: FONTS.Regular,
+    },
+    LockView: {
+      justifyContent: 'center',
+      borderRadius: 50,
+      backgroundColor: COLORS.pink,
+      padding: 10,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    LockImage: {
+      height: 20,
+      width: 20,
+      resizeMode: 'contain',
+      tintColor: COLORS.white,
+    },
+    topButton: {
+      paddingHorizontal: 30,
+      paddingVertical: 10,
+      borderRadius: 30,
+    },
+    topText: {
+      fontSize: 15,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
+    },
+  });
+  return styles;
+};

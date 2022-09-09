@@ -29,27 +29,17 @@ export default function Home() {
     return (
       <View>
         <View style={styles.listContainor}>
-          <TouchableOpacity style={{}}>
+          <TouchableOpacity style={{marginTop: 5}}>
             <Image source={Images.profile} style={styles.userProfile} />
           </TouchableOpacity>
           <View style={{marginLeft: 10, flex: 1}}>
-            <View style={{flexDirection: 'row', marginTop: 12}}>
+            <View style={{flexDirection: 'row', marginTop: 10}}>
               <View style={{}}>
                 <Text style={styles.userName}>Peter Benedict</Text>
                 <Text style={styles.XclusiveText}>@Xclusive</Text>
               </View>
               <View style={{flexDirection: 'row', marginLeft: 'auto'}}>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    lineHeight: 20,
-                    fontWeight: '400',
-                    color: theme.color.light,
-                    fontFamily: FONTS.semiBold,
-                    marginRight: 7,
-                  }}>
-                  2 days ago
-                </Text>
+                <Text style={styles.XclusiveText}>2 days ago</Text>
                 <TouchableOpacity>
                   <Image
                     source={require('../assest/icon/threedots.png')}
@@ -60,25 +50,17 @@ export default function Home() {
             </View>
             <Text
               style={{
-                color: COLORS.fontColor,
-                fontWeight: '400',
+                color: theme.color.fontColor,
                 fontSize: 14,
-                fontFamily: FONTS.Regular,
+                textTransform: 'capitalize',
+                fontFamily:FONTS.Regular
               }}>
               It is a long established fact that a reader will be distracted by
               the readable...
             </Text>
             <View>
               {/* ////////////////////////////// vidio ///////////////////// */}
-              <TouchableOpacity
-                activeOpacity={0.5}
-                style={{
-                  padding: 5,
-                  borderWidth: 0.5,
-                  borderRadius: 10,
-                  marginTop: 10,
-                  borderColor: COLORS.borderColor,
-                }}>
+              <TouchableOpacity activeOpacity={0.5} style={styles.border}>
                 <Image source={Images.Mask} style={styles.vidio} />
               </TouchableOpacity>
               <ScrollView
@@ -86,15 +68,7 @@ export default function Home() {
                 showsHorizontalScrollIndicator={false}>
                 {datas.map(index => {
                   return (
-                    <TouchableOpacity
-                      style={{
-                        marginRight: 7,
-                        padding: 5,
-                        borderWidth: 0.5,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        borderColor: COLORS.borderColor,
-                      }}>
+                    <TouchableOpacity style={[styles.border, {marginRight: 7}]}>
                       <Image source={Images.Mask} style={styles.mapItem} />
                     </TouchableOpacity>
                   );
@@ -108,13 +82,13 @@ export default function Home() {
                   source={like == true ? Images.like : Images.dislike}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{marginHorizontal: 30}}>
+              <TouchableOpacity style={{marginHorizontal: 40}}>
                 <Image style={styles.icon} source={Images.comments} />
               </TouchableOpacity>
               <TouchableOpacity>
                 <Image style={styles.icon} source={Images.share} />
               </TouchableOpacity>
-              <TouchableOpacity style={{marginLeft: 'auto'}}>
+              <TouchableOpacity style={{marginLeft: 'auto', marginRight: 5}}>
                 <Image style={styles.favorit} source={Images.favorit} />
               </TouchableOpacity>
             </View>
@@ -153,8 +127,8 @@ export default function Home() {
               }}>
               <Text style={styles.userName}>Suggestion</Text>
               <TouchableOpacity>
-                <Text style={[styles.detail, {color: COLORS.pink}]}>
-                  See all
+                <Text style={[styles.detail, {color: theme.color.pink}]}>
+                  See All
                 </Text>
               </TouchableOpacity>
             </View>
@@ -171,7 +145,11 @@ export default function Home() {
                     <TouchableOpacity style={{marginLeft: 'auto', margin: 10}}>
                       <Image
                         source={Images.dot}
-                        style={{height: 10, width: 30, tintColor: COLORS.black}}
+                        style={{
+                          height: 10,
+                          width: 30,
+                          tintColor: theme.color.black,
+                        }}
                       />
                     </TouchableOpacity>
                     <View style={styles.elivetionView}>
@@ -208,9 +186,10 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View style={styles.buttonContainor}> */}
-        <ScrollView horizontal style={styles.buttonContainor}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+      <View style={styles.seperator} />
+      <View style={styles.buttonContainor}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <TouchableOpacity
             onPress={() => onPress(1)}
             style={[
@@ -245,7 +224,10 @@ export default function Home() {
             onPress={() => onPress(3)}
             style={[
               styles.button,
-              {backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor},
+              {
+                backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor,
+                marginRight: 10,
+              },
             ]}>
             <Text
               style={[
@@ -256,38 +238,39 @@ export default function Home() {
             </Text>
           </TouchableOpacity>
         </ScrollView>
-        {/* </View> */}
-        <View style={styles.seperator} />
-        <View style={styles.filterView}>
-          <TouchableOpacity>
-            <Image style={styles.filterIcon} source={Images.gallery} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.filterIcon} source={Images.Vector} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.filterIcon} source={Images.edit} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={styles.filterIcon} source={Images.Menu} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.seperator} />
-        {active == 1 && (
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={ListData}
-            renderItem={renderItem}
-          />
-        )}
-      </ScrollView>
+      </View>
+      {/* </View> */}
+      <View style={styles.seperator} />
+      <View style={styles.filterView}>
+        <TouchableOpacity>
+          <Image style={styles.filterIcon} source={Images.gallery} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.filterIcon} source={Images.Vector} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.filterIcon} source={Images.edit} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image style={styles.filterIcon} source={Images.Menu} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.seperator} />
+      {active == 1 && (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={ListData}
+          renderItem={renderItem}
+        />
+      )}
+      {/* </ScrollView> */}
     </View>
   );
 }
 
 const dashboardStyles = theme => {
   const styles = StyleSheet.create({
-    container: {flex: 1, backgroundColor: theme.color.backgroundColor},
+    container: {flex: 1, backgroundColor: theme.color.bgColor},
     listContainor: {
       backgroundColor: theme.color.backgroundColor,
       marginTop: 15,
@@ -302,37 +285,35 @@ const dashboardStyles = theme => {
     },
     userName: {
       fontSize: 18,
-      fontWeight: '700',
       color: theme.color.lightblack,
       lineHeight: 25,
-      fontFamily: FONTS.medium,
+      fontFamily: FONTS.semiBold,
     },
     XclusiveText: {
       fontSize: 13,
       lineHeight: 20,
-      fontWeight: '400',
-      color: COLORS.baba,
-      fontFamily: FONTS.semiBold,
+      color: theme.color.baba,
+      fontFamily: FONTS.Regular,
+      
     },
-    DayText: {
-      fontSize: 13,
-      lineHeight: 20,
-      fontWeight: '400',
-      color: COLORS.light,
-      fontFamily: FONTS.light,
-    },
+    // DayText: {
+    //   fontSize: 13,
+    //   lineHeight: 20,
+    //   color: COLORS.light,
+    //   fontFamily: FONTS.light,
+    // },
     dotIcon: {
       width: 22,
       height: 22,
       resizeMode: 'contain',
-      marginLeft: 3,
-      tintColor: COLORS.csilver,
+      marginLeft: 5,
+      tintColor: theme.color.csilver,
     },
     detail: {
-      color: COLORS.fontColor,
-      fontWeight: '400',
+      color: theme.color.fontColor,
       fontSize: 14,
       fontFamily: FONTS.Regular,
+      textTransform: 'capitalize',
     },
     vidio: {
       width: '100%',
@@ -354,13 +335,13 @@ const dashboardStyles = theme => {
       resizeMode: 'contain',
       width: 20,
       height: 20,
-      tintColor: COLORS.Tgray,
+      tintColor: theme.color.light,
     },
     favorit: {
       resizeMode: 'contain',
       width: 20,
       height: 20,
-      tintColor: COLORS.pink,
+      tintColor: theme.color.pink,
     },
 
     singalDot: {
@@ -368,24 +349,22 @@ const dashboardStyles = theme => {
       width: 4,
       height: 4,
       marginHorizontal: 15,
+      tintColor: theme.color.appsilver,
     },
     buttonContainor: {
-      flexDirection: 'row',
       paddingVertical: 10,
       backgroundColor: theme.color.white,
-      marginTop: 1,
     },
     button: {
-      paddingVertical: 7,
-      paddingHorizontal: 15,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
       borderRadius: 20,
       marginLeft: 10,
     },
     buttonText: {
-      fontWeight: '400',
       fontSize: 15,
       lineHeight: 20,
-      fontFamily: FONTS.semiBold,
+      fontFamily: FONTS.Regular,
     },
     filterView: {
       flexDirection: 'row',
@@ -399,7 +378,7 @@ const dashboardStyles = theme => {
       resizeMode: 'contain',
       width: 20,
       height: 20,
-      tintColor: theme.color.black,
+      tintColor: theme.color.PlatinumGray,
     },
     bgImg: {
       height: 210,
@@ -428,14 +407,14 @@ const dashboardStyles = theme => {
       fontFamily: FONTS.light,
     },
     cardButton: {
-      backgroundColor: COLORS.white,
+      backgroundColor: theme.color.backgroundColor,
       paddingVertical: 4,
       paddingHorizontal: 15,
       marginTop: 5,
       borderRadius: 5,
     },
     cardButtonText: {
-      color: COLORS.black,
+      color: theme.color.black,
       fontSize: 12,
       fontFamily: FONTS.light,
     },
@@ -450,7 +429,13 @@ const dashboardStyles = theme => {
     seperator: {
       backgroundColor: theme.color.gray,
       height: 0.3,
-      marginVertical: 5,
+    },
+    border: {
+      padding: 5,
+      borderWidth: 0.5,
+      borderRadius: 10,
+      marginTop: 10,
+      borderColor: theme.color.borderColor,
     },
   });
   return styles;

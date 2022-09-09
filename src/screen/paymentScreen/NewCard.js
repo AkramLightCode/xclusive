@@ -11,6 +11,7 @@ import CoustomButton from '../../Component/CoustomButton';
 import CommanPicker from '../../Component/CommanPicker';
 import {COLORS, FONTS} from '../../assest/Themes';
 import LinearGradient from 'react-native-linear-gradient';
+import {useTheme, useThemeAwareObject} from '../../theme';
 
 const data = [
   {label: 'India', value: '1'},
@@ -45,6 +46,10 @@ const yearData = [
   {label: '1990', value: '11'},
 ];
 export default function NewCard({onClick}) {
+  const styles = useThemeAwareObject(dashboardStyles);
+
+  const {theme} = useTheme();
+
   const [Street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [State, setState] = useState('');
@@ -65,8 +70,7 @@ export default function NewCard({onClick}) {
         <View style={{margin: 10}}>
           <Text
             style={{
-              color: COLORS.black,
-              fontWeight: '500',
+              color: theme.color.black,
               fontSize: 16,
               lineHeight: 20,
               marginTop: 10,
@@ -77,33 +81,36 @@ export default function NewCard({onClick}) {
           <Text
             style={{
               fontSize: 14,
-              fontWeight: '500',
               lineHeight: 18,
-              color: COLORS.shadegray,
+              color: theme.color.shadegray,
               fontFamily: FONTS.medium,
+              marginTop: 10,
             }}>
             We are fully compliant with Payment Card Industry Data Security
             Standards.
           </Text>
           <View
             style={{
-              backgroundColor: 'white',
+              backgroundColor: theme.color.backgroundColor,
               marginTop: 20,
               borderRadius: 5,
-              padding: 15,
+              padding: 20,
             }}>
-            <View style={{}}>
-              <InputCommon
-                placeHolder="Street"
-                placeholderTextColor={COLORS.gray2}
-                value={Street}
-                onChangeText={v => {
-                  setStreet(v);
-                }}
-              />
-            </View>
+            <InputCommon
+              textStyle={{color: theme.color.gray2}}
+              inputStyle={styles.inputStyle}
+              style={{borderColor: theme.color.black}}
+              placeHolder="Street"
+              placeholderTextColor={COLORS.gray2}
+              value={Street}
+              onChangeText={v => {
+                setStreet(v);
+              }}
+            />
             <View style={{marginTop: 15}}>
               <InputCommon
+                textStyle={{color: theme.color.gray2}}
+                inputStyle={styles.inputStyle}
                 placeHolder="City"
                 placeholderTextColor={COLORS.gray2}
                 value={city}
@@ -114,6 +121,8 @@ export default function NewCard({onClick}) {
             </View>
             <View style={{marginTop: 15}}>
               <InputCommon
+                textStyle={{color: theme.color.gray2}}
+                inputStyle={styles.inputStyle}
                 placeHolder="State/Province"
                 placeholderTextColor={COLORS.gray2}
                 value={State}
@@ -124,6 +133,8 @@ export default function NewCard({onClick}) {
             </View>
             <View style={{marginTop: 15}}>
               <InputCommon
+                textStyle={{color: theme.color.gray2}}
+                inputStyle={styles.inputStyle}
                 placeHolder="ZIP/Postal Code"
                 placeholderTextColor={COLORS.gray2}
                 borderWidth={1}
@@ -146,7 +157,7 @@ export default function NewCard({onClick}) {
           </View>
           <Text
             style={{
-              color: COLORS.black,
+              color: theme.color.black,
               fontWeight: '500',
               fontSize: 16,
               lineHeight: 20,
@@ -157,45 +168,50 @@ export default function NewCard({onClick}) {
           </Text>
           <View
             style={{
-              backgroundColor: 'white',
+              backgroundColor: theme.color.backgroundColor,
               marginTop: 20,
-              padding: 15,
+              padding: 20,
+              borderRadius: 5,
             }}>
-            <View style={{}}>
-              <InputCommon
-                height={50}
-                placeHolder="Email"
-                placeholderTextColor={COLORS.gray2}
-              />
-            </View>
-            <View style={{marginTop: 15}}>
-              <InputCommon
-                height={50}
-                placeHolder="Name On The Card"
-                placeholderTextColor={COLORS.gray2}
-              />
-            </View>
-            <View style={{marginTop: 15}}>
-              <InputCommon
-                height={50}
-                placeHolder="Card Number"
-                placeholderTextColor={COLORS.gray2}
-              />
-            </View>
-            <View style={{marginTop: 15}}>
-              <InputCommon
-                height={50}
-                placeHolder="CVV"
-                placeholderTextColor={COLORS.gray2}
-              />
-            </View>
+            <InputCommon
+              textStyle={{color: theme.color.gray2}}
+              inputStyle={styles.inputStyle}
+              height={50}
+              placeHolder="Email"
+              placeholderTextColor={COLORS.gray2}
+            />
+
+            <InputCommon
+              textStyle={{color: theme.color.gray2}}
+              inputStyle={styles.inputStyle}
+              height={50}
+              placeHolder="Name On The Card"
+              placeholderTextColor={COLORS.gray2}
+              style={{marginTop: 15}}
+            />
+            <InputCommon
+              textStyle={{color: theme.color.gray2}}
+              inputStyle={styles.inputStyle}
+              height={50}
+              placeHolder="Card Number"
+              placeholderTextColor={COLORS.gray2}
+              style={{marginTop: 15}}
+            />
+            <InputCommon
+              textStyle={{color: theme.color.gray2}}
+              inputStyle={styles.inputStyle}
+              height={50}
+              placeHolder="CVV"
+              placeholderTextColor={COLORS.gray2}
+              style={{marginTop: 15}}
+            />
             <Text
               style={{
                 marginTop: 15,
                 fontWeight: '400',
                 fontSize: 14,
                 lineHeight: 18,
-                color: COLORS.soniksilver,
+                color: theme.color.light,
                 fontFamily: FONTS.Regular,
               }}>
               Expiration
@@ -247,7 +263,13 @@ export default function NewCard({onClick}) {
                 }}
               />
             </View>
-            <Text style={{fontSize: 13, marginLeft: 5, flex: 1}}>
+            <Text
+              style={{
+                fontSize: 13,
+                marginLeft: 5,
+                flex: 1,
+                color: theme.color.fontColor,
+              }}>
               Tick here to confirm that you are at least 18 years old and the
               age of majority in your place of residence
             </Text>
@@ -269,24 +291,17 @@ export default function NewCard({onClick}) {
               height={50}
             />
           </LinearGradient>
-{/* 
-          <CoustomButton
-            onPress={() => {
-              props.navigation.navigate('Sign_up');
-            }}
-            title={'Submit'}
-            fontSize={16}
-            color={COLORS.white}
-            backgroundColor={COLORS.pink}
-            MargH={15}
-            Redius={7}
-            height={50}
-            elevation={10}
-          /> */}
         </View>
       </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({});
+const dashboardStyles = theme => {
+  const styles = StyleSheet.create({
+    inputStyle: {
+      borderColor: theme.color.borderColor2,
+      backgroundColor: theme.color.backgroundColor,
+    },
+  });
+  return styles;
+};

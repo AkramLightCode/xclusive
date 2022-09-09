@@ -14,21 +14,28 @@ import CoustomButton from '../Component/CoustomButton';
 import {TextInput} from 'react-native-gesture-handler';
 import Headers from '../comman/Headers';
 import {COLORS, FONTS} from '../assest/Themes';
+import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function Chat({}) {
+  const styles = useThemeAwareObject(dashboardStyles);
+  const {theme} = useTheme();
   return (
     <View style={styles.mainview}>
-      <View style={{backgroundColor: COLORS.white}}>
-        <Headers search />
+      <View style={{backgroundColor: theme.color.backgroundColor}}>
+        <Headers
+          search
+          // mainStyles={{backgroundColor: theme.color.backgroundColor}}
+          styleSearch={{tintColor: theme.color.black}}
+          bellStayle={{tintColor: theme.color.black}}
+        />
         <Text
           style={{
             fontSize: 22,
-            color: COLORS.black,
-            fontWeight: '600',
+            color: theme.color.black,
             marginHorizontal: 10,
-            fontFamily: FONTS.bold,
+            fontFamily: FONTS.semiBold,
             lineHeight: 30,
-            marginVertical: 5,
+            marginVertical: 7,
           }}>
           Chat
         </Text>
@@ -59,10 +66,9 @@ export default function Chat({}) {
           <Text
             style={{
               fontSize: 18,
-              fontWeight: '600',
-              color: COLORS.lightblack,
+              color: theme.color.lightblack,
               lineHeight: 25,
-              fontFamily: FONTS.bold,
+              fontFamily: FONTS.semiBold,
               textAlign: 'center',
             }}>
             Peter Be nedict
@@ -72,15 +78,20 @@ export default function Chat({}) {
               fontSize: 13,
               fontWeight: '400',
               textAlign: 'center',
-              color: COLORS.bm,
+              color: theme.color.bm,
               lineHeight: 18,
-              fontFamily: FONTS.semiBold,
+              fontFamily: FONTS.Regular,
             }}>
             Last Seen 25min Ago
           </Text>
         </View>
 
-        <View style={{flex: 1, backgroundColor: 'white', padding: 15}}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: theme.color.backgroundColor,
+            padding: 15,
+          }}>
           <ImageBackground
             source={Images.chatgirlimg}
             style={{
@@ -101,17 +112,21 @@ export default function Chat({}) {
               <View
                 style={{
                   justifyContent: 'center',
-                  borderRadius: 40 / 2,
-                  backgroundColor: COLORS.white,
+                  borderRadius: 50,
+                  backgroundColor: theme.color.white,
                   justifyContent: 'center',
                   alignItems: 'center',
                   alignSelf: 'center',
                   padding: 10,
-                  alignItems: 'center',
                 }}>
                 <Image
                   source={Images.lock}
-                  style={{width: 25, height: 25, resizeMode: 'contain'}}
+                  style={{
+                    width: 25,
+                    height: 25,
+                    resizeMode: 'contain',
+                    tintColor: theme.color.gray,
+                  }}
                 />
               </View>
               <View style={{marginTop: 20}}>
@@ -124,19 +139,18 @@ export default function Chat({}) {
                   MargH={70}
                   Redius={7}
                   height={40}
-                  elevation={10}
                 />
               </View>
             </View>
           </ImageBackground>
           <Text
             style={{
-              color: COLORS.darkgray,
+              color: theme.color.light,
               fontWeight: '400',
               marginTop: 10,
               fontSize: 14,
               lineHeight: 20,
-              fontFamily:FONTS.semiBold
+              fontFamily: FONTS.Regular,
             }}>
             4.30am $5 Not Paid Yet
           </Text>
@@ -145,12 +159,21 @@ export default function Chat({}) {
       <View
         style={{
           flexDirection: 'row',
-          backgroundColor:COLORS.white,
+          backgroundColor: theme.color.backgroundColor,
           alignItems: 'center',
           padding: 15,
         }}>
-        <TouchableOpacity style={{}}>
-          <Image source={Images.Plus} style={{width: 40, height: 40}} />
+        <TouchableOpacity
+          style={{
+            backgroundColor: theme.color.pink,
+            padding: 10,
+            borderRadius: 50,
+          }}>
+          <Image
+            resizeMode="contain"
+            source={require('../assest/icon/puls.png')}
+            style={{width: 15, height: 15}}
+          />
         </TouchableOpacity>
         <View
           style={{
@@ -158,15 +181,21 @@ export default function Chat({}) {
             marginLeft: 10,
             borderWidth: 0.5,
             borderRadius: 50,
-            borderColor:COLORS.appgray,
+            borderColor: COLORS.appgray,
             paddingHorizontal: 10,
             flexDirection: 'row',
             alignItems: 'center',
           }}>
           <TextInput
             placeholder="Type a message....."
-            placeholderTextColor={COLORS.silver}
-            style={{marginHorizontal: 5, flex: 1}}
+            placeholderTextColor={theme.color.black}
+            style={{
+              marginHorizontal: 5,
+              flex: 1,
+              color: theme.color.black,
+              fontSize: 14,
+              fontFamily: FONTS.Regular,
+            }}
           />
           <TouchableOpacity>
             <Image
@@ -180,18 +209,21 @@ export default function Chat({}) {
   );
 }
 
-const styles = StyleSheet.create({
-  mainview: {
-    flex: 1,
-  },
-  date: {
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    color: COLORS.pink,
-    fontWeight: '400',
-    fontSize: 14,
-    lineHeight: 18,
-    fontFamily: FONTS.semiBold,
-  },
-});
+const dashboardStyles = theme => {
+  const styles = StyleSheet.create({
+    mainview: {
+      flex: 1,
+      backgroundColor: theme.color.bgColor,
+    },
+    date: {
+      backgroundColor: COLORS.white,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      color: COLORS.pink,
+      fontSize: 14,
+      lineHeight: 18,
+      fontFamily: FONTS.Regular,
+    },
+  });
+  return styles;
+};

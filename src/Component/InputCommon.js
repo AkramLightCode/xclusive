@@ -8,7 +8,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {COLORS} from '../assest/Themes';
+import {COLORS, FONTS} from '../assest/Themes';
+
 
 export default class InputCommon extends React.Component {
   constructor(props) {
@@ -19,17 +20,22 @@ export default class InputCommon extends React.Component {
   }
   render() {
     return (
-      <View style={{backgroundColor: this.props.isbackColor}}>
+      <View
+        style={[{backgroundColor: this.props.isbackColor}, this.props.style]}>
         {this.props.istitle && (
           <View style={[this.props.titelStyle, styles.TextView]}>
-            <Text style={[styles.TextStyles, {color: '#4A4B4D'}]}>
+            <Text
+              style={[
+                styles.TextStyles,
+                {color: '#4A4B4D', fontSize: 16, fontFamily: FONTS.medium},
+              ]}>
               {this.props.title}
             </Text>
           </View>
         )}
         <View style={[styles.inputStyle, this.props.inputStyle]}>
           {this.props.isLeftimg && (
-            <View style={{}}>
+            <View style={{marginRight: 5}}>
               <Image
                 resizeMode="contain"
                 source={this.props.typeIcon}
@@ -43,6 +49,7 @@ export default class InputCommon extends React.Component {
               {
                 textAlignVertical: this.props.textAlignVertical,
               },
+              this.props.textStyle
             ]}
             placeholder={this.props.placeHolder}
             value={this.props.value}
@@ -61,7 +68,9 @@ export default class InputCommon extends React.Component {
             autoFocus={this.autoFocus}
           />
           {this.props.showIcon && (
-            <TouchableOpacity onPress={this.props.onPress}>
+            <TouchableOpacity
+              onPress={this.props.onPress}
+              style={{marginLeft: 5}}>
               <Image
                 resizeMode="contain"
                 source={this.props.showpassIcon}
@@ -77,19 +86,17 @@ export default class InputCommon extends React.Component {
 const styles = StyleSheet.create({
   textValue: {
     fontSize: 14,
-    marginHorizontal: 5,
     flex: 1,
-    color:COLORS.black
+    color: COLORS.black,
+    fontFamily: FONTS.Regular,
   },
-  inputViewStyles: {},
-
   inputStyle: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 0.3,
     borderRadius: 5,
     paddingHorizontal: 10,
-    borderColor:COLORS.gray2,
+    borderColor: COLORS.gray2,
     backgroundColor: COLORS.white,
   },
 });

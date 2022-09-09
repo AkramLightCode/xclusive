@@ -59,9 +59,9 @@ const CostomDrawer = ({navigation}) => {
 
   const data = [
     {logo: Images.profileIcon, title: 'My profile'},
-    {logo: Images.RightIcon, title: 'Bookmark'},
+    {logo: Images.RightIcon, title: 'Bookmarks'},
     {logo: Images.TreehLine, title: 'Lists'},
-    {logo: Images.Setting, title: 'Setting'},
+    {logo: Images.Setting, title: 'Settings'},
     {logo: Images.Cards, title: 'Your Cards'},
     {logo: Images.Addbank, title: 'Add Bank (To Earn)'},
     {logo: Images.HelfIcon, title: 'Help & Support'},
@@ -152,28 +152,28 @@ const CostomDrawer = ({navigation}) => {
                 alignItems: 'center',
                 elevation: 0.5,
                 marginLeft: 0.5,
+                flexDirection: 'row',
+                justifyContent:"center"
               }}>
               <Text
                 style={{
                   textAlign: 'center',
                   fontSize: 17,
                   color: COLORS.white,
-                  fontWeight: '500',
-                  fontFamily: FONTS.semiBold,
+                  fontFamily: FONTS.medium,
                 }}>
                 05
-                <Text
-                  style={{
-                    fontSize: 13,
-                    color: COLORS.white,
-                    fontWeight: '500',
-                    fontFamily: FONTS.semiBold,
-                  }}>
-                  {' '}
-                  Fans
-                </Text>
+              </Text>
+              <Text
+                style={{
+                  fontSize: 13,
+                  color: COLORS.white,
+                  fontFamily: FONTS.Regular,
+                }}>
+                Fans
               </Text>
             </TouchableOpacity>
+            <View style={{borderLeftWidth:0.5,height:'100%',borderLeftColor:"white"}} />
             <TouchableOpacity
               style={{
                 backgroundColor: COLORS.Strawberry,
@@ -181,26 +181,25 @@ const CostomDrawer = ({navigation}) => {
                 flex: 0.5,
                 alignItems: 'center',
                 elevation: 0.5,
+                flexDirection: 'row',
+                justifyContent:"center"
               }}>
               <Text
                 style={{
-                  textAlign: 'center',
                   fontSize: 17,
                   color: COLORS.white,
-                  fontWeight: '500',
-                  fontFamily: FONTS.semiBold,
+                  fontFamily: FONTS.medium,
+                  marginRight: 5,
                 }}>
                 20
-                <Text
-                  style={{
-                    fontSize: 13,
-                    color: COLORS.white,
-                    fontWeight: '500',
-                    fontFamily: FONTS.semiBold,
-                  }}>
-                  {' '}
-                  Following
-                </Text>
+              </Text>
+              <Text
+                style={{
+                  fontSize: 13,
+                  color: COLORS.white,
+                  fontFamily: FONTS.Regular,
+                }}>
+                Following
               </Text>
             </TouchableOpacity>
           </View>
@@ -239,7 +238,7 @@ const drawerStyles = theme => {
       fontSize: 14,
       color: theme.color.black,
       fontWeight: '400',
-      fontFamily: FONTS.semiBold,
+      fontFamily: FONTS.Regular,
     },
   });
   return styles;

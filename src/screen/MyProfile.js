@@ -13,12 +13,16 @@ import Images from '../assest/Images';
 import InputCommon from '../Component/InputCommon';
 import Headers from '../comman/Headers';
 import {COLORS, FONTS} from '../assest/Themes';
+import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function MyProfile({props, navigation}) {
+  const styles = useThemeAwareObject(dashboardStyles);
+  const {theme} = useTheme();
+
   const datas = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}];
 
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.bgColor}}>
+    <View style={styles.Container}>
       <StatusBar backgroundColor={COLORS.gray} barStyle="light-content" />
       <ScrollView>
         <ImageBackground
@@ -26,6 +30,7 @@ export default function MyProfile({props, navigation}) {
           source={Images.profileimg}
           style={{width: '100%', height: 220, backgroundColor: 'pink'}}>
           <Headers
+            drawer
             onPress={() =>
               navigation.navigate('MyHomeStackScreens', {
                 screen: 'Notifications',
@@ -37,7 +42,7 @@ export default function MyProfile({props, navigation}) {
           />
         </ImageBackground>
 
-        <View style={{backgroundColor: COLORS.white, paddingVertical: 20}}>
+        <View style={styles.FirstView}>
           <View style={styles.mainview}>
             <View
               style={{
@@ -46,23 +51,21 @@ export default function MyProfile({props, navigation}) {
               }}>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 16,
                   lineHeight: 18,
-                  fontWeight: '500',
-                  color: COLORS.toneblack2,
-                  fontFamily: FONTS.medium,
+                  color: theme.color.toneblack2,
+                  fontFamily: FONTS.semiBold,
                 }}>
                 05
               </Text>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 14,
                   lineHeight: 18,
-                  fontWeight: '500',
-                  color: COLORS.gray1,
-                  fontFamily: FONTS.medium,
+                  color: theme.color.gray1,
+                  fontFamily: FONTS.Regular,
                 }}>
-                fans
+                Fans
               </Text>
             </View>
 
@@ -88,21 +91,20 @@ export default function MyProfile({props, navigation}) {
               }}>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 16,
                   lineHeight: 18,
-                  fontWeight: '500',
-                  color: COLORS.toneblack2,
-                  fontFamily: FONTS.medium,
+                  color: theme.color.toneblack2,
+                  fontFamily: FONTS.semiBold,
                 }}>
                 20
               </Text>
               <Text
                 style={{
-                  fontSize: 15,
+                  fontSize: 14,
                   lineHeight: 18,
-                  fontWeight: '500',
-                  color: COLORS.gray1,
-                  fontFamily: FONTS.medium,
+                  fontWeight: '400',
+                  color: theme.color.gray1,
+                  fontFamily: FONTS.Regular,
                 }}>
                 Following
               </Text>
@@ -114,8 +116,7 @@ export default function MyProfile({props, navigation}) {
               marginTop: 10,
               fontSize: 18,
               lineHeight: 25,
-              fontWeight: '500',
-              color: COLORS.darkblack,
+              color: theme.color.darkblack,
               textAlign: 'center',
               fontFamily: FONTS.semiBold,
             }}>
@@ -124,11 +125,10 @@ export default function MyProfile({props, navigation}) {
           <Text
             style={{
               textAlign: 'center',
-              fontSize: 14,
+              fontSize: 13,
               lineHeight: 20,
-              fontWeight: '400',
-              color: COLORS.lightgray,
-              fontFamily: FONTS.semiBold,
+              color: theme.color.lightgray,
+              fontFamily: FONTS.Regular,
             }}>
             @Xclusive
           </Text>
@@ -143,10 +143,9 @@ export default function MyProfile({props, navigation}) {
             }}>
             <Text
               style={{
-                fontSize: 13,
+                fontSize: 12,
                 lineHeight: 18,
-                fontWeight: '400',
-                color: COLORS.pink,
+                color: theme.color.pink,
                 fontFamily: FONTS.Regular,
               }}>
               1 POST
@@ -173,12 +172,7 @@ export default function MyProfile({props, navigation}) {
           </View>
         </View>
 
-        <View
-          style={{
-            backgroundColor: COLORS.white,
-            marginTop: 20,
-            padding: 20,
-          }}>
+        <View style={styles.SecondContainer}>
           <InputCommon
             inputStyle={{
               borderRadius: 50,
@@ -235,14 +229,8 @@ export default function MyProfile({props, navigation}) {
             marginTop: 20,
             marginBottom: 20,
           }}>
-          <View
-            style={{
-              backgroundColor: COLORS.white,
-              marginTop: 15,
-              flexDirection: 'row',
-              padding: 10,
-            }}>
-            <TouchableOpacity style={{}}>
+          <View style={styles.ThirdContainer}>
+            <TouchableOpacity style={{marginTop:5}}>
               <Image
                 source={Images.mainimg}
                 style={{
@@ -259,10 +247,9 @@ export default function MyProfile({props, navigation}) {
                   <Text
                     style={{
                       fontSize: 18,
-                      fontWeight: '600',
-                      color: COLORS.lightblack,
+                      color: theme.color.lightblack,
                       lineHeight: 25,
-                      fontFamily: FONTS.bold,
+                      fontFamily: FONTS.semiBold,
                     }}>
                     Peter Benedict
                   </Text>
@@ -270,9 +257,8 @@ export default function MyProfile({props, navigation}) {
                     style={{
                       fontSize: 13,
                       lineHeight: 20,
-                      fontWeight: '400',
-                      color: COLORS.baba,
-                      fontFamily: FONTS.semiBold,
+                      color: theme.color.baba,
+                      fontFamily: FONTS.Regular,
                     }}>
                     @Xclusive
                   </Text>
@@ -282,9 +268,8 @@ export default function MyProfile({props, navigation}) {
                     style={{
                       fontSize: 13,
                       lineHeight: 20,
-                      fontWeight: '400',
-                      color: COLORS.light,
-                      fontFamily: FONTS.semiBold,
+                      color: theme.color.light,
+                      fontFamily: FONTS.Regular,
                       marginRight: 7,
                     }}>
                     2 days ago
@@ -297,7 +282,7 @@ export default function MyProfile({props, navigation}) {
                         height: 22,
                         resizeMode: 'contain',
                         marginLeft: 3,
-                        tintColor: COLORS.csilver,
+                        tintColor: theme.color.csilver,
                       }}
                     />
                   </TouchableOpacity>
@@ -308,24 +293,23 @@ export default function MyProfile({props, navigation}) {
                   numberOfLines={2}
                   style={{
                     flex: 1,
-                    color: COLORS.fontColor,
-                    fontWeight: '400',
-                    fontSize: 15,
+                    color: theme.color.fontColor,
+                    fontSize: 14,
                     fontFamily: FONTS.Regular,
+                    textTransform: 'capitalize'
                   }}>
                   It is a long established fact that a reader will be distracted
                   by the readable...
                 </Text>
 
                 {/* ////////////////////////////// vidio ///////////////////// */}
-                <TouchableOpacity activeOpacity={0.5}>
+                <TouchableOpacity activeOpacity={0.5} style={styles.border}>
                   <Image
                     source={Images.mainboyimg}
                     style={{
                       width: '100%',
                       height: 200,
                       borderRadius: 10,
-                      marginTop: 10,
                     }}
                   />
                 </TouchableOpacity>
@@ -334,7 +318,8 @@ export default function MyProfile({props, navigation}) {
                   showsHorizontalScrollIndicator={false}>
                   {datas.map(index => {
                     return (
-                      <TouchableOpacity style={{marginTop: 10}}>
+                      <TouchableOpacity
+                        style={[styles.border, {marginRight: 7}]}>
                         <Image
                           source={Images.boyimg2}
                           style={{
@@ -357,48 +342,13 @@ export default function MyProfile({props, navigation}) {
                   marginTop: 15,
                 }}>
                 <TouchableOpacity>
-                  <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: 20,
-                      height: 20,
-                      tintColor: COLORS.Tgray,
-                    }}
-                    source={Images.dislike}
-                  />
+                  <Image style={styles.bottamIcom} source={Images.dislike} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{marginHorizontal: 30}}>
-                  <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: 20,
-                      height: 20,
-                      tintColor: COLORS.Tgray,
-                    }}
-                    source={Images.comments}
-                  />
+                <TouchableOpacity style={{marginHorizontal: 40}}>
+                  <Image style={styles.bottamIcom} source={Images.comments} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: 20,
-                      height: 20,
-                      tintColor: COLORS.Tgray,
-                    }}
-                    source={Images.share}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft: 'auto'}}>
-                  <Image
-                    style={{
-                      resizeMode: 'contain',
-                      width: 20,
-                      height: 20,
-                      tintColor: COLORS.pink,
-                    }}
-                    source={Images.favorit}
-                  />
+                  <Image style={styles.bottamIcom} source={Images.share} />
                 </TouchableOpacity>
               </View>
               <View
@@ -410,19 +360,19 @@ export default function MyProfile({props, navigation}) {
                 }}>
                 <Text
                   style={{
-                    color: COLORS.toneblack,
-                    fontWeight: '400',
+                    color: theme.color.toneblack,
                     fontSize: 14,
-                    fontFamily: FONTS.semiBold,
+                    fontFamily: FONTS.medium,
+                    textTransform: 'capitalize',
                   }}>
-                  13 likes
+                  13 Likes
                 </Text>
                 <Image
                   style={{
                     resizeMode: 'contain',
                     width: 4,
                     height: 4,
-                    color: COLORS.appsilver,
+                    tintColor: theme.color.appsilver,
                     marginHorizontal: 15,
                   }}
                   source={Images.onedot}
@@ -430,12 +380,12 @@ export default function MyProfile({props, navigation}) {
 
                 <Text
                   style={{
-                    color: COLORS.toneblack,
-                    fontWeight: '400',
+                    color: theme.color.toneblack,
                     fontSize: 14,
-                    fontFamily: FONTS.semiBold,
+                    fontFamily: FONTS.Regular,
+                    textTransform: 'capitalize',
                   }}>
-                  53 comments
+                  53 Comments
                 </Text>
               </View>
             </View>
@@ -445,50 +395,82 @@ export default function MyProfile({props, navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  mainview: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  Profileveiw: {
-    flex: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconview: {
-    backgroundColor: '#EC1E79',
-    borderRadius: 60 / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 10,
-    padding: 10,
-  },
-  contect: {
-    width: '33%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  Images: {
-    width: 25,
-    height: 25,
-    resizeMode: 'contain',
-  },
-  Textview: {
-    width: '33%',
-  },
-  Text: {
-    fontSize: 12,
-    lineHeight: 16,
-    color: COLORS.Tundora,
-    fontWeight: '500',
-    textAlign: 'center',
-    fontFamily: FONTS.semiBold,
-  },
-  boyimg: {
-    width: '100%',
-    height: 80,
-    borderRadius: 7,
-    resizeMode: 'cover',
-  },
-});
+const dashboardStyles = theme => {
+  const styles = StyleSheet.create({
+    Container: {
+      flex: 1,
+      backgroundColor: theme.color.bgColor,
+    },
+    FirstView: {
+      backgroundColor: theme.color.backgroundColor,
+      paddingVertical: 20,
+    },
+    mainview: {
+      width: '100%',
+      flexDirection: 'row',
+    },
+    Profileveiw: {
+      flex: 4,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    iconview: {
+      backgroundColor: '#EC1E79',
+      borderRadius: 60 / 2,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginHorizontal: 10,
+      padding: 10,
+    },
+    contect: {
+      width: '33%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    SecondContainer: {
+      backgroundColor: theme.color.backgroundColor,
+      marginTop: 20,
+      padding: 20,
+    },
+    Images: {
+      width: 25,
+      height: 25,
+      resizeMode: 'contain',
+    },
+    Textview: {
+      width: '33%',
+    },
+    Text: {
+      fontSize: 13,
+      lineHeight: 16,
+      color: theme.color.Tundora,
+      textAlign: 'center',
+      fontFamily: FONTS.medium,
+    },
+    boyimg: {
+      width: '100%',
+      height: 80,
+      borderRadius: 7,
+      resizeMode: 'cover',
+    },
+    ThirdContainer: {
+      backgroundColor: theme.color.backgroundColor,
+      flexDirection: 'row',
+      padding: 10,
+    },
+    bottamIcom: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 20,
+      tintColor: theme.color.Tgray,
+    },
+    border: {
+      padding: 5,
+      borderWidth: 0.5,
+      borderRadius: 10,
+      marginTop: 10,
+      borderColor: theme.color.borderColor,
+    },
+  });
+  return styles;
+};

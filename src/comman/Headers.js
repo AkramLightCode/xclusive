@@ -18,9 +18,10 @@ export default function Headers({
   StatusBarBg,
   barStyle,
   mainStyles,
+  drawer
 }) {
   return (
-    <View style={[mainStyles, {backgroundColor: 'rgba(0,0,0,0.0)'}]}>
+    <View style={[{backgroundColor: 'rgba(0,0,0,0.0)',paddingBottom:2},mainStyles]}>
       <StatusBar backgroundColor={StatusBarBg} barStyle={barStyle} />
       <View
         style={{
@@ -30,14 +31,32 @@ export default function Headers({
           paddingHorizontal: 10,
           paddingVertical: 5,
         }}>
-        <Image
-          source={Images.hederLogo}
-          style={{height: 30, width: 30, resizeMode: 'contain'}}
-        />
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={Images.hederLogo}
+            style={{
+              height: 35,
+              width: 35,
+              resizeMode: 'contain',
+              alignSelf: 'flex-start',
+            }}
+          />
+
+          {drawer && (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{marginLeft: 25, alignSelf: 'flex-end'}}>
+              <Image
+                source={require('../assest/icon/drawer.png')}
+                style={{height: 25, width: 25, resizeMode: 'contain'}}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
+        <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
           {search && (
             <TouchableOpacity
-              style={{marginRight: 20}}
+              style={{marginRight: 30}}
               onPress={() => onClick}
               activeOpacity={0.5}>
               <Image

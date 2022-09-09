@@ -4,18 +4,25 @@ import React from 'react';
 import Images from '../assest/Images';
 import Headers from '../comman/Headers';
 import {COLORS} from '../assest/Themes';
+import { useTheme, useThemeAwareObject } from '../theme';
 
 export default function TopTab({navigation}) {
   {
     console.log('navigation.getState().index', navigation.getState().index);
   }
+  // const styles = useThemeAwareObject(dashboardStyles);
+  const {theme} = useTheme()
+
   return (
-    <View style={{backgroundColor: COLORS.white, elevation: 2}}>
+    <View style={{backgroundColor: theme.color.backgroundColor, elevation: 2}}>
       <Headers
         search={navigation.getState().index == 2 ? false : true}
         onPress={() =>
           navigation.navigate('MyHomeStackScreens', {screen: 'Notifications'})
         }
+        StatusBarBg={theme.color.backgroundColor}
+        barStyle={ theme.color.backgroundColor == "#ffffff" ? "dark-content" : 'light-content'}
+        bellStayle={{tintColor:theme.color.black}}
       />
       <View
         style={{

@@ -33,7 +33,7 @@ const COLORS = {
   silver: '#BEBEBE',
   appgray: '#7E7E7E',
   gray1: '#808080',
-  Tundora: '#423F40 ',
+  Tundora: '#423F40',
   brightgray: '#EAEAEA ',
   soniksilver: '#757575',
   green: '#329C0C',
@@ -51,7 +51,7 @@ const FONTS = {
   extraLight: 'WorkSans-ExtraLight',
   light: 'WorkSans-Light',
   medium: 'WorkSans-Medium',
-  semiBold: 'PWorkSans-SemiBold',
+  semiBold: 'WorkSans-SemiBold',
   thin: 'WorkSans-Thin',
   Regular: 'WorkSans-Regular',
 };

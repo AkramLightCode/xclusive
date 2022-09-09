@@ -14,14 +14,13 @@ import {COLORS, FONTS} from '../../assest/Themes';
 import CoustomButton from '../../Component/CoustomButton';
 import InputCommon from '../../Component/InputCommon';
 
-import styles from '../Sign up/styles';
-
 const ResetPassword = ({navigation}) => {
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
-    <SafeAreaView style={{flex: 1, padding: 20}}>
+    <SafeAreaView style={styles.Container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image source={Images.hederLogo} style={styles.Image} />
         <Text
@@ -84,7 +83,13 @@ const ResetPassword = ({navigation}) => {
     </SafeAreaView>
   );
 };
-const Styles = StyleSheet.create({
+
+const styles = StyleSheet.create({
+  Container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor:COLORS,
+  },
   Image: {
     width: 80,
     height: 80,
@@ -92,4 +97,5 @@ const Styles = StyleSheet.create({
     marginTop: 40,
   },
 });
+
 export default ResetPassword;
