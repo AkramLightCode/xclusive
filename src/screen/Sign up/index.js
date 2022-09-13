@@ -21,11 +21,11 @@ import {useThemeAwareObject} from '../../theme';
 import signUpStyles from './styles';
 import API from '../../services/API';
 import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
-import { setLoggedIn, setRegToken } from '../../utils/Preference';
+import {setLoggedIn, setRegToken} from '../../utils/Preference';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState('test1@gmail.com');
+  const [email, setEmail] = useState('umat415@gmail.com');
   const [password, setPassword] = useState('12345678');
 
   const [emailError, setEmailError] = useState('');

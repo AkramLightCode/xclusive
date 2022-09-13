@@ -7,7 +7,7 @@ function baseAxios(options) {
     ? {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: options.Authorization,
+        Authorization: 'Bearer ' + options,
       }
     : {
         Accept: 'application/json',
@@ -30,15 +30,17 @@ function executeRequest(method, pathname, data, options = {}) {
 
   const baseAxiosRequest = baseAxios(options);
 
+  console.log('baseAxiosRequest:::', JSON.stringify(baseAxiosRequest));
+
   return new Promise((resolve, reject) => {
     return baseAxiosRequest
       .request(reqObj)
       .then(res => {
+        console.log('Request Success == ', res);
         resolve(res.data);
       })
       .catch(error => {
-        console.log('Request Data == ', error);
-
+        console.log('Request Error == ', error);
         reject(error);
       });
   });
