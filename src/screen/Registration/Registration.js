@@ -5,16 +5,24 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Keyboard,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Toast from 'react-native-simple-toast';
 
 import Images from '../../assest/Images';
 import {COLORS, FONTS} from '../../assest/Themes';
 import CoustomButton from '../../Component/CoustomButton';
 import InputCommon from '../../Component/InputCommon';
+import LoaderIndicator from '../../comman/LoaderIndicator';
+
+import NetInfo from '@react-native-community/netinfo';
+import Toast from 'react-native-simple-toast';
+import API from '../../services/API';
+import {REGISTER_ENDPOINT} from '../../services/ApiEndpoints';
+import {setRegToken} from '../../utils/Preference';
 
 const Registration = props => {
   const [show, setShow] = useState(false);
@@ -26,6 +34,7 @@ const Registration = props => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onClick = () => {
     setShow(show => !show);
@@ -33,26 +42,49 @@ const Registration = props => {
 
   const onlogin = () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
     if (email == '') {
-      setEmailError('Enter Email.');
+      setEmailError('Enter email');
     }
     if (password == '') {
-      setPasswordError('Enter Password.');
+      setPasswordError('Enter Password');
     }
     if (name == '') {
       setNameError('Enter name.');
     } else if (reg.test(email) == false) {
-      setEmailError('Check Email.');
-    } else if (name.length < 8) {
+      setEmailError('Enter Valid email');
+    } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
     } else {
-      props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+      setLoading(true);
+      const payload = {
+        email: email,
+        password: password,
+        name: name,
+      };
+      console.log('payload', JSON.stringify(payload));
+      API.post(REGISTER_ENDPOINT, payload)
+        .then(res => {
+          if (res.status === 'success') {
+            Toast.show(res.message);
+            setRegToken(res.data.access_token);
+            console.log('\n\n\n\n\n Response =>' + JSON.stringify(res));
+            props.navigation.navigate('Sign_in');
+            setLoading(false);
+          } else {
+            setLoading(false);
+          }
+        })
+        .catch(e => {
+          setLoading(false);
+          Toast.show('User not registered');
+        });
     }
   };
 
   return (
     <SafeAreaView style={Styles.continue}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image source={Images.hederLogo} style={Styles.Image} />
         <Text
@@ -68,7 +100,7 @@ const Registration = props => {
           Sign up
         </Text>
         <InputCommon
-          keyboardType="email-addresss"
+          keyboardType={'email-addresss'}
           value={email}
           onChangeText={v => {
             setEmail(v);
@@ -78,6 +110,7 @@ const Registration = props => {
           isLeftimg
           typeIcon={Images.email}
           placeHolder="Email"
+          autoCapitalize="none"
         />
         {emailError && <Text style={Styles.errorText}>{emailError}</Text>}
         <InputCommon
@@ -94,6 +127,7 @@ const Registration = props => {
           inputStyle={{marginTop: 20}}
           typeIcon={Images.password}
           placeHolder="Password"
+          keyboardType={'password'}
         />
         {passwordError && <Text style={Styles.errorText}>{passwordError}</Text>}
         <InputCommon
@@ -117,7 +151,9 @@ const Registration = props => {
           end={{x: 1.8, y: 0}}
           colors={['#FC0270', '#6B2063']}>
           <CoustomButton
-            onPress={onlogin}
+            onPress={() => {
+              onlogin();
+            }}
             title={'Sign Up'}
             fontSize={16}
             lineHeight={22}
@@ -225,6 +261,7 @@ const Registration = props => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <LoaderIndicator loading={loading} />
     </SafeAreaView>
   );
 };

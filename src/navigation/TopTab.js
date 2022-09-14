@@ -16,7 +16,10 @@ export default function TopTab({navigation}) {
   return (
     <View style={{backgroundColor: theme.color.backgroundColor, elevation: 2}}>
       <Headers
+      StatusBarBg='white'
+      barStyle="dark-content"
         search={navigation.getState().index == 2 ? false : true}
+        onClickSearch={()=>{navigation.navigate('Search')}}
         onPress={() =>
           navigation.navigate('MyHomeStackScreens', {screen: 'Notifications'})
         }

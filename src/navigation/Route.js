@@ -5,7 +5,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
 import CostomDrawer from '../Component/CostomDrawer';
-import Bookmark from '../screen/Bookmark';
 import Chat from '../screen/Chat';
 import ForgotPassword from '../screen/ForgotPassword/ForgotPassword';
 import Home from '../screen/Home';
@@ -22,6 +21,10 @@ import Sign_in from '../screen/Sign up/index';
 import Splesh from '../screen/Splesh';
 import TopTab from './TopTab';
 import HelpSupport from '../screen/HelpSupport';
+import Drawersetting from '../screen/Drawersetting';
+import ChangePassword from '../screen/ChangePassword';
+import Search from '../screen/Search';
+import Bookmark from '../screen/Bookmark';
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -165,6 +168,21 @@ export default function Route() {
         <Stack.Screen
           name="HelpSupport"
           component={HelpSupport}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Drawersetting"
+          component={Drawersetting}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="Search"
+          component={Search}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

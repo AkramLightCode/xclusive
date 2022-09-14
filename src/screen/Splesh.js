@@ -1,14 +1,32 @@
-import React, { useEffect } from 'react';
-import { Text, View, Image,StatusBar } from 'react-native'
+import React, {useEffect} from 'react';
+import {Text, View, Image} from 'react-native';
 import Images from '../assest/Images';
+import {getLoggedIn, getRegToken} from '../utils/Preference';
 import { COLORS } from '../assest/Themes';
 
-const Splesh = ({ navigation }) => {
+const Splesh = ({navigation}) => {
   useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('Sign_in')
-    }, 2000);
+    getDataToken();
   }, [navigation]);
+
+  const getDataToken = async () => {
+    try {
+      const token = await getRegToken();
+      console.log('=====token: ', token);
+      if (token) {
+        setTimeout(() => {
+          // navigation.replace('Home');
+          navigation.replace('HomeStacksScreen', {screen: 'Home'});
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          navigation.replace('Sign_in');
+        }, 2000);
+      }
+    } catch (e) {
+      console.log('=====e: ', e);
+    }
+  };
 
   return (
     <View style={{ flex: 1 }}>
