@@ -8,6 +8,7 @@ import {
   Switch,
   FlatList,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Images from '../assest/Images';
@@ -27,6 +28,8 @@ import {
   getRegToken,
   setApplicationTheme,
   setRegToken,
+  // setLoggedIn,
+  // getLoggedIn,
 } from '../utils/Preference';
 import LoaderIndicator from '../comman/LoaderIndicator';
 import SimpleToast from 'react-native-simple-toast';
@@ -73,14 +76,33 @@ const CostomDrawer = ({navigation}) => {
   const getDataToken = async () => {
     try {
       const token = await getRegToken();
-      console.log('=====token: ', token);
+      console.warn('token=====token: ', token);
       setIs_Token(token);
     } catch (e) {
       console.log('=====e: ', e);
     }
   };
 
+  const handleLogout = () => {
+    Alert.alert(
+      'Are You Sure',
+      '',
+      [
+        {text: 'Ok', onPress: () => logoutApi()},
+        {
+          text: 'Cancel',
+          onPress: () => console.log('No button clicked'),
+          style: 'cancel',
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
+  };
+
   const logoutApi = () => {
+    setLoading(true)
     const payload = {};
     API.post(LOGOUT_ENDPOINT, payload, is_Token)
       .then(res => {
@@ -92,7 +114,7 @@ const CostomDrawer = ({navigation}) => {
       })
       .catch(e => {
         setLoading(false);
-        SimpleToast.show('User not registered');
+        SimpleToast.show('Something Want Wrong');
       });
   };
 
@@ -128,8 +150,8 @@ const CostomDrawer = ({navigation}) => {
             toggleSwitch();
           } else if (index === 9) {
             // navigation.navigate('Sign_in');
-            alert('Logout');
-            logoutApi();
+            // alert('Logout');
+            handleLogout();
           } else if (index === 6) {
             navigation.navigate('HelpSupport');
           }
@@ -198,7 +220,7 @@ const CostomDrawer = ({navigation}) => {
                 elevation: 0.5,
                 marginLeft: 0.5,
                 flexDirection: 'row',
-                justifyContent:"center"
+                justifyContent: 'center',
               }}>
               <Text
                 style={{
@@ -218,7 +240,13 @@ const CostomDrawer = ({navigation}) => {
                 Fans
               </Text>
             </TouchableOpacity>
-            <View style={{borderLeftWidth:0.5,height:'100%',borderLeftColor:"white"}} />
+            <View
+              style={{
+                borderLeftWidth: 0.5,
+                height: '100%',
+                borderLeftColor: 'white',
+              }}
+            />
             <TouchableOpacity
               style={{
                 backgroundColor: COLORS.Strawberry,
@@ -227,7 +255,7 @@ const CostomDrawer = ({navigation}) => {
                 alignItems: 'center',
                 elevation: 0.5,
                 flexDirection: 'row',
-                justifyContent:"center"
+                justifyContent: 'center',
               }}>
               <Text
                 style={{

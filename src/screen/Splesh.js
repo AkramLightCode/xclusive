@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image,StatusBar} from 'react-native';
 import Images from '../assest/Images';
 import {getLoggedIn, getRegToken} from '../utils/Preference';
 import { COLORS } from '../assest/Themes';

@@ -154,6 +154,14 @@ export default function Messages({navigation}) {
             showsVerticalScrollIndicator={false}
           />
         )}
+          {active == 'All' && (
+          <FlatList
+            data={filteredDataSource}
+            renderItem={ListData}
+            keyExtractor={(item, index) => index.toString()}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
       {/* </ScrollView> */}
     </View>
   );

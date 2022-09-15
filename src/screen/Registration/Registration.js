@@ -84,7 +84,6 @@ const Registration = props => {
   return (
     <SafeAreaView style={Styles.continue}>
       <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
-
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image source={Images.hederLogo} style={Styles.Image} />
         <Text
@@ -240,7 +239,13 @@ const Registration = props => {
             flexDirection: 'row',
             marginBottom: 30,
           }}>
-          <Text style={{fontSize: 14, lineHeight: 20, color: COLORS.gray3,fontFamily:FONTS.Regular}}>
+          <Text
+            style={{
+              fontSize: 14,
+              lineHeight: 20,
+              color: COLORS.gray3,
+              fontFamily: FONTS.Regular,
+            }}>
             Don’t have an account?
           </Text>
           <TouchableOpacity

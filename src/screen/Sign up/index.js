@@ -9,15 +9,18 @@ import {
   StatusBar,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import LoaderIndicator from '../../comman/LoaderIndicator';
+import {setLoggedIn} from '../../utils/Preference';
 
 import Images from '../../assest/Images';
 import InputCommon from '../../Component/InputCommon';
 import CoustomButton from '../../Component/CoustomButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, FONTS} from '../../assest/Themes';
-// import {useThemeAwareObject} from '../../theme';
+import API from '../../services/API';
+import Toast from 'react-native-simple-toast';
+import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
 
-// import styles from './styles';
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
@@ -26,7 +29,8 @@ const Sign_in = props => {
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  // const styles = useThemeAwareObject(signUpStyles);
+
+  const [loding, setLoding] = useState(false);
 
   const onClick = () => {
     setShow(show => !show);
@@ -44,14 +48,41 @@ const Sign_in = props => {
       setEmailError('Enter Valid email');
     } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
-    } else {
-      props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+    }
+     else {
+      // console.log("dsafsd");
+      // setLoding(true);
+      // const payload = {
+      //   email,
+      //   password,
+      // };
+      // console.log('payload', JSON.stringify(payload));
+      // API.post(LOGIN_ENDPOINT, payload)
+      //   .then(res => {
+      //     console.log(res);
+      //     if (res.status === 'success') {
+      //       Toast.show(res.message);
+      //       setLoggedIn(res.data.access_token);
+      //       console.log('Response =>' + JSON.stringify(res));
+      //       setLoding(false);
+      //       props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+      //     } else {
+      //       setLoding(false);
+      //     }
+      //   })
+      //   .catch(e => {
+      //     setLoding(false);
+      //     console.log(e);
+      //     Toast.show('User not registered');
+      //   });
+
+      props.navigation.replace('HomeStacksScreen', {screen: 'Home'});
     }
   };
 
   return (
-    <SafeAreaView style={{flex: 1,backgroundColor:COLORS.bgColor}}>
-      <StatusBar backgroundColor={COLORS.bgColor} barStyle='dark-content' />
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.bgColor}}>
+      <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{marginHorizontal: 20}}>
@@ -140,6 +171,7 @@ const Sign_in = props => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <LoaderIndicator loading={loding} />
     </SafeAreaView>
   );
 };
@@ -156,7 +188,7 @@ const styles = StyleSheet.create({
     color: COLORS.dark,
     alignSelf: 'center',
     marginTop: 10,
-    fontFamily:FONTS.bold
+    fontFamily: FONTS.bold,
   },
   errorText: {
     color: 'red',

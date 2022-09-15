@@ -1,31 +1,45 @@
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useRef} from 'react';
 
 import Images from '../assest/Images';
 import Headers from '../comman/Headers';
 import {COLORS} from '../assest/Themes';
-import { useTheme, useThemeAwareObject } from '../theme';
+import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function TopTab({navigation}) {
-  {
-    console.log('navigation.getState().index', navigation.getState().index);
-  }
   // const styles = useThemeAwareObject(dashboardStyles);
-  const {theme} = useTheme()
+  const {theme} = useTheme();
+
+  // const scrollRef = useRef();
+
+  // const HomeTuch = () => {
+  //   scrollRef.current.scrollTo({
+  //     y: 5,
+  //     animated: true,
+  //   });
+  // };
 
   return (
-    <View style={{backgroundColor: theme.color.backgroundColor, elevation: 2}}>
+    <View
+      style={{backgroundColor: theme.color.backgroundColor, elevation: 2}}
+      // ref={scrollRef}
+      >
       <Headers
-      StatusBarBg='white'
-      barStyle="dark-content"
         search={navigation.getState().index == 2 ? false : true}
-        onClickSearch={()=>{navigation.navigate('Search')}}
+        onClickSearch={() => {
+          navigation.navigate('Search');
+        }}
         onPress={() =>
           navigation.navigate('MyHomeStackScreens', {screen: 'Notifications'})
         }
         StatusBarBg={theme.color.backgroundColor}
-        barStyle={ theme.color.backgroundColor == "#ffffff" ? "dark-content" : 'light-content'}
-        bellStayle={{tintColor:theme.color.black}}
+        barStyle={
+          theme.color.backgroundColor == '#ffffff'
+            ? 'dark-content'
+            : 'light-content'
+        }
+        bellStayle={{tintColor: theme.color.black}}
+        styleSearch={{tintColor: theme.color.black}}
       />
       <View
         style={{
@@ -36,9 +50,10 @@ export default function TopTab({navigation}) {
           paddingVertical: 10,
         }}>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('MyHomeStackScreens', {screen: 'Home'})
-          }>
+          onPress={() => {
+            navigation.navigate('MyHomeStackScreens', {screen: 'Home'});
+            // HomeTuch();
+          }}>
           <Image
             source={Images.homeLogo}
             resizeMode="contain"

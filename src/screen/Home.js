@@ -8,12 +8,18 @@ import {
   FlatList,
   ImageBackground,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
 import {useTheme, useThemeAwareObject} from '../theme';
+import API from '../services/API';
+import {ALL_FREE_POSTS} from '../services/ApiEndpoints';
+import LoaderIndicator from '../comman/LoaderIndicator';
 
-export default function Home() {
+
+export default function Home({route}) {
+ 
+
   const styles = useThemeAwareObject(dashboardStyles);
   const {theme} = useTheme();
   const [active, setActive] = useState(1);
@@ -22,9 +28,25 @@ export default function Home() {
   };
 
   const [like, setLike] = useState(false);
+  const [ListData, setListData] = useState([]);
+
+  const [loding, setLoding] = useState(false);
+
+  useEffect(() => {
+    setLoding(true);
+    API.get(ALL_FREE_POSTS)
+      .then(res => {
+        setListData(res.data);
+        // console.log('>>>>>>>>>>>>>>>>', res.data);
+        setLoding(false);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, []);
 
   const datas = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}];
-  const ListData = [1, 2, 3];
+
   const renderItem = ({index, item}) => {
     return (
       <View>
@@ -53,7 +75,7 @@ export default function Home() {
                 color: theme.color.fontColor,
                 fontSize: 14,
                 textTransform: 'capitalize',
-                fontFamily:FONTS.Regular
+                fontFamily: FONTS.Regular,
               }}>
               It is a long established fact that a reader will be distracted by
               the readable...
@@ -99,7 +121,7 @@ export default function Home() {
                 marginTop: 5,
               }}>
               <Text style={[styles.detail, {color: theme.color.toneblack}]}>
-                13 likes
+                20 likes
               </Text>
 
               <Image style={styles.singalDot} source={Images.onedot} />
@@ -261,9 +283,12 @@ export default function Home() {
           showsVerticalScrollIndicator={false}
           data={ListData}
           renderItem={renderItem}
+          keyExtractor={item => item.id}
+          
         />
       )}
       {/* </ScrollView> */}
+      <LoaderIndicator loading={loding} />
     </View>
   );
 }
@@ -294,7 +319,6 @@ const dashboardStyles = theme => {
       lineHeight: 20,
       color: theme.color.baba,
       fontFamily: FONTS.Regular,
-      
     },
     // DayText: {
     //   fontSize: 13,

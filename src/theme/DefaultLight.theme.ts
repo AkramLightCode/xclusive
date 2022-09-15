@@ -18,7 +18,7 @@ const DEFAULT_LIGHT_COLOR_THEME: ColorTheme = {
   csilver: '#CCCCCC',
   fontColor: '#847D80',
   Tgray: '#888888',
-  appsilver: '#C5C5C5 ',
+  appsilver: '#C5C5C5',
   toneblack2: '#232323',
   gray1: '#808080',
   lightgray: '#8E878A',
