@@ -28,80 +28,24 @@ export default function Chat({}) {
           styleSearch={{tintColor: theme.color.black}}
           bellStayle={{tintColor: theme.color.black}}
         />
-        <Text
-          style={{
-            fontSize: 22,
-            color: theme.color.black,
-            marginHorizontal: 10,
-            fontFamily: FONTS.semiBold,
-            lineHeight: 30,
-            marginVertical: 7,
-          }}>
-          Chat
-        </Text>
+        <Text style={styles.ChatText}>Chat</Text>
       </View>
       <ScrollView>
         <View style={{flex: 1, paddingVertical: 20}}>
           <View style={{alignItems: 'center', borderRadius: 10}}>
             <Text style={styles.date}>22 mar</Text>
           </View>
-          <TouchableOpacity
-            style={{
-              alignSelf: 'center',
-              marginVertical: 20,
-              backgroundColor: '#fff',
-              padding: 5,
-              borderRadius: 50,
-            }}>
-            <Image
-              source={Images.chatgirlimg}
-              style={{
-                width: 80,
-                height: 80,
-                resizeMode: 'contain',
-                borderRadius: 80 / 2,
-              }}
-            />
+          <TouchableOpacity style={styles.ProfileContainer}>
+            <Image source={Images.chatgirlimg} style={styles.chatgirlimg} />
           </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 18,
-              color: theme.color.lightblack,
-              lineHeight: 25,
-              fontFamily: FONTS.semiBold,
-              textAlign: 'center',
-            }}>
-            Peter Be nedict
-          </Text>
-          <Text
-            style={{
-              fontSize: 13,
-              fontWeight: '400',
-              textAlign: 'center',
-              color: theme.color.bm,
-              lineHeight: 18,
-              fontFamily: FONTS.Regular,
-            }}>
-            Last Seen 25min Ago
-          </Text>
+          <Text style={styles.PeterText}>Peter Be nedict</Text>
+          <Text style={styles.TimeText}>Last Seen 25min Ago</Text>
         </View>
 
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: theme.color.backgroundColor,
-            padding: 15,
-          }}>
+        <View style={styles.CenterContainer}>
           <ImageBackground
             source={Images.chatgirlimg}
-            style={{
-              width: '100%',
-              height: 200,
-              resizeMode: 'contain',
-              justifyContent: 'center',
-              borderRadius: 10,
-              overflow: 'hidden',
-            }}>
+            style={styles.chatgirlimg2}>
             <View
               opacity={0.8}
               style={{
@@ -109,25 +53,8 @@ export default function Chat({}) {
                 flex: 1,
                 justifyContent: 'center',
               }}>
-              <View
-                style={{
-                  justifyContent: 'center',
-                  borderRadius: 50,
-                  backgroundColor: theme.color.white,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  padding: 10,
-                }}>
-                <Image
-                  source={Images.lock}
-                  style={{
-                    width: 25,
-                    height: 25,
-                    resizeMode: 'contain',
-                    tintColor: theme.color.gray,
-                  }}
-                />
+              <View style={styles.CenterView}>
+                <Image source={Images.lock} style={styles.lock} />
               </View>
               <View style={{marginTop: 20}}>
                 <CoustomButton
@@ -143,49 +70,18 @@ export default function Chat({}) {
               </View>
             </View>
           </ImageBackground>
-          <Text
-            style={{
-              color: theme.color.light,
-              fontWeight: '400',
-              marginTop: 10,
-              fontSize: 14,
-              lineHeight: 20,
-              fontFamily: FONTS.Regular,
-            }}>
-            4.30am $5 Not Paid Yet
-          </Text>
+          <Text style={styles.CenterTime}>4.30am $5 Not Paid Yet</Text>
         </View>
       </ScrollView>
-      <View
-        style={{
-          flexDirection: 'row',
-          backgroundColor: theme.color.backgroundColor,
-          alignItems: 'center',
-          padding: 15,
-        }}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: theme.color.pink,
-            padding: 10,
-            borderRadius: 50,
-          }}>
+      <View style={styles.BottomMainView}>
+        <TouchableOpacity style={styles.plusBackground}>
           <Image
             resizeMode="contain"
             source={require('../assest/icon/puls.png')}
-            style={{width: 15, height: 15}}
+            style={styles.plus}
           />
         </TouchableOpacity>
-        <View
-          style={{
-            flex: 1,
-            marginLeft: 10,
-            borderWidth: 0.5,
-            borderRadius: 50,
-            borderColor: COLORS.appgray,
-            paddingHorizontal: 10,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
+        <View style={styles.BottomInputView}>
           <TextInput
             placeholder="Type a message....."
             placeholderTextColor={theme.color.black}
@@ -200,7 +96,7 @@ export default function Chat({}) {
           <TouchableOpacity>
             <Image
               source={require('../assest/icon/Button.png')}
-              style={{height: 35, width: 35, resizeMode: 'contain'}}
+              style={styles.ButtonImg}
             />
           </TouchableOpacity>
         </View>
@@ -215,6 +111,14 @@ const dashboardStyles = theme => {
       flex: 1,
       backgroundColor: theme.color.bgColor,
     },
+    ChatText: {
+      fontSize: 22,
+      color: theme.color.black,
+      marginHorizontal: 10,
+      fontFamily: FONTS.semiBold,
+      lineHeight: 30,
+      marginVertical: 7,
+    },
     date: {
       backgroundColor: COLORS.white,
       paddingHorizontal: 10,
@@ -223,6 +127,100 @@ const dashboardStyles = theme => {
       fontSize: 14,
       lineHeight: 18,
       fontFamily: FONTS.Regular,
+    },
+    ProfileContainer: {
+      alignSelf: 'center',
+      marginVertical: 20,
+      backgroundColor: '#fff',
+      padding: 5,
+      borderRadius: 50,
+    },
+    chatgirlimg: {
+      width: 80,
+      height: 80,
+      resizeMode: 'contain',
+      borderRadius: 80 / 2,
+    },
+    PeterText: {
+      fontSize: 18,
+      color: theme.color.lightblack,
+      lineHeight: 25,
+      fontFamily: FONTS.semiBold,
+      textAlign: 'center',
+    },
+    TimeText: {
+      fontSize: 13,
+      fontWeight: '400',
+      textAlign: 'center',
+      color: theme.color.bm,
+      lineHeight: 18,
+      fontFamily: FONTS.Regular,
+    },
+    CenterContainer: {
+      flex: 1,
+      backgroundColor: theme.color.backgroundColor,
+      padding: 15,
+    },
+    chatgirlimg2: {
+      width: '100%',
+      height: 200,
+      resizeMode: 'contain',
+      justifyContent: 'center',
+      borderRadius: 10,
+      overflow: 'hidden',
+    },
+    CenterView: {
+      justifyContent: 'center',
+      borderRadius: 50,
+      backgroundColor: theme.color.white,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'center',
+      padding: 10,
+    },
+    lock: {
+      width: 25,
+      height: 25,
+      resizeMode: 'contain',
+      tintColor: theme.color.gray,
+    },
+    CenterTime: {
+      color: theme.color.light,
+      fontWeight: '400',
+      marginTop: 10,
+      fontSize: 14,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
+    },
+    BottomMainView: {
+      flexDirection: 'row',
+      backgroundColor: theme.color.backgroundColor,
+      alignItems: 'center',
+      padding: 15,
+    },
+    plusBackground: {
+      backgroundColor: theme.color.pink,
+      padding: 10,
+      borderRadius: 50,
+    },
+    plus: {
+      width: 15,
+      height: 15,
+    },
+    BottomInputView: {
+      flex: 1,
+      marginLeft: 10,
+      borderWidth: 0.5,
+      borderRadius: 50,
+      borderColor: COLORS.appgray,
+      paddingHorizontal: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    ButtonImg: {
+      height: 35,
+      width: 35,
+      resizeMode: 'contain',
     },
   });
   return styles;

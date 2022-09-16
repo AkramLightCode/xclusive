@@ -144,8 +144,7 @@ const dashboardStyles = theme => {
       marginTop: 10,
       borderRadius: 7,
       marginBottom: 20,
-    
-      elevation:1
+      elevation: 1,
     },
     secondview: {
       borderWidth: 0.2,
@@ -156,8 +155,8 @@ const dashboardStyles = theme => {
       borderRadius: 5,
       marginTop: 15,
       backgroundColor: theme.color.backgroundColor,
-      borderWidth:0.5,
-      borderColor:theme.color.borderColor2,
+      borderWidth: 0.5,
+      borderColor: theme.color.borderColor2,
     },
     inputHeading: {
       fontFamily: FONTS.medium,
@@ -178,14 +177,14 @@ const dashboardStyles = theme => {
       width: 14,
       height: 14,
       resizeMode: 'contain',
-      tintColor:theme.color.black,
+      tintColor: theme.color.black,
     },
-    txt:{
+    txt: {
       color: theme.color.black,
       fontSize: 16,
       lineHeight: 25,
       fontFamily: FONTS.medium,
-    }
+    },
   });
   return styles;
 };

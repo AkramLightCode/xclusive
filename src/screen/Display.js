@@ -22,55 +22,21 @@ export default function Display() {
     <View style={styles.mainview}>
       <View style={styles.secondview}>
         <View>
-          <Text
-            style={{
-              fontFamily: FONTS.medium,
-              color: theme.color.black,
-              fontSize: 15,
-              lineHeight: 20,
-            }}>
-            Language
-          </Text>
+          <Text style={styles.LanguageText}>Language</Text>
           <TextInput
-            style={{
-              color: theme.color.shadegray,
-              fontWeight: '400',
-              fontSize: 15,
-              fontFamily: FONTS.light,
-            }}
+            style={styles.InputContainer}
             placeholder="English"
             keyboardType="name-phone-pad"
             placeholderTextColor={theme.color.shadegray}
           />
         </View>
         <TouchableOpacity>
-          <Image
-            source={Images.Rightarrow}
-            style={{
-              width: 14,
-              height: 14,
-              resizeMode: 'contain',
-              tintColor: theme.color.black,
-            }}
-          />
+          <Image source={Images.Rightarrow} style={styles.Rightarrow} />
         </TouchableOpacity>
       </View>
       <View style={[styles.secondview, {marginTop: 15}]}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text
-            style={{
-              fontFamily: FONTS.medium,
-              color: theme.color.black,
-              fontSize: 15,
-              lineHeight: 20,
-            }}>
-            Dark Theme
-          </Text>
+        <View style={styles.DarkContainer}>
+          <Text style={styles.DarkText}>Dark Theme</Text>
           <View>
             <Switch
               trackColor={{false: '#ccc', true: '#EC1E79'}}
@@ -106,6 +72,35 @@ const dashboardStyles = theme => {
       backgroundColor: theme.color.backgroundColor,
       borderWidth: 0.5,
       borderColor: theme.color.borderColor2,
+    },
+    LanguageText: {
+      fontFamily: FONTS.medium,
+      color: theme.color.black,
+      fontSize: 15,
+      lineHeight: 20,
+    },
+    InputContainer: {
+      color: theme.color.shadegray,
+      // fontWeight: '400',
+      fontSize: 15,
+      fontFamily: FONTS.light,
+    },
+    Rightarrow: {
+      width: 14,
+      height: 14,
+      resizeMode: 'contain',
+      tintColor: theme.color.black,
+    },
+    DarkContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    DarkText: {
+      fontFamily: FONTS.medium,
+      color: theme.color.black,
+      fontSize: 15,
+      lineHeight: 20,
     },
   });
   return styles;

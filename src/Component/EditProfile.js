@@ -71,11 +71,11 @@ export default function EditProfile() {
           <ImageBackground
             resizeMode="stretch"
             source={Images.profileimg}
-            style={{width: '100%', height: 196, marginTop: 5}}>
+            style={styles.backgroundImage}>
             <View style={styles.cameraview}>
               <Image
                 source={Images.camera}
-                style={{width: 20, height: 20, resizeMode: 'contain'}}
+                style={styles.camera} 
               />
             </View>
 
@@ -95,14 +95,7 @@ export default function EditProfile() {
                 />
                 <TouchableOpacity activeOpacity={0.7} onPress={OpenPicker}>
                   <Image
-                    style={{
-                      height: 60,
-                      width: 60,
-                      resizeMode: 'contain',
-                      alignSelf: 'center',
-                      position: 'absolute',
-                      bottom: -14,
-                    }}
+                    style={styles.bgcamera}
                     source={Images.bgcamera}
                   />
                 </TouchableOpacity>
@@ -188,6 +181,11 @@ export default function EditProfile() {
 }
 const dashboardStyles = theme => {
   const styles = StyleSheet.create({
+    backgroundImage: {
+      width: '100%',
+      height: 196,
+      marginTop: 5,
+    },
     cameraview: {
       width: 35,
       height: 35,
@@ -197,6 +195,34 @@ const dashboardStyles = theme => {
       alignItems: 'center',
       alignSelf: 'flex-end',
       margin: 10,
+    },
+    camera: {
+      width: 20,
+      height: 20,
+      resizeMode: 'contain',
+    },
+    ProfileImage: {
+      width: 100,
+      height: 100,
+      borderRadius: 50,
+      resizeMode: 'contain',
+      alignSelf: 'center',
+      borderColor: '#EC1E79',
+      borderWidth: 5,
+    },
+    bgcamera: {
+      height: 60,
+      width: 60,
+      resizeMode: 'contain',
+      alignSelf: 'center',
+      position: 'absolute',
+      bottom: -14,
+    },
+    InputContainer: {
+      paddingHorizontal: 10,
+      flex: 1,
+      paddingBottom: 20,
+      marginTop: 50,
     },
     Profileveiw: {
       borderRadius: 120,

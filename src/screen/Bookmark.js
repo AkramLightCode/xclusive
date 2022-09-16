@@ -25,16 +25,7 @@ export default function Notifications() {
     <View style={{flex: 1, backgroundColor: theme.color.bgColor}}>
       <View style={styles.seperator} />
       <View style={styles.MainView}>
-        <Text
-          style={{
-            fontSize: 22,
-            color: theme.color.black,
-            marginHorizontal: 10,
-            fontFamily: FONTS.semiBold,
-            lineHeight: 30,
-          }}>
-          Bookmarks
-        </Text>
+        <Text style={styles.BookText}>Bookmarks</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.AllMainView}>
             <TouchableOpacity
@@ -154,97 +145,35 @@ export default function Notifications() {
           renderItem={() => {
             return (
               <View style={styles.FlatListContainer}>
-                <View style={{marginTop:5}}>
-                  <Image
-                    source={Images.profile}
-                    style={{
-                      width: 40,
-                      height: 40,
-                      resizeMode: 'contain',
-                      borderRadius: 20,
-                    }}
-                  />
+                <View style={{marginTop: 5}}>
+                  <Image source={Images.profile} style={styles.profileImage} />
                 </View>
 
                 <View style={{marginLeft: 10, flex: 1}}>
                   <View style={{flexDirection: 'row', marginTop: 12}}>
                     <View style={{}}>
-                      <Text
-                        style={{
-                          fontSize: 18,
-                          color: theme.color.lightblack,
-                          lineHeight: 25,
-                          fontFamily: FONTS.semiBold,
-                        }}>
-                        Peter Benedict
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 13,
-                          lineHeight: 20,
-                          color: theme.color.baba,
-                          fontFamily: FONTS.Regular,
-                        }}>
-                        @Xclusive
-                      </Text>
+                      <Text style={styles.PeterText}>Peter Benedict</Text>
+                      <Text style={styles.XclusiveText}>@Xclusive</Text>
                     </View>
                     <View style={{flexDirection: 'row', marginLeft: 'auto'}}>
-                      <Text
-                        style={{
-                          fontSize: 13,
-                          lineHeight: 20,
-                          color: theme.color.light,
-                          fontFamily: FONTS.Regular,
-                          marginRight: 7,
-                        }}>
-                        2 days ago
-                      </Text>
+                      <Text style={styles.DayText}>2 days ago</Text>
                       <TouchableOpacity>
                         <Image
                           source={require('../assest/icon/threedots.png')}
-                          style={{
-                            width: 22,
-                            height: 22,
-                            resizeMode: 'contain',
-                            marginLeft: 3,
-                            tintColor: theme.color.csilver,
-                            resizeMode: 'contain',
-                          }}
+                          style={styles.threedots}
                         />
                       </TouchableOpacity>
                     </View>
                   </View>
                   <View>
-                    <Text
-                      style={{
-                        color: theme.color.Tgray,
-                        fontWeight: '400',
-                        fontSize: 14,
-                        fontFamily: FONTS.Regular,
-                      }}>
+                    <Text style={styles.Details}>
                       It is a long established fact that a reader will be
                       distracted by the readable...
                     </Text>
 
                     {/* ////////////////////////////// vidio ///////////////////// */}
-                    <TouchableOpacity
-                      activeOpacity={0.5}
-                      style={{
-                        padding: 5,
-                        borderWidth: 0.5,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        borderColor: COLORS.borderColor,
-                      }}>
-                      <Image
-                        source={Images.Mask2}
-                        style={{
-                          width: '100%',
-                          height: 200,
-                          borderRadius: 10,
-                          resizeMode: 'stretch',
-                        }}
-                      />
+                    <TouchableOpacity activeOpacity={0.5} style={styles.Video}>
+                      <Image source={Images.Mask2} style={styles.Mask2} />
                     </TouchableOpacity>
 
                     <ScrollView
@@ -254,113 +183,39 @@ export default function Notifications() {
                         return (
                           <TouchableOpacity
                             key={index}
-                            style={{
-                              marginRight: 7,
-                              padding: 5,
-                              borderWidth: 0.5,
-                              borderRadius: 10,
-                              marginTop: 10,
-                              borderColor: COLORS.borderColor,
-                            }}>
-                            <Image
-                              source={Images.Mask}
-                              style={{
-                                width: 100,
-                                height: 50,
-                                borderRadius: 10,
-                                resizeMode: 'contain',
-                              }}
-                            />
+                            style={styles.VideoList}>
+                            <Image source={Images.Mask} style={styles.Mask} />
                           </TouchableOpacity>
                         );
                       })}
                     </ScrollView>
                   </View>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      marginTop: 15,
-                    }}>
+                  <View style={styles.DCSFContainer}>
                     <TouchableOpacity>
-                      <Image
-                        style={{
-                          resizeMode: 'contain',
-                          width: 20,
-                          height: 20,
-                          tintColor: theme.color.Tgray,
-                        }}
-                        source={Images.dislike}
-                      />
+                      <Image style={styles.commonImg} source={Images.dislike} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginHorizontal: 40}}>
                       <Image
-                        style={{
-                          resizeMode: 'contain',
-                          width: 20,
-                          height: 20,
-                          tintColor: theme.color.Tgray,
-                        }}
+                        style={styles.commonImg}
                         source={Images.comments}
                       />
                     </TouchableOpacity>
                     <TouchableOpacity>
-                      <Image
-                        style={{
-                          resizeMode: 'contain',
-                          width: 20,
-                          height: 20,
-                          tintColor: theme.color.Tgray,
-                        }}
-                        source={Images.share}
-                      />
+                      <Image style={styles.commonImg} source={Images.share} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 'auto'}}>
                       <Image
-                        style={{
-                          resizeMode: 'contain',
-                          width: 20,
-                          height: 20,
-                          tintColor: theme.color.pink,
-                        }}
+                        style={styles.favoritImg}
                         source={Images.favorit}
                       />
                     </TouchableOpacity>
                   </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      marginTop: 10,
-                      alignItems: 'center',
-                    }}>
-                    <Text
-                      style={{
-                        color: theme.color.toneblack,
-                        fontSize: 14,
-                        fontFamily: FONTS.Regular,
-                      }}>
-                      13 Likes
-                    </Text>
+                  <View style={styles.BottomContainer}>
+                    <Text style={styles.LikeText}>13 Likes</Text>
 
-                    <Image
-                      style={{
-                        resizeMode: 'contain',
-                        width: 4,
-                        height: 4,
-                        marginHorizontal: 12,
-                        tintColor: theme.color.appsilver,
-                      }}
-                      source={Images.onedot}
-                    />
+                    <Image style={styles.onedot} source={Images.onedot} />
 
-                    <Text
-                      style={{
-                        color: theme.color.toneblack,
-                        fontSize: 14,
-                        fontFamily: FONTS.Regular,
-                      }}>
-                      53 Comments
-                    </Text>
+                    <Text style={styles.CommentsText}>53 Comments</Text>
                   </View>
                 </View>
               </View>
@@ -373,9 +228,20 @@ export default function Notifications() {
 }
 const dashboardStyles = theme => {
   const styles = StyleSheet.create({
+    seperator: {
+      backgroundColor: theme.color.gray,
+      height: 0.3,
+    },
     MainView: {
       backgroundColor: theme.color.backgroundColor,
       paddingVertical: 15,
+    },
+    BookText: {
+      fontSize: 22,
+      color: theme.color.black,
+      marginHorizontal: 10,
+      fontFamily: FONTS.semiBold,
+      lineHeight: 30,
     },
     AllMainView: {
       backgroundColor: theme.color.backgroundColor,
@@ -389,9 +255,110 @@ const dashboardStyles = theme => {
       flexDirection: 'row',
       padding: 10,
     },
-    seperator: {
-      backgroundColor: theme.color.gray,
-      height: 0.3,
+    profileImage: {
+      width: 40,
+      height: 40,
+      resizeMode: 'contain',
+      borderRadius: 20,
+    },
+    PeterText: {
+      fontSize: 18,
+      color: theme.color.lightblack,
+      lineHeight: 25,
+      fontFamily: FONTS.semiBold,
+    },
+    XclusiveText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.baba,
+      fontFamily: FONTS.Regular,
+    },
+    DayText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.light,
+      fontFamily: FONTS.Regular,
+      marginRight: 7,
+    },
+    threedots: {
+      width: 22,
+      height: 22,
+      resizeMode: 'contain',
+      marginLeft: 3,
+      tintColor: theme.color.csilver,
+      resizeMode: 'contain',
+    },
+    Details: {
+      color: theme.color.Tgray,
+      fontWeight: '400',
+      fontSize: 14,
+      fontFamily: FONTS.Regular,
+    },
+    Video: {
+      padding: 5,
+      borderWidth: 0.5,
+      borderRadius: 10,
+      marginTop: 10,
+      borderColor: COLORS.borderColor,
+    },
+    Mask2: {
+      width: '100%',
+      height: 200,
+      borderRadius: 10,
+      resizeMode: 'stretch',
+    },
+    VideoList: {
+      marginRight: 7,
+      padding: 5,
+      borderWidth: 0.5,
+      borderRadius: 10,
+      marginTop: 10,
+      borderColor: COLORS.borderColor,
+    },
+    Mask: {
+      width: 100,
+      height: 50,
+      borderRadius: 10,
+      resizeMode: 'contain',
+    },
+    DCSFContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      marginTop: 15,
+    },
+    commonImg: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 20,
+      tintColor: theme.color.Tgray,
+    },
+    favoritImg: {
+      resizeMode: 'contain',
+      width: 20,
+      height: 20,
+      tintColor: theme.color.pink,
+    },
+    BottomContainer: {
+      flexDirection: 'row',
+      marginTop: 10,
+      alignItems: 'center',
+    },
+    LikeText: {
+      color: theme.color.toneblack,
+      fontSize: 14,
+      fontFamily: FONTS.Regular,
+    },
+    onedot: {
+      resizeMode: 'contain',
+      width: 4,
+      height: 4,
+      marginHorizontal: 12,
+      tintColor: theme.color.appsilver,
+    },
+    CommentsText: {
+      color: theme.color.toneblack,
+      fontSize: 14,
+      fontFamily: FONTS.Regular,
     },
   });
   return styles;

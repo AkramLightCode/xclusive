@@ -88,80 +88,79 @@ export default function Messages({navigation}) {
   return (
     <View style={styles.Container}>
       {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-        <View style={styles.mainview}>
-          <Text style={styles.MessagesText}>Messages</Text>
-          <View style={styles.SearchbarContainer}>
-            <View style={styles.SearchbarinnerView}>
-              <TextInput
-                placeholder="name"
-                onChangeText={text => searchFilterFunction(text)}
-                value={search}
-                style={styles.Input}
-              />
-              <TouchableOpacity>
-                <Image style={styles.SerchImage} source={Images.search} />
-              </TouchableOpacity>
-            </View>
-            <Image style={styles.PlusImage} source={Images.plus} />
-          </View>
-          <View style={styles.ButtonContainer}>
-            <TouchableOpacity
-              onPress={() => onPress('Recents')}
-              style={[
-                styles.topButton,
-                {
-                  backgroundColor:
-                    active == 'Recents' ? COLORS.pink : COLORS.bgColor,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.topText,
-                  {
-                    color: active == 'Recents' ? COLORS.white : COLORS.sblack,
-                  },
-                ]}>
-                Recents
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress('All')}
-              style={[
-                styles.topButton,
-                {
-                  backgroundColor:
-                    active == 'All' ? COLORS.pink : COLORS.bgColor,
-                  marginLeft: 20,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.topText,
-                  {
-                    color: active == 'All' ? COLORS.white : COLORS.sblack,
-                  },
-                ]}>
-                All
-              </Text>
+      <View style={styles.mainview}>
+        <Text style={styles.MessagesText}>Messages</Text>
+        <View style={styles.SearchbarContainer}>
+          <View style={styles.SearchbarinnerView}>
+            <TextInput
+              placeholder="name"
+              onChangeText={text => searchFilterFunction(text)}
+              value={search}
+              style={styles.Input}
+            />
+            <TouchableOpacity>
+              <Image style={styles.SerchImage} source={Images.search} />
             </TouchableOpacity>
           </View>
+          <Image style={styles.PlusImage} source={Images.plus} />
         </View>
-        {active == 'Recents' && (
-          <FlatList
-            data={filteredDataSource}
-            renderItem={ListData}
-            keyExtractor={(item, index) => index.toString()}
-            showsVerticalScrollIndicator={false}
-          />
-        )}
-          {active == 'All' && (
-          <FlatList
-            data={filteredDataSource}
-            renderItem={ListData}
-            keyExtractor={(item, index) => index.toString()}
-            showsVerticalScrollIndicator={false}
-          />
-        )}
+        <View style={styles.ButtonContainer}>
+          <TouchableOpacity
+            onPress={() => onPress('Recents')}
+            style={[
+              styles.topButton,
+              {
+                backgroundColor:
+                  active == 'Recents' ? COLORS.pink : COLORS.bgColor,
+              },
+            ]}>
+            <Text
+              style={[
+                styles.topText,
+                {
+                  color: active == 'Recents' ? COLORS.white : COLORS.sblack,
+                },
+              ]}>
+              Recents
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onPress('All')}
+            style={[
+              styles.topButton,
+              {
+                backgroundColor: active == 'All' ? COLORS.pink : COLORS.bgColor,
+                marginLeft: 20,
+              },
+            ]}>
+            <Text
+              style={[
+                styles.topText,
+                {
+                  color: active == 'All' ? COLORS.white : COLORS.sblack,
+                },
+              ]}>
+              All
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {active == 'Recents' && (
+        <FlatList
+          data={filteredDataSource}
+          renderItem={ListData}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
+      {active == 'All' && (
+        <FlatList
+          data={filteredDataSource}
+          renderItem={ListData}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
       {/* </ScrollView> */}
     </View>
   );
@@ -184,7 +183,6 @@ const dashboardStyles = theme => {
       fontFamily: FONTS.semiBold,
       lineHeight: 30,
       textTransform: 'capitalize',
-
     },
     SearchbarContainer: {
       flexDirection: 'row',
@@ -244,7 +242,6 @@ const dashboardStyles = theme => {
       color: theme.color.lightblack,
       fontFamily: FONTS.semiBold,
       textTransform: 'capitalize',
-
     },
     XclusiveText: {
       fontSize: 13,

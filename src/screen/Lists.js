@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import Images from '../assest/Images';
-import { FONTS} from '../assest/Themes';
+import {FONTS} from '../assest/Themes';
 import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function Lists() {
@@ -19,54 +19,12 @@ export default function Lists() {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity activeOpacity={0.7} style={styles.FlatListView}>
-        <Text
-          style={{
-            fontSize: 20,
-            color: theme.color.black,
-            marginHorizontal: 10,
-            fontFamily: FONTS.semiBold,
-            lineHeight: 30,
-          }}>
-          {item.Text}
-        </Text>
-        <Text
-          style={{
-            color: theme.color.pink,
-            fontSize: 15,
-            lineHeight: 18,
-            fontFamily: FONTS.Regular,
-          }}>
-          {item.Text1}
-        </Text>
-        <View
-          style={{flexDirection: 'row', alignItems: 'center', marginTop: 5}}>
-          <Image
-            style={{
-              width: 15,
-              height: 15,
-              resizeMode: 'contain',
-              borderRadius: 8,
-            }}
-            source={item.imageViews}
-          />
-          <Image
-            style={{
-              width: 15,
-              height: 15,
-              resizeMode: 'contain',
-              borderRadius: 8,
-            }}
-            source={item.imagemen}
-          />
-          <Image
-            style={{
-              width: 15,
-              height: 15,
-              resizeMode: 'contain',
-              borderRadius: 8,
-            }}
-            source={item.imageView}
-          />
+        <Text style={styles.BlackText}>{item.Text}</Text>
+        <Text style={styles.PinkText}>{item.Text1}</Text>
+        <View style={styles.ImageContainer}>
+          <Image style={styles.common} source={item.imageViews} />
+          <Image style={styles.common} source={item.imagemen} />
+          <Image style={styles.common} source={item.imageView} />
         </View>
       </TouchableOpacity>
     );
@@ -128,11 +86,28 @@ export default function Lists() {
 }
 const dashboardStyles = theme => {
   const styles = StyleSheet.create({
-    mainview: {
+    Container: {
       flex: 1,
       paddinVertical: 20,
       backgroundColor: theme.color.bgColor,
     },
+    mainView: {
+      borderTopWidth: 1,
+      borderTopColor: theme.color.bgColor,
+    },
+    ListText: {
+      fontSize: 22,
+      color: theme.color.black,
+      marginHorizontal: 10,
+      fontFamily: FONTS.semiBold,
+      lineHeight: 30,
+      marginTop: 15,
+    },
+    FlatListContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
     FlatListView: {
       width: 170,
       height: 150,
@@ -142,6 +117,30 @@ const dashboardStyles = theme => {
       alignItems: 'center',
       backgroundColor: theme.color.backgroundColor,
       marginHorizontal: 10,
+    },
+    BlackText: {
+      fontSize: 20,
+      color: theme.color.black,
+      marginHorizontal: 10,
+      fontFamily: FONTS.semiBold,
+      lineHeight: 30,
+    },
+    PinkText: {
+      color: theme.color.pink,
+      fontSize: 15,
+      lineHeight: 18,
+      fontFamily: FONTS.Regular,
+    },
+    ImageContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 5,
+    },
+    common: {
+      width: 15,
+      height: 15,
+      resizeMode: 'contain',
+      borderRadius: 8,
     },
   });
   return styles;

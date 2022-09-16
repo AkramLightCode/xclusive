@@ -25,20 +25,16 @@ export default function Settings({navigation}) {
   return (
     <View style={styles.Container}>
       <View style={{borderTopColor: theme.color.light, borderTopWidth: 0.5}} />
-
       <View style={styles.MainView}>
         <Text style={styles.SettingText}>Setting</Text>
         <View style={styles.TopButtonView}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableOpacity
               onPress={() => onPress(1)}
-              style={{
-                backgroundColor: active == 1 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 1 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -49,13 +45,10 @@ export default function Settings({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress(2)}
-              style={{
-                backgroundColor: active == 2 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 2 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -66,13 +59,10 @@ export default function Settings({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress(3)}
-              style={{
-                backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -83,13 +73,10 @@ export default function Settings({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress(4)}
-              style={{
-                backgroundColor: active == 4 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 4 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -100,13 +87,10 @@ export default function Settings({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress(5)}
-              style={{
-                backgroundColor: active == 5 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 5 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -117,13 +101,10 @@ export default function Settings({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress(6)}
-              style={{
-                backgroundColor: active == 6 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 6 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -134,13 +115,10 @@ export default function Settings({navigation}) {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress(7)}
-              style={{
-                backgroundColor: active == 7 ? COLORS.pink : COLORS.bgColor,
-                paddingVertical: 10,
-                paddingHorizontal: 20,
-                borderRadius: 20,
-                marginHorizontal: 5,
-              }}>
+              style={[
+                styles.buttonContainer,
+                {backgroundColor: active == 7 ? COLORS.pink : COLORS.bgColor},
+              ]}>
               <Text
                 style={[
                   styles.buttonText,
@@ -191,7 +169,6 @@ const dashboardStyles = theme => {
       marginHorizontal: 5,
       marginTop: 10,
     },
-
     cameraview: {
       width: 35,
       height: 35,
@@ -212,6 +189,12 @@ const dashboardStyles = theme => {
       paddingHorizontal: 7,
       paddingVertical: 7,
       top: -60,
+    },
+    buttonContainer: {
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 20,
+      marginHorizontal: 5,
     },
     buttonText: {
       fontSize: 15,

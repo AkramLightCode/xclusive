@@ -156,7 +156,7 @@ const CostomDrawer = ({navigation}) => {
             navigation.navigate('HelpSupport');
           }
         }}>
-        <Image style={styles.profileimg} source={item.logo} />
+        <Image style={styles.profileimg}  source={item.logo} />
         <Text style={styles.Text}>{item.title}</Text>
 
         {index === 7 && (
@@ -180,63 +180,26 @@ const CostomDrawer = ({navigation}) => {
           <Image
             resizeMode="cover"
             source={Images.profile}
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 100 / 2,
-              alignSelf: 'center',
-              marginTop: 30,
-            }}
+            style={styles.ProfileImage}
           />
           <Text
-            style={{
-              fontSize: 16,
-              fontWeight: '500',
-              color: COLORS.white,
-              textAlign: 'center',
-              marginTop: 20,
-              fontFamily: FONTS.semiBold,
-            }}>
+            style={styles.GailText}>
             Gail Forcewind
           </Text>
           <Text
-            style={{
-              color: COLORS.pigpink,
-              fontSize: 11,
-              textAlign: 'center',
-              fontWeight: '400',
-              fontFamily: FONTS.Regular,
-            }}>
+            style={styles.infoText}>
             info@gmail.com
           </Text>
 
-          <View style={{flexDirection: 'row', marginTop: 20}}>
+          <View style={styles.fansfollowingContainer}>
             <TouchableOpacity
-              style={{
-                backgroundColor: COLORS.Strawberry,
-                paddingVertical: 15,
-                flex: 0.5,
-                alignItems: 'center',
-                elevation: 0.5,
-                marginLeft: 0.5,
-                flexDirection: 'row',
-                justifyContent: 'center',
-              }}>
+              style={styles.common}>
               <Text
-                style={{
-                  textAlign: 'center',
-                  fontSize: 17,
-                  color: COLORS.white,
-                  fontFamily: FONTS.medium,
-                }}>
+                style={styles.fiveText}>
                 05
               </Text>
               <Text
-                style={{
-                  fontSize: 13,
-                  color: COLORS.white,
-                  fontFamily: FONTS.Regular,
-                }}>
+                style={styles.FansText}>
                 Fans
               </Text>
             </TouchableOpacity>
@@ -248,30 +211,13 @@ const CostomDrawer = ({navigation}) => {
               }}
             />
             <TouchableOpacity
-              style={{
-                backgroundColor: COLORS.Strawberry,
-                paddingVertical: 15,
-                flex: 0.5,
-                alignItems: 'center',
-                elevation: 0.5,
-                flexDirection: 'row',
-                justifyContent: 'center',
-              }}>
+              style={styles.common}>
               <Text
-                style={{
-                  fontSize: 17,
-                  color: COLORS.white,
-                  fontFamily: FONTS.medium,
-                  marginRight: 5,
-                }}>
+                style={styles.TwentyText}>
                 20
               </Text>
               <Text
-                style={{
-                  fontSize: 13,
-                  color: COLORS.white,
-                  fontFamily: FONTS.Regular,
-                }}>
+                style={styles.FollowingText}>
                 Following
               </Text>
             </TouchableOpacity>
@@ -294,6 +240,66 @@ const drawerStyles = theme => {
       backgroundColor: COLORS.razzmatazz,
       paddingTop: 20,
     },
+    ProfileImage: {
+      width: 100,
+      height: 100,
+      borderRadius: 100 / 2,
+      alignSelf: 'center',
+      marginTop: 30,
+    },
+    GailText: {
+      fontSize: 16,
+      fontWeight: '500',
+      color: COLORS.white,
+      textAlign: 'center',
+      marginTop: 20,
+      fontFamily: FONTS.semiBold,
+    },
+    infoText: {
+      color: COLORS.pigpink,
+      fontSize: 11,
+      textAlign: 'center',
+      fontWeight: '400',
+      fontFamily: FONTS.Regular,
+    },
+    fansfollowingContainer: {
+      flexDirection: 'row',
+      marginTop: 20,
+    },
+    common: {
+      backgroundColor: COLORS.Strawberry,
+      paddingVertical: 15,
+      flex: 0.5,
+      alignItems: 'center',
+      elevation: 0.5,
+      marginLeft: 0.5,
+      flexDirection: 'row',
+      justifyContent: 'center',
+    },
+    fiveText: {
+      textAlign: 'center',
+      fontSize: 17,
+      color: COLORS.white,
+      fontFamily: FONTS.medium,
+      marginRight: 5,
+    },
+    FansText: {
+      fontSize: 13,
+      color: COLORS.white,
+      fontFamily: FONTS.Regular,
+    },
+    TwentyText: {
+      fontSize: 17,
+      color: COLORS.white,
+      fontFamily: FONTS.medium,
+      marginRight: 5,
+    },
+    FollowingText: {
+      fontSize: 13,
+      color: COLORS.white,
+      fontFamily: FONTS.Regular,
+    },
+
     Myprofile: {
       height: 40,
       alignItems: 'center',
@@ -314,6 +320,7 @@ const drawerStyles = theme => {
       fontWeight: '400',
       fontFamily: FONTS.Regular,
     },
+
   });
   return styles;
 };

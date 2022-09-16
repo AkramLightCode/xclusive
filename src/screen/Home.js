@@ -16,10 +16,7 @@ import API from '../services/API';
 import {ALL_FREE_POSTS} from '../services/ApiEndpoints';
 import LoaderIndicator from '../comman/LoaderIndicator';
 
-
 export default function Home({route}) {
- 
-
   const styles = useThemeAwareObject(dashboardStyles);
   const {theme} = useTheme();
   const [active, setActive] = useState(1);
@@ -70,13 +67,7 @@ export default function Home({route}) {
                 </TouchableOpacity>
               </View>
             </View>
-            <Text
-              style={{
-                color: theme.color.fontColor,
-                fontSize: 14,
-                textTransform: 'capitalize',
-                fontFamily: FONTS.Regular,
-              }}>
+            <Text style={styles.Details}>
               It is a long established fact that a reader will be distracted by
               the readable...
             </Text>
@@ -284,7 +275,6 @@ export default function Home({route}) {
           data={ListData}
           renderItem={renderItem}
           keyExtractor={item => item.id}
-          
         />
       )}
       {/* </ScrollView> */}
@@ -453,6 +443,12 @@ const dashboardStyles = theme => {
     seperator: {
       backgroundColor: theme.color.gray,
       height: 0.3,
+    },
+    Details: {
+      color: theme.color.fontColor,
+      fontSize: 14,
+      textTransform: 'capitalize',
+      fontFamily: FONTS.Regular,
     },
     border: {
       padding: 5,

@@ -29,67 +29,16 @@ export default function Notifications() {
   const ListData = ({item}) => {
     return (
       <View style={styles.FlatListContainer}>
-        <Image
-          style={{
-            height: 50,
-            width: 50,
-            resizeMode: 'contain',
-            borderRadius: 50,
-          }}
-          source={Images.profile}
-        />
-        <View style={{flex: 1, justifyContent: 'center', marginLeft: 10}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text
-              style={{
-                fontSize: 18,
-                color: theme.color.lightblack,
-                lineHeight: 25,
-                fontFamily: FONTS.semiBold,
-              }}>
-              Peter Benedict
-            </Text>
-            <Text
-              style={{
-                fontSize: 13,
-                lineHeight: 20,
-                color: theme.color.light,
-                fontFamily: FONTS.Regular,
-              }}>
-              2 days ago
-            </Text>
+        <Image style={styles.profileImage} source={Images.profile} />
+        <View style={styles.PeterContainer}>
+          <View style={styles.PetermainView}>
+            <Text style={styles.PeterText}>Peter Benedict</Text>
+            <Text style={styles.DayText}>2 days ago</Text>
           </View>
-          <Text
-            style={{
-              fontSize: 13,
-              lineHeight: 20,
-              color: theme.color.lightgray,
-              fontFamily: FONTS.Regular,
-            }}>
-            @Xclusive
-          </Text>
-          <Text
-            style={{
-              flexDirection: 'row',
-              marginTop: 5,
-              flex: 1,
-            }}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 20,
-                color: theme.color.gray,
-                fontFamily: FONTS.medium,
-              }}>
-              Lorem ipsum
-            </Text>
-            <Text
-              style={{
-                color: theme.color.gray,
-                fontSize: 14,
-                lineHeight: 20,
-                fontFamily: FONTS.Regular,
-              }}>
+          <Text style={styles.XclusiveText}>@Xclusive</Text>
+          <Text style={styles.TextView}>
+            <Text style={styles.LoremText}>Lorem ipsum</Text>
+            <Text style={styles.dolorText}>
               {} dolor amet, adipiscing elit. Cras cursus...
             </Text>
           </Text>
@@ -102,99 +51,80 @@ export default function Notifications() {
     <View style={styles.Container}>
       <View style={styles.seperator} />
       <View style={styles.MainView}>
-        <Text
-          style={{
-            fontSize: 22,
-            color: theme.color.black,
-            marginHorizontal: 10,
-            fontFamily: FONTS.semiBold,
-            lineHeight: 30,
-          }}>
-          Notifications
-        </Text>
+        <Text style={styles.NotificationsText}>Notifications</Text>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={styles.AllMainView}>
             <TouchableOpacity
               onPress={() => onPress('All')}
-              style={{
-                backgroundColor: active == 'All' ? COLORS.pink : COLORS.bgColor,
-                paddingHorizontal: 20,
-                paddingVertical: 10,
-                borderRadius: 30,
-                marginLeft: 15,
-              }}>
+              style={[
+                styles.All,
+                {
+                  backgroundColor:
+                    active == 'All' ? COLORS.pink : COLORS.bgColor,
+                },
+              ]}>
               <Text
-                style={{
-                  color: active == 'All' ? COLORS.white : COLORS.sblack,
-                  fontSize: 15,
-                  lineHeight: 20,
-                  fontFamily: FONTS.Regular,
-                }}>
+                style={[
+                  styles.AllText,
+                  {color: active == 'All' ? COLORS.white : COLORS.sblack},
+                ]}>
                 All
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress('Interactions')}
-              style={{
-                backgroundColor:
-                  active == 'Interactions' ? COLORS.pink : COLORS.bgColor,
-                paddingHorizontal: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 30,
-                marginLeft: 15,
-              }}>
+              style={[
+                styles.Interactions,
+                {
+                  backgroundColor:
+                    active == 'Interactions' ? COLORS.pink : COLORS.bgColor,
+                },
+              ]}>
               <Text
-                style={{
-                  color:
-                    active == 'Interactions' ? COLORS.white : COLORS.sblack,
-                  fontSize: 15,
-                  lineHeight: 20,
-                  fontFamily: FONTS.Regular,
-                }}>
+                style={[
+                  styles.InteractionsText,
+                  {
+                    color:
+                      active == 'Interactions' ? COLORS.white : COLORS.sblack,
+                  },
+                ]}>
                 Interactions
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress('Liked')}
-              style={{
-                backgroundColor:
-                  active == 'Liked' ? COLORS.pink : COLORS.bgColor,
-                paddingHorizontal: 15,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 30,
-                marginLeft: 15,
-              }}>
+              style={[
+                styles.Liked,
+                {
+                  backgroundColor:
+                    active == 'Liked' ? COLORS.pink : COLORS.bgColor,
+                },
+              ]}>
               <Text
-                style={{
-                  color: active == 'Liked' ? COLORS.white : COLORS.sblack,
-                  fontSize: 15,
-                  lineHeight: 20,
-                  fontFamily: FONTS.Regular,
-                }}>
+                style={[
+                  styles.LikedText,
+                  {color: active == 'Liked' ? COLORS.white : COLORS.sblack},
+                ]}>
                 Liked
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => onPress('Subscribed')}
-              style={{
-                backgroundColor:
-                  active == 'Subscribed' ? COLORS.pink : COLORS.bgColor,
-                paddingHorizontal: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 30,
-                marginLeft: 15,
-                marginRight: 15,
-              }}>
+              style={[
+                styles.Subscribed,
+                {
+                  backgroundColor:
+                    active == 'Subscribed' ? COLORS.pink : COLORS.bgColor,
+                },
+              ]}>
               <Text
-                style={{
-                  color: active == 'Subscribed' ? COLORS.white : COLORS.sblack,
-                  fontSize: 15,
-                  lineHeight: 20,
-                  fontFamily: FONTS.Regular,
-                }}>
+                style={[
+                  styles.SubscribedText,
+                  {
+                    color:
+                      active == 'Subscribed' ? COLORS.white : COLORS.sblack,
+                  },
+                ]}>
                 Subscribed
               </Text>
             </TouchableOpacity>
@@ -219,10 +149,21 @@ const dashboardStyles = theme => {
       flex: 1,
       backgroundColor: theme.color.bgColor,
     },
+    seperator: {
+      backgroundColor: theme.color.gray,
+      height: 0.3,
+    },
     MainView: {
       backgroundColor: theme.color.backgroundColor,
       paddingVertical: 15,
       marginTop: 0.7,
+    },
+    NotificationsText: {
+      fontSize: 22,
+      color: theme.color.black,
+      marginHorizontal: 10,
+      fontFamily: FONTS.semiBold,
+      lineHeight: 30,
     },
     AllMainView: {
       backgroundColor: theme.color.backgroundColor,
@@ -230,6 +171,55 @@ const dashboardStyles = theme => {
       justifyContent: 'space-between',
       marginTop: 20,
     },
+    All: {
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      borderRadius: 30,
+      marginLeft: 15,
+    },
+    AllText: {
+      fontSize: 15,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
+    },
+    Interactions: {
+      paddingHorizontal: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 30,
+      marginLeft: 15,
+    },
+    InteractionsText: {
+      fontSize: 15,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
+    },
+    Liked: {
+      paddingHorizontal: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 30,
+      marginLeft: 15,
+    },
+    LikedText: {
+      fontSize: 15,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
+    },
+    Subscribed: {
+      paddingHorizontal: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 30,
+      marginLeft: 15,
+      marginRight: 15,
+    },
+    SubscribedText: {
+      fontSize: 15,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
+    },
+
     FlatListContainer: {
       padding: 15,
       flexDirection: 'row',
@@ -237,9 +227,55 @@ const dashboardStyles = theme => {
       marginBottom: 10,
       flex: 1,
     },
-    seperator: {
-      backgroundColor: theme.color.gray,
-      height: 0.3,
+    profileImage: {
+      height: 50,
+      width: 50,
+      resizeMode: 'contain',
+      borderRadius: 50,
+    },
+    PeterContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      marginLeft: 10,
+    },
+    PetermainView: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    PeterText: {
+      fontSize: 18,
+      color: theme.color.lightblack,
+      lineHeight: 25,
+      fontFamily: FONTS.semiBold,
+    },
+    DayText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.light,
+      fontFamily: FONTS.Regular,
+    },
+    XclusiveText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.lightgray,
+      fontFamily: FONTS.Regular,
+    },
+    TextView: {
+      flexDirection: 'row',
+      marginTop: 5,
+      flex: 1,
+    },
+    LoremText: {
+      fontSize: 14,
+      lineHeight: 20,
+      color: theme.color.gray,
+      fontFamily: FONTS.medium,
+    },
+    dolorText: {
+      color: theme.color.gray,
+      fontSize: 14,
+      lineHeight: 20,
+      fontFamily: FONTS.Regular,
     },
   });
   return styles;

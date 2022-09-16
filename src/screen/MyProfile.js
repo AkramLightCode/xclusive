@@ -41,123 +41,33 @@ export default function MyProfile({props, navigation}) {
             bellStayle={{tintColor: COLORS.white}}
           />
         </ImageBackground>
-
         <View style={styles.FirstView}>
           <View style={styles.mainview}>
-            <View
-              style={{
-                alignItems: 'center',
-                flex: 3,
-              }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  lineHeight: 18,
-                  color: theme.color.toneblack2,
-                  fontFamily: FONTS.semiBold,
-                }}>
-                05
-              </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  lineHeight: 18,
-                  color: theme.color.gray1,
-                  fontFamily: FONTS.Regular,
-                }}>
-                Fans
-              </Text>
+            <View style={styles.fiveView}>
+              <Text style={styles.FiveText}>05</Text>
+              <Text style={styles.FansText}>Fans</Text>
             </View>
-
             <View style={styles.Profileveiw}>
               <View style={{position: 'absolute', top: -75}}>
-                <Image
-                  source={Images.profile}
-                  style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 100 / 2,
-                    resizeMode: 'contain',
-                    borderWidth: 5,
-                    borderColor: COLORS.pink,
-                  }}
-                />
+                <Image source={Images.profile} style={styles.profileImage} />
               </View>
             </View>
-            <View
-              style={{
-                flex: 3,
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontSize: 16,
-                  lineHeight: 18,
-                  color: theme.color.toneblack2,
-                  fontFamily: FONTS.semiBold,
-                }}>
-                20
-              </Text>
-              <Text
-                style={{
-                  fontSize: 14,
-                  lineHeight: 18,
-                  fontWeight: '400',
-                  color: theme.color.gray1,
-                  fontFamily: FONTS.Regular,
-                }}>
-                Following
-              </Text>
+            <View style={styles.TwentyView}>
+              <Text style={styles.Text20}>20</Text>
+              <Text style={styles.FollowingText}>Following</Text>
             </View>
           </View>
-
-          <Text
-            style={{
-              marginTop: 10,
-              fontSize: 18,
-              lineHeight: 25,
-              color: theme.color.darkblack,
-              textAlign: 'center',
-              fontFamily: FONTS.semiBold,
-            }}>
-            Peter Benedict
-          </Text>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 13,
-              lineHeight: 20,
-              color: theme.color.lightgray,
-              fontFamily: FONTS.Regular,
-            }}>
-            @Xclusive
-          </Text>
-          <View
-            style={{
-              alignSelf: 'center',
-              paddingVertical: 5,
-              paddingHorizontal: 10,
-              backgroundColor: COLORS.bgColor,
-              marginTop: 10,
-              borderRadius: 3,
-            }}>
-            <Text
-              style={{
-                fontSize: 12,
-                lineHeight: 18,
-                color: theme.color.pink,
-                fontFamily: FONTS.Regular,
-              }}>
-              1 POST
-            </Text>
+          <Text style={styles.PETERText}>Peter Benedict</Text>
+          <Text style={styles.XclusiveFirst}>@Xclusive</Text>
+          <View style={styles.PostContainer}>
+            <Text style={styles.Post1Text}>1 POST</Text>
           </View>
-          <View
-            style={{flexDirection: 'row', alignSelf: 'center', marginTop: 20}}>
+          <View style={styles.Container2icon}>
             <TouchableOpacity activeOpacity={0.7} style={styles.iconview}>
               <Image
                 source={Images.icon2}
                 resizeMode="contain"
-                style={{width: 18, height: 18}}
+                style={styles.commonicon}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -166,29 +76,17 @@ export default function MyProfile({props, navigation}) {
               <Image
                 source={Images.icon1}
                 resizeMode="contain"
-                style={{width: 18, height: 18}}
+                style={styles.commonicon}
               />
             </TouchableOpacity>
           </View>
         </View>
-
         <View style={styles.SecondContainer}>
           <InputCommon
-            inputStyle={{
-              borderRadius: 50,
-              marginBottom: 20,
-              borderColor: COLORS.black,
-            }}
+            inputStyle={styles.InputContainer}
             placeHolder="Compose new post"
           />
-
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingTop: 20,
-              borderTopWidth: 1,
-              borderStyle: 'dashed',
-            }}>
+          <View style={styles.dashed}>
             <TouchableOpacity activeOpacity={0.7} style={styles.contect}>
               <Image source={Images.img1} style={styles.Images} />
             </TouchableOpacity>
@@ -209,7 +107,6 @@ export default function MyProfile({props, navigation}) {
               <Image source={Images.img3} style={styles.Images} />
             </TouchableOpacity>
           </View>
-
           <View style={{flexDirection: 'row', marginTop: 15}}>
             <View style={styles.Textview}>
               <Text style={styles.Text}>Live Video</Text>
@@ -222,96 +119,35 @@ export default function MyProfile({props, navigation}) {
             </View>
           </View>
         </View>
-
-        <View
-          style={{
-            backgroundColor: 'white',
-            marginTop: 20,
-            marginBottom: 20,
-          }}>
+        <View style={styles.Third}>
           <View style={styles.ThirdContainer}>
-            <TouchableOpacity style={{marginTop:5}}>
-              <Image
-                source={Images.mainimg}
-                style={{
-                  width: 40,
-                  height: 40,
-                  resizeMode: 'contain',
-                  borderRadius: 20,
-                }}
-              />
+            <TouchableOpacity style={{marginTop: 5}}>
+              <Image source={Images.mainimg} style={styles.mainimg} />
             </TouchableOpacity>
             <View style={{marginLeft: 10, flex: 1}}>
               <View style={{flexDirection: 'row', marginTop: 12}}>
                 <View style={{}}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      color: theme.color.lightblack,
-                      lineHeight: 25,
-                      fontFamily: FONTS.semiBold,
-                    }}>
-                    Peter Benedict
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      lineHeight: 20,
-                      color: theme.color.baba,
-                      fontFamily: FONTS.Regular,
-                    }}>
-                    @Xclusive
-                  </Text>
+                  <Text style={styles.peterText}>Peter Benedict</Text>
+                  <Text style={styles.xclusive}>@Xclusive</Text>
                 </View>
-                <View style={{flexDirection: 'row', marginLeft: 'auto'}}>
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      lineHeight: 20,
-                      color: theme.color.light,
-                      fontFamily: FONTS.Regular,
-                      marginRight: 7,
-                    }}>
-                    2 days ago
-                  </Text>
+                <View style={styles.DayContainer}>
+                  <Text style={styles.DayText}>2 days ago</Text>
                   <TouchableOpacity>
                     <Image
                       source={require('../assest/icon/threedots.png')}
-                      style={{
-                        width: 22,
-                        height: 22,
-                        resizeMode: 'contain',
-                        marginLeft: 3,
-                        tintColor: theme.color.csilver,
-                      }}
+                      style={styles.threedots}
                     />
                   </TouchableOpacity>
                 </View>
               </View>
               <View>
-                <Text
-                  numberOfLines={2}
-                  style={{
-                    flex: 1,
-                    color: theme.color.fontColor,
-                    fontSize: 14,
-                    fontFamily: FONTS.Regular,
-                    textTransform: 'capitalize'
-                  }}>
+                <Text numberOfLines={2} style={styles.details}>
                   It is a long established fact that a reader will be distracted
                   by the readable...
                 </Text>
-
                 {/* ////////////////////////////// vidio ///////////////////// */}
                 <TouchableOpacity activeOpacity={0.5} style={styles.border}>
-                  <Image
-                    source={Images.mainboyimg}
-                    style={{
-                      width: '100%',
-                      height: 200,
-                      borderRadius: 10,
-                    }}
-                  />
+                  <Image source={Images.mainboyimg} style={styles.mainboyimg} />
                 </TouchableOpacity>
                 <ScrollView
                   horizontal={true}
@@ -320,27 +156,13 @@ export default function MyProfile({props, navigation}) {
                     return (
                       <TouchableOpacity
                         style={[styles.border, {marginRight: 7}]}>
-                        <Image
-                          source={Images.boyimg2}
-                          style={{
-                            width: 100,
-                            height: 50,
-                            borderRadius: 10,
-                            resizeMode: 'stretch',
-                            marginHorizontal: 5,
-                          }}
-                        />
+                        <Image source={Images.boyimg2} style={styles.boyimg2} />
                       </TouchableOpacity>
                     );
                   })}
                 </ScrollView>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  marginTop: 15,
-                }}>
+              <View style={styles.BottomContainer}>
                 <TouchableOpacity>
                   <Image style={styles.bottamIcom} source={Images.dislike} />
                 </TouchableOpacity>
@@ -351,42 +173,10 @@ export default function MyProfile({props, navigation}) {
                   <Image style={styles.bottamIcom} source={Images.share} />
                 </TouchableOpacity>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  marginTop: 15,
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{
-                    color: theme.color.toneblack,
-                    fontSize: 14,
-                    fontFamily: FONTS.medium,
-                    textTransform: 'capitalize',
-                  }}>
-                  13 Likes
-                </Text>
-                <Image
-                  style={{
-                    resizeMode: 'contain',
-                    width: 4,
-                    height: 4,
-                    tintColor: theme.color.appsilver,
-                    marginHorizontal: 15,
-                  }}
-                  source={Images.onedot}
-                />
-
-                <Text
-                  style={{
-                    color: theme.color.toneblack,
-                    fontSize: 14,
-                    fontFamily: FONTS.Regular,
-                    textTransform: 'capitalize',
-                  }}>
-                  53 Comments
-                </Text>
+              <View style={styles.BottomView}>
+                <Text style={styles.LikesText}>13 Likes</Text>
+                <Image style={styles.onedot} source={Images.onedot} />
+                <Text style={styles.CommentsText}>53 Comments</Text>
               </View>
             </View>
           </View>
@@ -409,10 +199,86 @@ const dashboardStyles = theme => {
       width: '100%',
       flexDirection: 'row',
     },
+    fiveView: {
+      alignItems: 'center',
+      flex: 3,
+    },
+    FiveText: {
+      fontSize: 16,
+      lineHeight: 18,
+      color: theme.color.toneblack2,
+      fontFamily: FONTS.semiBold,
+    },
+    FansText: {
+      fontSize: 14,
+      lineHeight: 18,
+      color: theme.color.gray1,
+      fontFamily: FONTS.Regular,
+    },
+    profileImage: {
+      width: 100,
+      height: 100,
+      borderRadius: 100 / 2,
+      resizeMode: 'contain',
+      borderWidth: 5,
+      borderColor: COLORS.pink,
+    },
+    TwentyView: {
+      flex: 3,
+      alignItems: 'center',
+    },
+    Text20: {
+      fontSize: 16,
+      lineHeight: 18,
+      color: theme.color.toneblack2,
+      fontFamily: FONTS.semiBold,
+    },
+    FollowingText: {
+      fontSize: 14,
+      lineHeight: 18,
+      fontWeight: '400',
+      color: theme.color.gray1,
+      fontFamily: FONTS.Regular,
+    },
+    PETERText: {
+      marginTop: 10,
+      fontSize: 18,
+      lineHeight: 25,
+      color: theme.color.darkblack,
+      textAlign: 'center',
+      fontFamily: FONTS.semiBold,
+    },
+    XclusiveFirst: {
+      textAlign: 'center',
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.lightgray,
+      fontFamily: FONTS.Regular,
+    },
+    PostContainer: {
+      alignSelf: 'center',
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      backgroundColor: COLORS.bgColor,
+      marginTop: 10,
+      borderRadius: 3,
+    },
+    Post1Text: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: theme.color.pink,
+      fontFamily: FONTS.Regular,
+    },
+
     Profileveiw: {
       flex: 4,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    Container2icon: {
+      flexDirection: 'row',
+      alignSelf: 'center',
+      marginTop: 20,
     },
     iconview: {
       backgroundColor: '#EC1E79',
@@ -422,6 +288,11 @@ const dashboardStyles = theme => {
       marginHorizontal: 10,
       padding: 10,
     },
+    commonicon: {
+      width: 18,
+      height: 18,
+    },
+
     contect: {
       width: '33%',
       justifyContent: 'center',
@@ -432,6 +303,18 @@ const dashboardStyles = theme => {
       marginTop: 20,
       padding: 20,
     },
+    InputContainer: {
+      borderRadius: 50,
+      marginBottom: 20,
+      borderColor: COLORS.black,
+    },
+    dashed: {
+      flexDirection: 'row',
+      paddingTop: 20,
+      borderTopWidth: 1,
+      borderStyle: 'dashed',
+    },
+
     Images: {
       width: 25,
       height: 25,
@@ -453,17 +336,111 @@ const dashboardStyles = theme => {
       borderRadius: 7,
       resizeMode: 'cover',
     },
+    Third: {
+      backgroundColor: 'white',
+      marginTop: 20,
+      marginBottom: 20,
+    },
+
     ThirdContainer: {
       backgroundColor: theme.color.backgroundColor,
       flexDirection: 'row',
       padding: 10,
     },
+    mainimg: {
+      width: 40,
+      height: 40,
+      resizeMode: 'contain',
+      borderRadius: 20,
+    },
+    peterText: {
+      fontSize: 18,
+      color: theme.color.lightblack,
+      lineHeight: 25,
+      fontFamily: FONTS.semiBold,
+    },
+    xclusive: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.baba,
+      fontFamily: FONTS.Regular,
+    },
+    DayContainer: {
+      flexDirection: 'row',
+      marginLeft: 'auto',
+    },
+    DayText: {
+      fontSize: 13,
+      lineHeight: 20,
+      color: theme.color.light,
+      fontFamily: FONTS.Regular,
+      marginRight: 7,
+    },
+    threedots: {
+      width: 22,
+      height: 22,
+      resizeMode: 'contain',
+      marginLeft: 3,
+      tintColor: theme.color.csilver,
+    },
+    details: {
+      flex: 1,
+      color: theme.color.fontColor,
+      fontSize: 14,
+      fontFamily: FONTS.Regular,
+      textTransform: 'capitalize',
+    },
+    mainboyimg: {
+      width: '100%',
+      height: 200,
+      borderRadius: 10,
+    },
+    boyimg2: {
+      width: 100,
+      height: 50,
+      borderRadius: 10,
+      resizeMode: 'stretch',
+      marginHorizontal: 5,
+    },
+
+    BottomContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      marginTop: 15,
+    },
+
     bottamIcom: {
       resizeMode: 'contain',
       width: 20,
       height: 20,
       tintColor: theme.color.Tgray,
     },
+    BottomView: {
+      flex: 1,
+      flexDirection: 'row',
+      marginTop: 15,
+      alignItems: 'center',
+    },
+    LikesText: {
+      color: theme.color.toneblack,
+      fontSize: 14,
+      fontFamily: FONTS.medium,
+      textTransform: 'capitalize',
+    },
+    onedot: {
+      resizeMode: 'contain',
+      width: 4,
+      height: 4,
+      tintColor: theme.color.appsilver,
+      marginHorizontal: 15,
+    },
+    CommentsText: {
+      color: theme.color.toneblack,
+      fontSize: 14,
+      fontFamily: FONTS.Regular,
+      textTransform: 'capitalize',
+    },
+
     border: {
       padding: 5,
       borderWidth: 0.5,
