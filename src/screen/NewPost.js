@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useTheme, useThemeAwareObject} from '../theme';
 import {COLORS} from '../assest/Themes';
+import Video from 'react-native-video';
 
 // import {COLORS} from '../assest/Themes';
 
@@ -10,7 +11,18 @@ export default function NewPost() {
   const {theme} = useTheme();
   return (
     <View style={styles.Container}>
-      <Text style={styles.NewPostText}>NewPost</Text>
+      {/* <Video
+        source={require('../assest/icon/video.mp4')}
+        // play={true}
+        // duration={2}
+        style={styles.vidio}
+        repeat={false}
+        value={10}
+        hideShutterView={true}
+        playWhenInactive={true}
+        progressUpdateInterval={10}
+        type='auto'
+      /> */}
     </View>
   );
 }
@@ -19,10 +31,12 @@ const dashboardStyles = theme => {
     Container: {
       flex: 1,
       backgroundColor: theme.color.bgColor,
+      justifyContent:'center',alignItems:'center'
     },
     NewPostText: {
       color: theme.color.black,
     },
+    vidio:{width:'100%'}
   });
   return styles;
 };

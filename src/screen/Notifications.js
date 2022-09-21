@@ -2,10 +2,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Image,
   TouchableOpacity,
-  ScrollView,
   FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -16,16 +14,47 @@ import {useTheme, useThemeAwareObject} from '../theme';
 export default function Notifications() {
   const styles = useThemeAwareObject(dashboardStyles);
   const {theme} = useTheme();
-  const [active, setActive] = useState(
+
+  const [activeButton, setActiveButton] = useState(
     'All',
     'Interactions',
     'Liked',
     'Subscribed',
   );
 
-  const onPress = v => {
-    setActive(v);
+  const onChangButton = item => {
+    setActiveButton(item);
   };
+
+  const buttonData = [
+    {title: 'All'},
+    {title: 'Interactions'},
+    {title: 'Liked'},
+    {title: 'Subscribed'},
+  ];
+
+  const buttonItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => onChangButton(item.title)}
+        style={[
+          styles.All,
+          {
+            backgroundColor:
+              item.title == activeButton ? COLORS.pink : COLORS.bgColor,
+          },
+        ]}>
+        <Text
+          style={[
+            styles.AllText,
+            {color: item.title == activeButton ? COLORS.white : COLORS.sblack},
+          ]}>
+          {item.title}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   const ListData = ({item}) => {
     return (
       <View style={styles.FlatListContainer}>
@@ -52,86 +81,15 @@ export default function Notifications() {
       <View style={styles.seperator} />
       <View style={styles.MainView}>
         <Text style={styles.NotificationsText}>Notifications</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={styles.AllMainView}>
-            <TouchableOpacity
-              onPress={() => onPress('All')}
-              style={[
-                styles.All,
-                {
-                  backgroundColor:
-                    active == 'All' ? COLORS.pink : COLORS.bgColor,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.AllText,
-                  {color: active == 'All' ? COLORS.white : COLORS.sblack},
-                ]}>
-                All
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress('Interactions')}
-              style={[
-                styles.Interactions,
-                {
-                  backgroundColor:
-                    active == 'Interactions' ? COLORS.pink : COLORS.bgColor,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.InteractionsText,
-                  {
-                    color:
-                      active == 'Interactions' ? COLORS.white : COLORS.sblack,
-                  },
-                ]}>
-                Interactions
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress('Liked')}
-              style={[
-                styles.Liked,
-                {
-                  backgroundColor:
-                    active == 'Liked' ? COLORS.pink : COLORS.bgColor,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.LikedText,
-                  {color: active == 'Liked' ? COLORS.white : COLORS.sblack},
-                ]}>
-                Liked
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress('Subscribed')}
-              style={[
-                styles.Subscribed,
-                {
-                  backgroundColor:
-                    active == 'Subscribed' ? COLORS.pink : COLORS.bgColor,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.SubscribedText,
-                  {
-                    color:
-                      active == 'Subscribed' ? COLORS.white : COLORS.sblack,
-                  },
-                ]}>
-                Subscribed
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+        <FlatList
+          horizontal
+          data={buttonData}
+          renderItem={buttonItem}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item.id}
+        />
       </View>
-      {active == 'All' && (
+      {activeButton == 'All' && (
         <FlatList
           style={{paddingTop: 10}}
           data={[1, 2, 3, 4, 5, 6]}
@@ -139,7 +97,6 @@ export default function Notifications() {
           showsVerticalScrollIndicator={false}
         />
       )}
-      {/* </ScrollView> */}
     </View>
   );
 }

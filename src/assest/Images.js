@@ -1,5 +1,7 @@
 const Images = {
   Splash: require('./icon/Splash.jpg'),
+  backgroundImage: require('./icon/backgroundImage.png'),
+
   hederLogo: require('./icon/appLogo.png'),
   bell: require('./icon/bell.png'),
   search: require('./icon/search.png'),
@@ -33,10 +35,10 @@ const Images = {
   onedot: require('./icon/onedot.png'),
   Mask2: require('./icon/Mask2.png'),
   Mask3: require('./icon/Mask3.png'),
+  Mask4: require('./icon/Mask4.png'),
+
   Rightarrow: require('./icon/Rightarrow.png'),
   like: require('./icon/like.png'),
-
-  // samir ////////////////////////////////////
 
   RightIcon: require('./icon/RightIcon.png'),
   TreehLine: require('./icon/TreehLine.png'),

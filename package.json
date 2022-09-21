@@ -19,6 +19,7 @@
     "@react-navigation/stack": "^6.2.2",
     "axios": "^0.27.2",
     "joi": "^17.6.0",
+    "keymirror": "^0.1.1",
     "react": "18.0.0",
     "react-native": "0.69.3",
     "react-native-element-dropdown": "^2.1.0",
@@ -32,6 +33,7 @@
     "react-native-simple-toast": "^1.1.4",
     "react-native-system-setting": "^1.7.6",
     "react-native-tab-view": "^3.1.1",
+    "react-native-video": "^5.2.1",
     "react-native-webview": "^11.23.0"
   },
   "devDependencies": {

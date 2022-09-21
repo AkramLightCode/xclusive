@@ -7,27 +7,38 @@ import {
   Image,
   FlatList,
   ImageBackground,
+  RefreshControl,
+  Pressable,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
 import Images from '../assest/Images';
 import {useTheme, useThemeAwareObject} from '../theme';
 import API from '../services/API';
-import {ALL_FREE_POSTS} from '../services/ApiEndpoints';
+import {ADD_BOOKMARK, ALL_FREE_POSTS} from '../services/ApiEndpoints';
 import LoaderIndicator from '../comman/LoaderIndicator';
+import Video from 'react-native-video';
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 export default function Home({route}) {
+  const [refreshing, setRefreshing] = useState(false);
   const styles = useThemeAwareObject(dashboardStyles);
   const {theme} = useTheme();
-  const [active, setActive] = useState(1);
-  const onPress = v => {
-    setActive(v);
-  };
-
   const [like, setLike] = useState(false);
+  const [activeButton, setActiveButton] = useState('All Members');
   const [ListData, setListData] = useState([]);
-
   const [loding, setLoding] = useState(false);
+  const [listVideo, setListVideo] = useState();
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    API.get(ALL_FREE_POSTS).then(res => {
+      setListData(res.data);
+    });
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   useEffect(() => {
     setLoding(true);
@@ -42,9 +53,53 @@ export default function Home({route}) {
       });
   }, []);
 
-  const datas = [{key: '1'}, {key: '2'}, {key: '3'}, {key: '4'}];
+  // const AddToFavorit = index => {
+  //   API.post(ADD_BOOKMARK, {post_id:21}).then(res => {
+  //     console.log('======post_id=======',res);
+  //   });
+  // };
 
+  const onChangButton = item => {
+    setActiveButton(item);
+  };
+
+  const buttonData = [
+    {buttonHeading: 'All Members'},
+    {buttonHeading: 'Following'},
+    {buttonHeading: 'Close Friends'},
+  ];
+
+  const datas = [{key: '1',vidioImage:Images.Mask}, {key: '2',vidioImage:Images.Mask2}, {key: '3',vidioImage:Images.Mask4}, {key: '4',vidioImage:Images.Mask3}];
+
+  const ButtonItem = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => onChangButton(item.buttonHeading)}
+        style={[
+          styles.button,
+          {
+            backgroundColor:
+              item.buttonHeading == activeButton ? COLORS.pink : COLORS.bgColor,
+          },
+        ]}>
+        <Text
+          style={[
+            styles.buttonText,
+            {
+              color:
+                item.buttonHeading == activeButton
+                  ? COLORS.white
+                  : COLORS.sblack,
+            },
+          ]}>
+          {item.buttonHeading}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
   const renderItem = ({index, item}) => {
+    // console.warn('index', index,'ig',item.id);
+    // console.warn('item', ;
     return (
       <View>
         <View style={styles.listContainor}>
@@ -67,22 +122,52 @@ export default function Home({route}) {
                 </TouchableOpacity>
               </View>
             </View>
-            <Text style={styles.Details}>
+            <Text
+              style={{
+                color: theme.color.fontColor,
+                fontSize: 14,
+                textTransform: 'capitalize',
+                fontFamily: FONTS.Regular,
+              }}>
               It is a long established fact that a reader will be distracted by
               the readable...
             </Text>
             <View>
               {/* ////////////////////////////// vidio ///////////////////// */}
-              <TouchableOpacity activeOpacity={0.5} style={styles.border}>
-                <Image source={Images.Mask} style={styles.vidio} />
-              </TouchableOpacity>
+
+              <View style={[styles.border, {width: '100%', height: 200}]}>
+                {/* <Image source={Images.Mask} resizeMode="contain"  style={styles.vidio} /> */}
+                <Pressable onPress={() => setListVideo('')}>
+                  <Video
+                    resizeMode="cover"
+                    paused={listVideo == index ? false : true}
+                    source={require('../assest/icon/video.mp4')}
+                    style={styles.vidio}
+                    repeat={false}
+                    value={10}
+                    poster="https://img.freepik.com/free-photo/high-fashion-look-glamor-sexy-sunbathed-model-girl-white-lingerie-bikini-colorful-sunhat-blue-beach-ocean-water_158538-2743.jpg?w=2000"
+                    posterResizeMode="cover"
+                  />
+                  {listVideo != index && (
+                    <Pressable
+                      onPress={() => setListVideo(index)}
+                      style={styles.playButton}>
+                      <Image
+                        resizeMode="contain"
+                        source={require('../assest/icon/play.png')}
+                        style={{height: 10, width: 10}}
+                      />
+                    </Pressable>
+                  )}
+                </Pressable>
+              </View>
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
-                {datas.map(index => {
+                {datas.map((ele,index) => {
                   return (
                     <TouchableOpacity style={[styles.border, {marginRight: 7}]}>
-                      <Image source={Images.Mask} style={styles.mapItem} />
+                      <Image source={ele.vidioImage} style={styles.mapItem} />
                     </TouchableOpacity>
                   );
                 })}
@@ -101,7 +186,10 @@ export default function Home({route}) {
               <TouchableOpacity>
                 <Image style={styles.icon} source={Images.share} />
               </TouchableOpacity>
-              <TouchableOpacity style={{marginLeft: 'auto', marginRight: 5}}>
+              <TouchableOpacity
+                style={{marginLeft: 'auto', marginRight: 5}}
+                // onPress={AddToFavorit()}
+              >
                 <Image style={styles.favorit} source={Images.favorit} />
               </TouchableOpacity>
             </View>
@@ -124,9 +212,7 @@ export default function Home({route}) {
           </View>
         </View>
 
-        {/* /////////////////////////////////////////////////////???????//////////////?? */}
-        {/* ????????????????????????????????????????????????????????????????????????/// /*/}
-
+        {/* ????????????????????????????????????????????????????????????????????????*/}
         {index === 1 && (
           <View
             style={{
@@ -199,60 +285,15 @@ export default function Home({route}) {
 
   return (
     <View style={styles.container}>
-      {/* <ScrollView showsVerticalScrollIndicator={false}> */}
       <View style={styles.seperator} />
       <View style={styles.buttonContainor}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity
-            onPress={() => onPress(1)}
-            style={[
-              styles.button,
-              {
-                backgroundColor: active == 1 ? COLORS.pink : COLORS.bgColor,
-              },
-            ]}>
-            <Text
-              style={[
-                styles.buttonText,
-                {color: active == 1 ? COLORS.white : COLORS.sblack},
-              ]}>
-              All Members
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => onPress(2)}
-            style={[
-              styles.button,
-              {backgroundColor: active == 2 ? COLORS.pink : COLORS.bgColor},
-            ]}>
-            <Text
-              style={[
-                styles.buttonText,
-                {color: active == 2 ? COLORS.white : COLORS.sblack},
-              ]}>
-              Following
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => onPress(3)}
-            style={[
-              styles.button,
-              {
-                backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor,
-                marginRight: 10,
-              },
-            ]}>
-            <Text
-              style={[
-                styles.buttonText,
-                {color: active == 3 ? COLORS.white : COLORS.sblack},
-              ]}>
-              Close Friends
-            </Text>
-          </TouchableOpacity>
-        </ScrollView>
+        <FlatList
+          data={buttonData}
+          renderItem={ButtonItem}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
       </View>
-      {/* </View> */}
       <View style={styles.seperator} />
       <View style={styles.filterView}>
         <TouchableOpacity>
@@ -269,15 +310,16 @@ export default function Home({route}) {
         </TouchableOpacity>
       </View>
       <View style={styles.seperator} />
-      {active == 1 && (
+      {activeButton == 'All Members' && (
         <FlatList
           showsVerticalScrollIndicator={false}
           data={ListData}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       )}
-      {/* </ScrollView> */}
       <LoaderIndicator loading={loding} />
     </View>
   );
@@ -310,12 +352,6 @@ const dashboardStyles = theme => {
       color: theme.color.baba,
       fontFamily: FONTS.Regular,
     },
-    // DayText: {
-    //   fontSize: 13,
-    //   lineHeight: 20,
-    //   color: COLORS.light,
-    //   fontFamily: FONTS.light,
-    // },
     dotIcon: {
       width: 22,
       height: 22,
@@ -331,7 +367,7 @@ const dashboardStyles = theme => {
     },
     vidio: {
       width: '100%',
-      height: 200,
+      height: '100%',
       borderRadius: 10,
     },
     mapItem: {
@@ -444,18 +480,21 @@ const dashboardStyles = theme => {
       backgroundColor: theme.color.gray,
       height: 0.3,
     },
-    Details: {
-      color: theme.color.fontColor,
-      fontSize: 14,
-      textTransform: 'capitalize',
-      fontFamily: FONTS.Regular,
-    },
     border: {
       padding: 5,
       borderWidth: 0.5,
       borderRadius: 10,
       marginTop: 10,
       borderColor: theme.color.borderColor,
+    },
+    playButton: {
+      alignSelf: 'center',
+      padding: 10,
+      backgroundColor: '#fff',
+      borderRadius: 50,
+      position: 'absolute',
+      alignContent: 'center',
+      top: 101,
     },
   });
   return styles;

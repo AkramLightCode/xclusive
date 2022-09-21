@@ -13,3 +13,5 @@ export const LOGIN_ENDPOINT = 'auth/login';
 export const REGISTER_ENDPOINT = 'auth/register';
 export const LOGOUT_ENDPOINT = 'auth/logout';
 export const ALL_FREE_POSTS  ='auth/all-free-posts';
+export const ADD_BOOKMARK = 'auth/add-bookmark';
+export const BOOKMARK_LIST = 'auth/bookmark-list';

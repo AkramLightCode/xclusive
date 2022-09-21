@@ -3,9 +3,10 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -14,14 +15,21 @@ import {COLORS, FONTS} from '../../assest/Themes';
 import CoustomButton from '../../Component/CoustomButton';
 import InputCommon from '../../Component/InputCommon';
 
-const ResetPassword = ({navigation}) => {
+const {height, width} = Dimensions.get('window');
 
+const ResetPassword = ({navigation}) => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
-    <SafeAreaView style={styles.Container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    
+    <ImageBackground
+      source={Images.backgroundImage}
+      resizeMode="stretch"
+      style={{width: width / 1, height: height / 1,alignSelf:''}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{marginHorizontal: 20}}>
         <Image source={Images.hederLogo} style={styles.Image} />
         <Text
           style={{
@@ -80,7 +88,7 @@ const ResetPassword = ({navigation}) => {
           />
         </LinearGradient>
       </ScrollView>
-    </SafeAreaView>
+    </ImageBackground>
   );
 };
 
@@ -88,7 +96,7 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
     padding: 20,
-    backgroundColor:COLORS,
+    backgroundColor: COLORS,
   },
   Image: {
     width: 80,

@@ -36,11 +36,11 @@ function executeRequest(method, pathname, data, options = {}) {
     return baseAxiosRequest
       .request(reqObj)
       .then(res => {
-        console.log('Request Success == ', res);
+        // console.log('Request Success == ', res);
         resolve(res.data);
       })
       .catch(error => {
-        console.log('Request Error == ', error);
+        // console.log('Request Error == ', error);
         reject(error);
       });
   });

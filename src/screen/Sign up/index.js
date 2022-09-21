@@ -7,6 +7,8 @@ import {
   ScrollView,
   StyleSheet,
   StatusBar,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import LoaderIndicator from '../../comman/LoaderIndicator';
@@ -15,17 +17,17 @@ import {setLoggedIn} from '../../utils/Preference';
 import Images from '../../assest/Images';
 import InputCommon from '../../Component/InputCommon';
 import CoustomButton from '../../Component/CoustomButton';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS, FONTS} from '../../assest/Themes';
 import API from '../../services/API';
 import Toast from 'react-native-simple-toast';
 import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
 
+const {height, width} = Dimensions.get('window');
 
 const Sign_in = props => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState('test@gmail.com');
-  const [password, setPassword] = useState('12345678');
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -48,18 +50,17 @@ const Sign_in = props => {
       setEmailError('Enter Valid email');
     } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
-    }
-     else {
-      // console.log("dsafsd");
+    } else {
+      // console.log('dsafsd');
       // setLoding(true);
       // const payload = {
-      //   email,
-      //   password,
+      //   email: 'test10@gmail.com',
+      //   password: '1234567890',
       // };
-      // console.log('payload', JSON.stringify(payload));
+      // // console.log('payload', JSON.stringify(payload));
       // API.post(LOGIN_ENDPOINT, payload)
       //   .then(res => {
-      //     console.log(res);
+      //     console.log('resresresresresresres', res);
       //     if (res.status === 'success') {
       //       Toast.show(res.message);
       //       setLoggedIn(res.data.access_token);
@@ -75,13 +76,16 @@ const Sign_in = props => {
       //     console.log(e);
       //     Toast.show('User not registered');
       //   });
+        props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
 
-      props.navigation.replace('HomeStacksScreen', {screen: 'Home'});
     }
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.bgColor}}>
+    <ImageBackground
+      source={Images.backgroundImage}
+      resizeMode="stretch"
+      style={{width: width / 1, height: height / 1}}>
       <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -172,7 +176,7 @@ const Sign_in = props => {
         </View>
       </ScrollView>
       <LoaderIndicator loading={loding} />
-    </SafeAreaView>
+    </ImageBackground>
   );
 };
 

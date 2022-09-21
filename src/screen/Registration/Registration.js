@@ -8,6 +8,8 @@ import {
   Keyboard,
   ScrollView,
   StatusBar,
+  ImageBackground,
+  Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -18,11 +20,12 @@ import CoustomButton from '../../Component/CoustomButton';
 import InputCommon from '../../Component/InputCommon';
 import LoaderIndicator from '../../comman/LoaderIndicator';
 
-import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-simple-toast';
 import API from '../../services/API';
 import {REGISTER_ENDPOINT} from '../../services/ApiEndpoints';
 import {setRegToken} from '../../utils/Preference';
+
+const {height, width} = Dimensions.get('window');
 
 const Registration = props => {
   const [show, setShow] = useState(false);
@@ -76,15 +79,20 @@ const Registration = props => {
         })
         .catch(e => {
           setLoading(false);
-          Toast.show('User not registered');
+          Toast.show('User already registered');
         });
     }
   };
 
   return (
-    <SafeAreaView style={Styles.continue}>
+    <ImageBackground
+      source={Images.backgroundImage}
+      resizeMode="stretch"
+      style={{width: width / 1, height: height / 1}}>
       <StatusBar backgroundColor={COLORS.bgColor} barStyle="dark-content" />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{marginHorizontal: 20}}>
         <Image source={Images.hederLogo} style={Styles.Image} />
         <Text
           style={{
@@ -267,13 +275,12 @@ const Registration = props => {
         </View>
       </ScrollView>
       <LoaderIndicator loading={loading} />
-    </SafeAreaView>
+    </ImageBackground>
   );
 };
 const Styles = StyleSheet.create({
   continue: {
     flex: 1,
-    marginHorizontal: 20,
   },
   Image: {
     width: 80,

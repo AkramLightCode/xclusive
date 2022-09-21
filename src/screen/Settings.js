@@ -2,8 +2,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TouchableOpacity,
+  FlatList
 } from 'react-native';
 import React, {useState} from 'react';
 import {COLORS, FONTS} from '../assest/Themes';
@@ -12,137 +12,84 @@ import Account from './Account';
 import FansFollowing from './FansFollowing';
 import Display from './Display';
 import {WebView} from 'react-native-webview';
-import HelpSupport from './HelpSupport';
 import {useTheme, useThemeAwareObject} from '../theme';
 
 export default function Settings({navigation}) {
   const styles = useThemeAwareObject(dashboardStyles);
   const {theme} = useTheme();
-  const [active, setActive] = useState(1);
-  const onPress = v => {
-    setActive(v);
+
+  const [activeButton, setActiveButton] = useState(
+    'Edit Profile',
+    'Account',
+    'Privcy & Safety',
+    'Fans & Following',
+    'Notifications',
+    'Display',
+    'What’s New',
+  );
+  const onChangButton = item => {
+    setActiveButton(item);
   };
+
+  const buttonData = [
+    {title: 'Edit Profile'},
+    {title: 'Account'},
+    {title: 'Privcy & Safety'},
+    {title: 'Fans & Following'},
+    {title: 'Notifications'},
+    {title: 'Display'},
+    {title: 'What’s New'},
+  ];
+
+  const buttonItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => onChangButton(item.title)}
+        style={[
+          styles.buttonContainer,
+          {
+            backgroundColor:
+              item.title == activeButton ? COLORS.pink : COLORS.bgColor,
+          },
+        ]}>
+        <Text
+          style={[
+            styles.buttonText,
+            {color: item.title == activeButton ? COLORS.white : COLORS.sblack},
+          ]}>
+          {item.title}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.Container}>
       <View style={{borderTopColor: theme.color.light, borderTopWidth: 0.5}} />
       <View style={styles.MainView}>
         <Text style={styles.SettingText}>Setting</Text>
         <View style={styles.TopButtonView}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity
-              onPress={() => onPress(1)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 1 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 1 ? COLORS.white : COLORS.sblack},
-                ]}>
-                Edit Profile
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress(2)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 2 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 2 ? COLORS.white : COLORS.sblack},
-                ]}>
-                Account
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress(3)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 3 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 3 ? COLORS.white : COLORS.sblack},
-                ]}>
-                Privcy & Safety
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress(4)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 4 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 4 ? COLORS.white : COLORS.sblack},
-                ]}>
-                Fans & Following
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress(5)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 5 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 5 ? COLORS.white : COLORS.sblack},
-                ]}>
-                Notifications
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress(6)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 6 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 6 ? COLORS.white : COLORS.sblack},
-                ]}>
-                Display
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => onPress(7)}
-              style={[
-                styles.buttonContainer,
-                {backgroundColor: active == 7 ? COLORS.pink : COLORS.bgColor},
-              ]}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  {color: active == 7 ? COLORS.white : COLORS.sblack},
-                ]}>
-                What’s New
-              </Text>
-            </TouchableOpacity>
-          </ScrollView>
+          <FlatList
+            horizontal
+            data={buttonData}
+            renderItem={buttonItem}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id}
+          />
         </View>
       </View>
-      {active == 1 && <EditProfile />}
-      {active == 2 && <Account />}
-      {active == 3 && (
+      {activeButton == 'Edit Profile' && <EditProfile />}
+      {activeButton == 'Account' && <Account />}
+      {activeButton == 'Privcy & Safety' && (
         <WebView
           source={{
-            uri: 'https://reactnative.dev/',
+            uri: 'https://reactnativeguides.com/terms-and-conditions/',
           }}
         />
       )}
 
-      {active == 4 && <FansFollowing />}
-      {active == 6 && <Display />}
-      {/* </ScrollView> */}
+      {activeButton == 'Fans & Following' && <FansFollowing />}
+      {activeButton == 'Display' && <Display />}
     </View>
   );
 }
@@ -155,7 +102,6 @@ const dashboardStyles = theme => {
     MainView: {
       backgroundColor: theme.color.backgroundColor,
       paddingVertical: 10,
-      // marginTop: 0.7,
     },
     SettingText: {
       fontSize: 22,
