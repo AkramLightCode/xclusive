@@ -9,6 +9,7 @@ import {
   StatusBar,
   ImageBackground,
   Dimensions,
+  // NativeModules,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import LoaderIndicator from '../../comman/LoaderIndicator';
@@ -21,9 +22,15 @@ import {COLORS, FONTS} from '../../assest/Themes';
 import API from '../../services/API';
 import Toast from 'react-native-simple-toast';
 import {LOGIN_ENDPOINT} from '../../services/ApiEndpoints';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const {height, width} = Dimensions.get('window');
 
+GoogleSignin.configure({});
+// const { RNTwitterSignIn } = NativeModules;
 const Sign_in = props => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
@@ -51,35 +58,67 @@ const Sign_in = props => {
     } else if (password.length < 8) {
       setPasswordError('Password Must Be 8 Charater');
     } else {
-      // console.log('dsafsd');
-      // setLoding(true);
-      // const payload = {
-      //   email: 'test10@gmail.com',
-      //   password: '1234567890',
-      // };
-      // // console.log('payload', JSON.stringify(payload));
-      // API.post(LOGIN_ENDPOINT, payload)
-      //   .then(res => {
-      //     console.log('resresresresresresres', res);
-      //     if (res.status === 'success') {
-      //       Toast.show(res.message);
-      //       setLoggedIn(res.data.access_token);
-      //       console.log('Response =>' + JSON.stringify(res));
-      //       setLoding(false);
-      //       props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
-      //     } else {
-      //       setLoding(false);
-      //     }
-      //   })
-      //   .catch(e => {
-      //     setLoding(false);
-      //     console.log(e);
-      //     Toast.show('User not registered');
-      //   });
-        props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
-
+      console.log('dsafsd');
+      setLoding(true);
+      const payload = {
+        email: 'test10@gmail.com',
+        password: '1234567890',
+      };
+      // console.log('payload', JSON.stringify(payload));
+      API.post(LOGIN_ENDPOINT, payload)
+        .then(res => {
+          console.log('resresresresresresres', res);
+          if (res.status === 'success') {
+            Toast.show(res.message);
+            setLoggedIn(res.data.access_token);
+            console.log('Response =>' + JSON.stringify(res));
+            setLoding(false);
+            props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
+          } else {
+            setLoding(false);
+          }
+        })
+        .catch(e => {
+          setLoding(false);
+          console.log(e);
+          Toast.show('User not registered');
+        });
+      // props.navigation.navigate('HomeStacksScreen', {screen: 'Home'});
     }
   };
+
+  const googleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.warn('userInfo', userInfo);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log('error', error);
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log('error', error);
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log('error', error);
+      } else {
+        console.log('error', error);
+      }
+    }
+  };
+
+//   const APIKEY ={
+//     TWITTER_API_KEY:"9anz12MFEHop58Cbde2PYpVvi",
+//     TWITTER_SECRET_KEY:"Uskb9ISMtFISmBd6kmMnUY4FIpMoR2d15lsdDLvZ61AP74DMM9"
+//   }
+
+// const twitterLogin =() =>{
+// RNTwitterSignIn.init(APIKEY.TWITTER_API_KEY,APIKEY.TWITTER_SECRET_KEY)
+// RNTwitterSignIn.logIn().then(LoginData=>{
+//   console.log('LoginData',LoginData);
+// }).catch(error =>{
+//   console.log('error',error);
+// })
+// }
+
 
   return (
     <ImageBackground
@@ -156,7 +195,9 @@ const Sign_in = props => {
 
         <Text style={styles.OrText}>Or</Text>
         <View style={styles.GTContainer}>
-          <TouchableOpacity style={styles.GTCommonContainer}>
+          <TouchableOpacity
+            style={styles.GTCommonContainer}
+            onPress={googleLogin}>
             <Image source={Images.google} style={styles.CommonImage} />
             <Text style={styles.CommonText}>Google</Text>
           </TouchableOpacity>

@@ -24,8 +24,14 @@ import Toast from 'react-native-simple-toast';
 import API from '../../services/API';
 import {REGISTER_ENDPOINT} from '../../services/ApiEndpoints';
 import {setRegToken} from '../../utils/Preference';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const {height, width} = Dimensions.get('window');
+
+GoogleSignin.configure({});
 
 const Registration = props => {
   const [show, setShow] = useState(false);
@@ -81,6 +87,24 @@ const Registration = props => {
           setLoading(false);
           Toast.show('User already registered');
         });
+    }
+  };
+
+  const googleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log('userInfo', userInfo);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log('error', error);
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log('error', error);
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log('error', error);
+      } else {
+        console.log('error', error);
+      }
     }
   };
 
@@ -192,6 +216,7 @@ const Registration = props => {
             alignItems: 'center',
           }}>
           <TouchableOpacity
+            onPress={googleLogin}
             style={{
               flexDirection: 'row',
               backgroundColor: 'white',
